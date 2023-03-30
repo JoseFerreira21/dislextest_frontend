@@ -9,17 +9,6 @@ const routes: Routes = [
     component: LayoutComponent,
     children: [
       {
-        path: '',
-        redirectTo: 'boards',
-        pathMatch: 'full'
-      },
-      
-      /*{
-        path: 'boards',
-        loadChildren: () =>
-          import('../boards/boards.module').then((m) => m.BoardsModule),
-      },*/
-      {
         path: 'perfil',
         loadChildren: () =>
           import('../profile/profile.module').then((m) => m.ProfileModule),
@@ -28,6 +17,16 @@ const routes: Routes = [
         path: 'alumnos',
         loadChildren: () =>
           import('../alumnos/alumnos.module').then((m) => m.AlumnosModule),
+      },
+      {
+        path: 'resultados',
+        loadChildren: () =>
+          import('../resultados/resultados.module').then((m) => m.ResultadosModule),
+      },
+      {
+        path: 'registrar-alumno',
+        loadChildren: () =>
+          import('../registrar-alumno/registrar-alumnos.module').then((m) => m.RegistrarAlumnosModule),
       },
     ],
   },

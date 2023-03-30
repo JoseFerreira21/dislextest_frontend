@@ -12,13 +12,22 @@
       <div class="flex items-center">
         <ul class="flex items-center space-x-2 text-sm font-medium">
           <li>
-            <a routerLink="/app/alumnos" class="block py-3 px-4 text-white">Alumnos</a>
+            <a routerLink="/app/registrar-alumno" class="block py-3 px-4 text-white">Registro de Alumnos</a>
           </li>
           <li>
-            <app-btn typeBtn="button" color="sky">Registrar alumnos</app-btn>
+            <a routerLink="/app/alumnos" class="block py-3 px-4 text-white">Lista de Alumnos</a>
           </li>
         </ul>
       </div>
+
+      <div class="flex items-center">
+        <ul class="flex items-center space-x-2 text-sm font-medium">
+          <li>
+            <a routerLink="/app/resultados" class="block py-3 px-4 text-white">Resultado Test</a>
+          </li>
+        </ul>
+      </div>
+
     </div>
     <div class="flex items-center">
       <div class="flex space-x-2">
@@ -80,7 +89,7 @@
     <ul class="py-1">
       <li>
         <a
-          routerLink="/app/profile"
+          routerLink="/app/perfil"
           class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600"
           >Perfil</a
         >
@@ -88,7 +97,7 @@
     </ul>
     <ul class="py-1">
       <li>
-        <button class="block py-2 px-4 text-sm text-gray-700" (click)="logout()" >Log out</button>
+        <button class="block py-2 px-4 text-sm text-gray-700" (click)="logout()" >Cerrar sección</button>
       </li>
     </ul>
   </div>

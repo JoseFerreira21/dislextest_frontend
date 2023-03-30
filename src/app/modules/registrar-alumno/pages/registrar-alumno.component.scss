@@ -1,0 +1,22 @@
+.contenedor {
+    margin: 30px;
+    border: 1px solid black;
+    border-radius: 15px;
+    width: 100%;
+    text-align: center;
+
+
+}
+
+.form {
+    margin: 50px;
+}
+
+mat-form-field {
+    width: 500px !important;
+}
+.container-2 {
+    display: flex;
+    justify-content: center;
+
+}

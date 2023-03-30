@@ -6,7 +6,7 @@ import { AlumnosService } from '@services/alumnos.service';
 import { Alumnos } from '@models/alumnos.model';
 
 @Component({
-  selector: 'app-users-table',
+  selector: 'app-alumnos-table',
   templateUrl: './alumnos-table.component.html'
 })
 export class AlumnosTableComponent  {

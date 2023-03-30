@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { CdkTableModule } from '@angular/cdk/table';
 
 import { AlumnosRoutingModule } from './alumnos-routing.module';
-import { AlumnosTableComponent } from './pages/users-table/alumnos-table.component';
+import { AlumnosTableComponent } from './pages/alumnos-table/alumnos-table.component';
 
 
 @NgModule({
