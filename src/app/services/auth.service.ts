@@ -7,12 +7,16 @@ import { TokenService } from '@services/token.service';
 import { ResponseLogin } from '@models/auth.model';
 
 import { User } from '@models/user.model';
+import { BehaviorSubject } from 'rxjs';
+import { checkToken } from 'src/interceptors/token.interceptor';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
   apiUrl = environment.API_URL;
+
+  user$ = new BehaviorSubject<User | null>(null);
 
   constructor(private http: HttpClient, private tokenService: TokenService) {}
 
@@ -23,7 +27,7 @@ export class AuthService {
         password,
       })
       .pipe(
-        tap((response: { access_token: string; }) => {
+        tap((response: { access_token: string }) => {
           this.tokenService.saveToken(response.access_token);
         })
       );
@@ -44,7 +48,7 @@ export class AuthService {
   }
 
   isAvailable(email: string) {
-    console.log(email);
+    //console.log(email);
     return this.http.post<{ isAvailable: boolean }>(
       `${this.apiUrl}/auth/is-available`,
       {
@@ -65,20 +69,20 @@ export class AuthService {
       newPassword,
     });
   }
-  
-  getProfile(){
-    const token = this.tokenService.getToken(); 
-    console.log(token);
-    return this.http.get<User>(`${this.apiUrl}/auth/profile`, {
-      headers :{
-        Authorization: `Bearer ${token}`,
-      }
-    });
+
+  getProfile() {
+    //const token = this.tokenService.getToken();
+    //console.log(token);
+    return this.http
+      .get<User>(`${this.apiUrl}/auth/profile`, { context: checkToken() })
+      .pipe(
+        tap((user) => {
+          this.user$.next(user);
+        })
+      );
   }
 
-  logout(){
+  logout() {
     this.tokenService.removeToken();
   }
-
-
 }

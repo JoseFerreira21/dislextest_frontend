@@ -1,26 +1,41 @@
 import { Injectable } from '@angular/core';
-import { getCookie, setCookie, removeCookie} from 'typescript-cookie';
+import { getCookie, setCookie, removeCookie } from 'typescript-cookie';
+import jwt_decode, { JwtPayload } from 'jwt-decode';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class TokenService {
+  constructor() {}
 
-  constructor() { }
-
-  saveToken(token: string){
-    setCookie('token', token, { expires: 365, path: '/'});
+  saveToken(token: string) {
+    setCookie('token', token, { expires: 365, path: '/' });
   }
 
-  getToken(){
+  getToken() {
     const token = getCookie('token');
     return token;
   }
 
-  removeToken(){
+  removeToken() {
     removeCookie('token');
   }
-  
+
+  isValidToken() {
+    const token = this.getToken();
+    if (!token) {
+      return false;
+    }
+    const decodeToken = jwt_decode<JwtPayload>(token);
+    if (decodeToken && decodeToken?.exp) {
+      const tokenDate = new Date(0);
+      tokenDate.setUTCSeconds(decodeToken.exp);
+      const today = new Date();
+      return tokenDate.getTime() > today.getTime();
+    }
+    return false;
+  }
+
   //Guardar token JWT en local storage navegador
   /*
   saveToken(token: string){

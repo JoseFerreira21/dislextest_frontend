@@ -1,4 +1,5 @@
-<nav class="bg-sky-700 border-gray-200 px-6 shadow-md">
+<ng-container *ngIf="user$ | async as user">
+ <nav class="bg-sky-700 border-gray-200 px-6 shadow-md">
   <div class="flex flex-wrap justify-between items-center">
     <div class="flex items-center">
       <a routerLink="/app">
@@ -48,7 +49,7 @@
         >
           <img
             class="w-8 h-8 rounded-full"
-            src="https://api.lorem.space/image/face?w=400&h=400"
+            src="https://api.multiavatar.com/Binx%20Bond.png"
             alt="user photo"
           />
         </button>
@@ -78,11 +79,10 @@
     <div class="py-3 px-4 flex items-center space-x-4">
       <img
         class="w-10 h-10 rounded-full"
-        src="https://api.lorem.space/image/face?w=400&h=400"
+        src="https://api.multiavatar.com/Binx%20Bond.png"
         alt=""
       />
       <div class="space-y-1">
-        <div>{{user?.id}}</div>
         <div class="text-sm text-gray-500">{{user?.email}}</div>
       </div>
     </div>
@@ -101,26 +101,5 @@
       </li>
     </ul>
   </div>
-</ng-template>
-<!--[cdkConnectedOverlayOrigin]="boardsOverlay"-->
-<ng-template
-  cdkConnectedOverlay
-  
-  [cdkConnectedOverlayOpen]="isOpenOverlayBoards"
-  (overlayOutsideClick)="isOpenOverlayBoards = !isOpenOverlayBoards"
->
-  <div
-    class="z-50 my-4 w-60 text-base list-none bg-white rounded divide-y divide-gray-100 shadow"
-  >
-    <div class="py-2 px-4 text-center relative">
-      <span class="block text-normal text-gray-900">Boards</span>
-      <button
-        (click)="isOpenOverlayBoards = !isOpenOverlayBoards"
-        class="block text-sm text-gray-900 absolute right-3 top-3"
-      >
-        <fa-icon [icon]="faClose"></fa-icon>
-      </button>
-    </div>
-    <div class="py-3 px-4 flex justify-between">Content</div>
-  </div>
-</ng-template>
+ </ng-template>
+</ng-container>

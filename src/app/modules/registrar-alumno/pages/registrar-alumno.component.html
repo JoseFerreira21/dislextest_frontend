@@ -76,6 +76,14 @@
                       class="bg-gray-50 border border-gray-300 text-gray-700 rounded block w-full p-2 pl"
                     />
                   </div>
+                  <div *ngIf="entidad.controls.fechaNacimiento.touched">
+                    <p
+                      *ngIf="entidad.controls.fechaNacimiento.hasError('required')"
+                      class="font-medium text-red-500 text-xs mt-1 ml-1"
+                    >
+                      Este campo es obligatorio
+                    </p>
+                  </div>
                 </div>
 
                 <div>

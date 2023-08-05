@@ -5,6 +5,7 @@ import { environment } from '@environments/environment';
 
 import { TokenService } from '@services/token.service';
 import { Alumnos } from '@models/alumnos.model';
+import { checkToken } from 'src/interceptors/token.interceptor';
 
 @Injectable({
   providedIn: 'root'
@@ -16,13 +17,7 @@ export class AlumnosService {
   apiUrl = environment.API_URL;
 
   getAlumnos() {
-    const token = this.tokenService.getToken();
-    console.log(token);
-    return this.http.get<Alumnos[]>(`${this.apiUrl}/alumno`, {
-      headers :{
-        Authorization: `Bearer ${token}`,
-      }
-    });
+    return this.http.get<Alumnos[]>(`${this.apiUrl}/alumno`, {context: checkToken()});
   }
 
 
