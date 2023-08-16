@@ -33,16 +33,18 @@ export class AuthService {
       );
   }
 
-  register(name: string, email: string, password: string) {
-    return this.http.post(`${this.apiUrl}/auth/register`, {
+  register(name: string, email: string, password: string, role: string) {
+    return this.http.post(`${this.apiUrl}/usuario`, {
       name,
       email,
       password,
+      role
     });
   }
 
-  registerAndLogin(name: string, email: string, password: string) {
-    return this.register(name, email, password).pipe(
+  registerAndLogin(name: string, email: string, password: string,
+                   role: string) {
+    return this.register(name, email, password, role).pipe(
       switchMap(() => this.login(email, password))
     );
   }

@@ -22,6 +22,7 @@ export class RegisterFormComponent {
       email: ['', [Validators.email, Validators.required]],
       password: ['', [Validators.minLength(6), Validators.required]],
       confirmPassword: ['', [Validators.required]],
+      role: ['profesor']
     },
     {
       validators: [
@@ -45,8 +46,8 @@ export class RegisterFormComponent {
   register() {
     if (this.form.valid) {
       this.status = 'loading';
-      const { name, email, password } = this.form.getRawValue();
-      this.authService.register(name, email, password).subscribe({
+      const { name, email, password, role} = this.form.getRawValue();
+      this.authService.register(name, email, password, role).subscribe({
         next: () => {
           this.status = 'success';
           this.router.navigate(['/login']);
@@ -55,7 +56,7 @@ export class RegisterFormComponent {
           this.status = 'failed';
         },
       });
-      console.log(name, email, password);
+      console.log(name, email, password, role);
     } else {
       this.form.markAllAsTouched();
     }
