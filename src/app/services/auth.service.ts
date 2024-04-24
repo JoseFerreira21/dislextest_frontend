@@ -29,9 +29,10 @@ export class AuthService {
       .pipe(
         tap((response: { access_token: string }) => {
           this.tokenService.saveToken(response.access_token);
+          //console.log(response.access_token);
         })
       );
-  }
+    }
 
   register(name: string, email: string, password: string, role: string) {
     return this.http.post(`${this.apiUrl}/usuario`, {
@@ -72,9 +73,10 @@ export class AuthService {
     });
   }
 
-  getProfile() {
-    //const token = this.tokenService.getToken();
-    //console.log(token);
+ /* getProfile() {
+    const token = this.tokenService.getToken();
+    console.log('Token desde front');
+    console.log(token);
     return this.http
       .get<User>(`${this.apiUrl}/auth/profile`, { context: checkToken() })
       .pipe(
@@ -82,7 +84,7 @@ export class AuthService {
           this.user$.next(user);
         })
       );
-  }
+  }*/
 
   logout() {
     this.tokenService.removeToken();

@@ -22,7 +22,7 @@ export class PerfilService {
   user$ = this.authService.user$;
   apiUrl = environment.API_URL;
 
-  getPerfilEntidad() {
+  /*getPerfilEntidad() {
     return this.http.get<Perfil[]>(
       `${this.apiUrl}/entidad/usuario/${this.user$.value?.id}`,
       {
@@ -43,5 +43,5 @@ export class PerfilService {
     return this.http.post(`${this.apiUrl}/entidad`, JSON.stringify(entidad), {
       headers: headers,
     });
-  }
+  }*/
 }

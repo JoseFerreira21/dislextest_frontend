@@ -20,7 +20,8 @@ export class AlumnosTableComponent  {
 }
 
   ngOnInit(): void{
-    this.alumnosService.getAlumnos()
+    const idProfesor = 1; // Aquí debes establecer el idProfesor según tu lógica
+    this.alumnosService.getAlumnosDelProfesor(idProfesor)
     .subscribe((alumnos: Alumnos[]) => {
       this.dataSource.init(alumnos);
     })

@@ -10,12 +10,6 @@ const routes: Routes = [
     component: LayoutComponent,
     children: [
       {
-        path: 'perfil',
-        canActivate: [AuthGuard],
-        loadChildren: () =>
-          import('../profile/profile.module').then((m) => m.ProfileModule),
-      },
-      {
         path: 'alumnos',
         canActivate: [AuthGuard],
         loadChildren: () =>
@@ -32,6 +26,12 @@ const routes: Routes = [
         canActivate: [AuthGuard],
         loadChildren: () =>
           import('../registrar-alumno/registrar-alumnos.module').then((m) => m.RegistrarAlumnosModule),
+      },
+      {
+        path: 'test',
+        canActivate: [AuthGuard],
+        loadChildren: () =>
+          import('../test/test.module').then((m) => m.TestModule),
       },
     ],
   },

@@ -16,8 +16,8 @@ export class AlumnosService {
 
   apiUrl = environment.API_URL;
 
-  getAlumnos() {
-    return this.http.get<Alumnos[]>(`${this.apiUrl}/alumno`, {context: checkToken()});
+  getAlumnosDelProfesor(idProfesor :number) {
+    return this.http.get<Alumnos[]>(`${this.apiUrl}/alumno/${idProfesor}`, {context: checkToken()});
   }
 
 
@@ -30,6 +30,27 @@ export class AlumnosService {
       'Authorization': `Bearer ${token}`})
     
     return this.http.post(`${this.apiUrl}/entidad`, JSON.stringify(entidad), {headers: headers});   
+  }
+
+  updateAlumno(id: number, entidad: any) {
+    console.log('Objeto alumno que recibira la Api');
+    console.log(entidad);
+    const token = this.tokenService.getToken();
+    const headers = new HttpHeaders({
+      'content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`})
+    
+    return this.http.put(`${this.apiUrl}/entidad/${id}`, JSON.stringify(entidad), {headers: headers});   
+  }
+
+  deleteAlumno(id: number) {
+    console.log('Objeto alumno que recibira la Api');
+    const token = this.tokenService.getToken();
+    const headers = new HttpHeaders({
+      'content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`})
+    
+    return this.http.delete(`${this.apiUrl}/entidad/${id}`, {headers: headers});   
   }
 
 
