@@ -12,12 +12,13 @@ import { checkToken } from 'src/interceptors/token.interceptor';
 })
 export class AlumnosService {
 
-  constructor(private http: HttpClient, private tokenService: TokenService) {}
+  constructor(private http: HttpClient, 
+             private tokenService: TokenService) {}
 
   apiUrl = environment.API_URL;
 
   getAlumnosDelProfesor(idProfesor :number) {
-    return this.http.get<Alumnos[]>(`${this.apiUrl}/alumno/${idProfesor}`, {context: checkToken()});
+    return this.http.get<Alumnos[]>(`${this.apiUrl}/alumno/profesor/${idProfesor}`, {context: checkToken()});
   }
 
 

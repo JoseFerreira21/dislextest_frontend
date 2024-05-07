@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { DialogAddEditEntidadComponent } from './pages/dialog/dialog-add-edit-entidad.component'; 
 
-import { AlumnosComponent } from './pages/alumnos/alumnos.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: AlumnosComponent
+    component: DialogAddEditEntidadComponent
   }
 ];
 
@@ -14,4 +14,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class AlumnosRoutingModule { }
+export class DialogAddEditEntidadRoutingModule { }

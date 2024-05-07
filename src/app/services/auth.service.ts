@@ -9,14 +9,17 @@ import { ResponseLogin } from '@models/auth.model';
 import { User } from '@models/user.model';
 import { BehaviorSubject } from 'rxjs';
 import { checkToken } from 'src/interceptors/token.interceptor';
+import jwt_decode from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
   apiUrl = environment.API_URL;
+  private user: any;
+  token: string | undefined;
 
-  user$ = new BehaviorSubject<User | null>(null);
+  //user$ = new BehaviorSubject<User | null>(null);
 
   constructor(private http: HttpClient, private tokenService: TokenService) {}
 
@@ -88,5 +91,14 @@ export class AuthService {
 
   logout() {
     this.tokenService.removeToken();
+  }
+
+  setUserFromToken(token: string) {
+    this.token = this.tokenService.getToken();
+    this.user = jwt_decode(token);
+  }
+
+  getUser() {
+    return this.user;
   }
 }

@@ -1,14 +1,8 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-
-
-
-import { TokenInterceptor } from 'src/interceptors/token.interceptor';
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
+import { DialogAddEditEntidadComponent } from './pages/dialog/dialog-add-edit-entidad.component'; 
+import { DialogAddEditEntidadRoutingModule } from './dialog-add-edit-entidad-routing.module'; 
 
 // Angular Material importaciones
 import { MatTableModule } from '@angular/material/table';
@@ -45,41 +39,20 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import {ObserversModule} from '@angular/cdk/observers';
 import {CdkStepperModule} from '@angular/cdk/stepper';
+import { SharedModule } from "../shared/shared.module";
+
 
 @NgModule({
-  declarations: [AppComponent],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    CommonModule,
-    ReactiveFormsModule,
-    FormsModule,
-    MatTableModule,
-    MatPaginatorModule,
-    MatRadioModule,
-    MatCardModule,
-    MatCheckboxModule,
-    BrowserAnimationsModule,
-    MatInputModule,
-    MatFormFieldModule,
-    MatSelectModule,
-    MatButtonModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-    MomentDateModule,
-    MatStepperModule,
-    MatSnackBarModule,
-    MatIconModule,
-    MatDialogModule,
-    MatGridListModule,
-    DragDropModule,
-    ObserversModule,
-    CdkStepperModule,
-  ],
-  providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
-  ],
-  bootstrap: [AppComponent],
+    declarations: [
+        DialogAddEditEntidadComponent
+    ],
+    imports: [
+        CommonModule,
+        ReactiveFormsModule,
+        FormsModule,
+        DialogAddEditEntidadRoutingModule,
+        SharedModule,
+        MatGridListModule,
+    ]
 })
-export class AppModule {}
+export class DialogAddEditEntidadModule { }

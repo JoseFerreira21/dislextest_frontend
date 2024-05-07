@@ -22,7 +22,7 @@ export class NavbarComponent {
   isOpenOverlayAvatar = false;
   isOpenOverlayBoards = false;
 
-  user$ = this.authService.user$;
+  //user$ = this.authService.user$;
   showRegister = false;
   perfil: any;
 

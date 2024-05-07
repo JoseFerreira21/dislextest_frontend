@@ -3,17 +3,18 @@ import { CommonModule } from '@angular/common';
 import { CdkTableModule } from '@angular/cdk/table';
 
 import { AlumnosRoutingModule } from './alumnos-routing.module';
-import { AlumnosTableComponent } from './pages/alumnos-table/alumnos-table.component';
+import { AlumnosComponent } from './pages/alumnos/alumnos.component';
+import { DialogAddEditEntidadComponent } from '../dialog-add-edit-entidad/pages/dialog/dialog-add-edit-entidad.component';
 
 
 @NgModule({
   declarations: [
-    AlumnosTableComponent,
+    //AlumnosComponent,
   ],
   imports: [
     CommonModule,
     AlumnosRoutingModule,
-    CdkTableModule
+    AlumnosComponent
   ]
 })
 export class AlumnosModule { }
