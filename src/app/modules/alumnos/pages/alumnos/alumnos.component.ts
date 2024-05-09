@@ -40,7 +40,7 @@ export class AlumnosComponent implements AfterViewInit, OnInit {
     'N° Documento',
     'Acciones',
   ];
-  dataSource = new MatTableDataSource<Entidad>();
+  dataSource = new MatTableDataSource<alumnoEntidad>();
   constructor(private entidadService: EntidadService, 
               private alumnoService: AlumnosService,
               public dialog: MatDialog,
