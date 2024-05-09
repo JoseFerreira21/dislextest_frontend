@@ -1,4 +1,5 @@
-export interface Entidad {
+export interface alumnoEntidad {
+    alumnoId: number,
     id: number,
     tipoEntidad: string,
     nombre: string,

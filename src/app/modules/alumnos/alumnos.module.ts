@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CdkTableModule } from '@angular/cdk/table';
 
 import { AlumnosRoutingModule } from './alumnos-routing.module';
 import { AlumnosComponent } from './pages/alumnos/alumnos.component';
-import { DialogAddEditEntidadComponent } from '../dialog-add-edit-entidad/pages/dialog/dialog-add-edit-entidad.component';
+import { MatIconModule } from '@angular/material/icon';
+import { MatDialogModule } from '@angular/material/dialog';
 
 
 @NgModule({
@@ -14,7 +14,9 @@ import { DialogAddEditEntidadComponent } from '../dialog-add-edit-entidad/pages/
   imports: [
     CommonModule,
     AlumnosRoutingModule,
-    AlumnosComponent
-  ]
+    AlumnosComponent,
+    MatIconModule,
+    MatDialogModule,
+  ],
 })
-export class AlumnosModule { }
+export class AlumnosModule {}

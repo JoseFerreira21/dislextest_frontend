@@ -25,7 +25,13 @@ const routes: Routes = [
         path: 'registrar-alumno',
         canActivate: [AuthGuard],
         loadChildren: () =>
-          import('../registrar-alumno/registrar-alumnos.module').then((m) => m.RegistrarAlumnosModule),
+          import('../dialogs/registrar-editar-alumno/registrar-editar-alumno.module').then((m) => m.RegistrarAlumnosModule),
+      },
+      {
+        path: 'eliminar-alumno',
+        canActivate: [AuthGuard],
+        loadChildren: () =>
+          import('../dialogs/eliminar-alumno/eliminar-alumno.module').then((m) => m.EliminarAlumnosModule),
       },
       {
         path: 'test',

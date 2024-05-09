@@ -1,14 +1,10 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CdkTableModule } from '@angular/cdk/table';
 
-
-
-import { TokenInterceptor } from 'src/interceptors/token.interceptor';
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
+import { EliminarAlumnoComponent } from './pages/eliminar-alumno.component'; 
+import { EliminarAlumnosRoutingModule } from './eliminar-alumno-routing.module';
 
 // Angular Material importaciones
 import { MatTableModule } from '@angular/material/table';
@@ -46,41 +42,40 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import {ObserversModule} from '@angular/cdk/observers';
 import {CdkStepperModule} from '@angular/cdk/stepper';
 
+
 @NgModule({
-  declarations: [AppComponent],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    CommonModule,
-    ReactiveFormsModule,
-    FormsModule,
-    MatTableModule,
-    MatPaginatorModule,
-    MatRadioModule,
-    MatCardModule,
-    MatCheckboxModule,
-    BrowserAnimationsModule,
-    MatInputModule,
-    MatFormFieldModule,
-    MatSelectModule,
-    MatButtonModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-    MomentDateModule,
-    MatStepperModule,
-    MatSnackBarModule,
-    MatIconModule,
-    MatDialogModule,
-    MatGridListModule,
-    DragDropModule,
-    ObserversModule,
-    CdkStepperModule,
-    MatIconModule
-  ],
-  providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
-  ],
-  bootstrap: [AppComponent],
+    declarations: [
+        EliminarAlumnoComponent,
+    ],
+    imports: [
+        CommonModule,
+        EliminarAlumnosRoutingModule,
+        CdkTableModule,
+        CommonModule,
+        ReactiveFormsModule,
+        FormsModule,
+        MatTableModule,
+        MatPaginatorModule,
+        MatRadioModule,
+        MatCardModule,
+        MatCheckboxModule,
+        BrowserAnimationsModule,
+        MatInputModule,
+        MatFormFieldModule,
+        MatSelectModule,
+        MatButtonModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
+        MomentDateModule,
+        MatStepperModule,
+        MatSnackBarModule,
+        MatIconModule,
+        MatDialogModule,
+        MatGridListModule,
+        DragDropModule,
+        ObserversModule,
+        CdkStepperModule,
+        MatIconModule,
+    ]
 })
-export class AppModule {}
+export class EliminarAlumnosModule { }

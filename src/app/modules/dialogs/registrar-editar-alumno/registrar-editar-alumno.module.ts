@@ -1,8 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { DialogAddEditEntidadComponent } from './pages/dialog/dialog-add-edit-entidad.component'; 
-import { DialogAddEditEntidadRoutingModule } from './dialog-add-edit-entidad-routing.module'; 
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CdkTableModule } from '@angular/cdk/table';
+
+import { RegistrarAlumnoComponent } from './pages/registrar-editar-alumno.component';
+import { RegistrarAlumnosRoutingModule } from './registrar-editar-alumno-routing.module';
 
 // Angular Material importaciones
 import { MatTableModule } from '@angular/material/table';
@@ -39,20 +41,41 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import {ObserversModule} from '@angular/cdk/observers';
 import {CdkStepperModule} from '@angular/cdk/stepper';
-import { SharedModule } from "../shared/shared.module";
 
 
 @NgModule({
     declarations: [
-        DialogAddEditEntidadComponent
+        RegistrarAlumnoComponent,
     ],
     imports: [
         CommonModule,
+        RegistrarAlumnosRoutingModule,
+        CdkTableModule,
+        CommonModule,
         ReactiveFormsModule,
         FormsModule,
-        DialogAddEditEntidadRoutingModule,
-        SharedModule,
+        MatTableModule,
+        MatPaginatorModule,
+        MatRadioModule,
+        MatCardModule,
+        MatCheckboxModule,
+        BrowserAnimationsModule,
+        MatInputModule,
+        MatFormFieldModule,
+        MatSelectModule,
+        MatButtonModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
+        MomentDateModule,
+        MatStepperModule,
+        MatSnackBarModule,
+        MatIconModule,
+        MatDialogModule,
         MatGridListModule,
+        DragDropModule,
+        ObserversModule,
+        CdkStepperModule,
+        MatIconModule,
     ]
 })
-export class DialogAddEditEntidadModule { }
+export class RegistrarAlumnosModule { }

@@ -1,0 +1,61 @@
+<h1 mat-dialog-title>{{tituloAccion}} Alumno</h1>
+<div mat-dialog-content>
+
+  <form [formGroup]="formAlumno" class="mat-form-fiel-registrar-alumno">
+
+  <mat-grid-list cols="1" rowHeight="80px">
+    <mat-grid-tile>
+      <mat-form-field appearance="fill">
+        <mat-label>Nombres</mat-label>
+        <input matInput formControlName="nombre" autocomplete="off">
+      </mat-form-field>
+    </mat-grid-tile>
+  
+    <mat-grid-tile>
+      <mat-form-field appearance="fill">
+        <mat-label>Apellidos</mat-label>
+        <input matInput formControlName="apellido" autocomplete="off">
+      </mat-form-field>
+    </mat-grid-tile>
+  
+    <mat-grid-tile>
+      <mat-form-field appearance="fill">
+        <mat-label>Fecha Nacimiento</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="fechaNacimiento" type="date">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile>
+      <mat-form-field appearance="fill">
+        <mat-label>Teléfono</mat-label>
+        <input matInput formControlName="telefono" autocomplete="off">
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile>
+      <mat-form-field appearance="fill">
+        <mat-label>Dirección</mat-label>
+        <input matInput formControlName="direccion" autocomplete="off">
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile>
+      <mat-form-field appearance="fill">
+        <mat-label>N° Documento</mat-label>
+        <input matInput formControlName="nroDocumento" autocomplete="off" type="number">
+      </mat-form-field>
+    </mat-grid-tile>
+  
+  </mat-grid-list>
+
+</form>
+
+<div mat-dialog-actions>
+  <button mat-raised-button mat-dialog-close>Volver</button>
+  <button mat-raised-button color="primary"
+  (click)="agregarEditarAlumno()"
+  [disabled]="formAlumno.invalid"
+  >{{botonAccion}}</button>
+</div>

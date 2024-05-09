@@ -76,19 +76,6 @@ export class AuthService {
     });
   }
 
- /* getProfile() {
-    const token = this.tokenService.getToken();
-    console.log('Token desde front');
-    console.log(token);
-    return this.http
-      .get<User>(`${this.apiUrl}/auth/profile`, { context: checkToken() })
-      .pipe(
-        tap((user) => {
-          this.user$.next(user);
-        })
-      );
-  }*/
-
   logout() {
     this.tokenService.removeToken();
   }

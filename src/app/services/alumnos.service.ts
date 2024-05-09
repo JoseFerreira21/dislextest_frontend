@@ -6,6 +6,8 @@ import { environment } from '@environments/environment';
 import { TokenService } from '@services/token.service';
 import { Alumnos } from '@models/alumnos.model';
 import { checkToken } from 'src/interceptors/token.interceptor';
+import { Entidad } from '../interfaces/entidad';
+import { alumnoEntidad } from '../interfaces/alumnoEntidad';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +20,7 @@ export class AlumnosService {
   apiUrl = environment.API_URL;
 
   getAlumnosDelProfesor(idProfesor :number) {
-    return this.http.get<Alumnos[]>(`${this.apiUrl}/alumno/profesor/${idProfesor}`, {context: checkToken()});
+    return this.http.get<alumnoEntidad[]>(`${this.apiUrl}/alumno/profesor/${idProfesor}`, {context: checkToken()});
   }
 
 

@@ -13,17 +13,20 @@ import { EntidadService } from '@services/entidad.service';
 import { MatIconModule } from '@angular/material/icon';
 //Para trabajar con modal de material
 import {MatDialog} from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
-import { DialogAddEditEntidadComponent } from '../../../dialog-add-edit-entidad/pages/dialog/dialog-add-edit-entidad.component';
+
 import { MatGridListModule } from '@angular/material/grid-list';
-
+import { alumnoEntidad } from 'src/app/interfaces/alumnoEntidad';
+import { RegistrarAlumnoComponent } from 'src/app/modules/dialogs/registrar-editar-alumno/pages/registrar-editar-alumno.component';
+import { EliminarAlumnoComponent } from 'src/app/modules/dialogs/eliminar-alumno/pages/eliminar-alumno.component'; 
 
 @Component({
-  selector: 'alumnos',
-  templateUrl: './alumnos.component.html',
-  styleUrls: ['./alumnos.component.css'],
-  standalone: true,
-  imports: [MatTableModule, MatPaginatorModule, MatIconModule, MatGridListModule ],
+    selector: 'alumnos',
+    templateUrl: './alumnos.component.html',
+    styleUrls: ['./alumnos.component.css'],
+    standalone: true,
+    imports: [MatTableModule, MatPaginatorModule, MatIconModule, MatGridListModule]
 })
 export class AlumnosComponent implements AfterViewInit, OnInit {
   displayedColumns: string[] = [
@@ -37,15 +40,17 @@ export class AlumnosComponent implements AfterViewInit, OnInit {
     'Acciones',
   ];
   dataSource = new MatTableDataSource<Entidad>();
-
-  constructor(private entidadService: EntidadService, public dialog: MatDialog) {}
+  constructor(private entidadService: EntidadService, 
+              private alumnoService: AlumnosService,
+              public dialog: MatDialog,
+              private _snackBar: MatSnackBar) {}
   
   ngOnInit(): void {
-    this.getEntidades();
+    this.mostrarAlumnosDelProfesor();
   }
 
-  getEntidades() {
-    this.entidadService.getEntidadList().subscribe({
+  mostrarAlumnosDelProfesor() {
+    this.alumnoService.getAlumnosDelProfesor(1).subscribe({
       next: (dataResponse) => {
         console.log(dataResponse);
         this.dataSource.data = dataResponse;
@@ -65,7 +70,53 @@ export class AlumnosComponent implements AfterViewInit, OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  dialogoNuevaEntidad(){
-    this.dialog.open(DialogAddEditEntidadComponent);
+  dialogoNuevoAlumno(){
+    this.dialog.open(RegistrarAlumnoComponent, {
+      disableClose:true,
+      width:"500px"
+    }).afterClosed().subscribe(resultado => {
+      if (resultado === 'creado'){
+        this.mostrarAlumnosDelProfesor();
+      }
+    });
   }
+
+  dialogoEditarAlumno(dataAlumno: Entidad){
+    this.dialog.open(RegistrarAlumnoComponent, {
+      disableClose:true,
+      width:"500px",
+      data: dataAlumno
+    }).afterClosed().subscribe(resultado => {
+      if (resultado === 'editado'){
+        this.mostrarAlumnosDelProfesor();
+      }
+    });
+  }
+
+  mostrarAlerta(msg: string, accion: string){
+    this._snackBar.open(msg, accion, {
+      horizontalPosition: "end",
+      verticalPosition:"top",
+      duration: 3000
+    });
+  }
+
+  dialogoEliminarAlumno(dataAlumno: Entidad){
+    this.dialog.open(EliminarAlumnoComponent, {
+      disableClose:true,
+      data: dataAlumno
+    }).afterClosed().subscribe(resultado => {
+      if (resultado === 'eliminado'){
+        this.entidadService.deleteEntidad(dataAlumno.id).subscribe({
+          next: (data)=>{
+            this.mostrarAlerta("Alumno eliminado correctamente.", "Listo");
+            this.mostrarAlumnosDelProfesor();
+          }, error:(e)=> {
+            console.log(e);
+          }
+        });
+      }
+    });
+  }
+
 }
