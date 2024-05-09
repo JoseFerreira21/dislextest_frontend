@@ -34,6 +34,7 @@ export class AlumnosComponent implements AfterViewInit, OnInit {
     'Nombre',
     'Apellido',
     'Fecha de Nacimiento',
+    'Edad',
     'Teléfono',
     'Dirección',
     'N° Documento',
@@ -81,7 +82,7 @@ export class AlumnosComponent implements AfterViewInit, OnInit {
     });
   }
 
-  dialogoEditarAlumno(dataAlumno: Entidad){
+  dialogoEditarAlumno(dataAlumno: alumnoEntidad){
     this.dialog.open(RegistrarAlumnoComponent, {
       disableClose:true,
       width:"500px",
@@ -101,13 +102,13 @@ export class AlumnosComponent implements AfterViewInit, OnInit {
     });
   }
 
-  dialogoEliminarAlumno(dataAlumno: Entidad){
+  dialogoEliminarAlumno(dataAlumno: alumnoEntidad){
     this.dialog.open(EliminarAlumnoComponent, {
       disableClose:true,
       data: dataAlumno
     }).afterClosed().subscribe(resultado => {
-      if (resultado === 'eliminado'){
-        this.entidadService.deleteEntidad(dataAlumno.id).subscribe({
+      if (resultado === 'eliminar'){
+        this.alumnoService.deleteAlumno(dataAlumno.id).subscribe({
           next: (data)=>{
             this.mostrarAlerta("Alumno eliminado correctamente.", "Listo");
             this.mostrarAlumnosDelProfesor();
