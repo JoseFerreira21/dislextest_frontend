@@ -1,0 +1,13 @@
+<form action="">
+    <div class="formar-container-test">
+        <div *ngFor="let grupo of grupos; let i = index" class="grupo" [style.border-color]="grupo.color">
+            <div *ngFor="let palabra of grupo.palabras; let j = index"
+                 class="palabra"
+                 [ngClass]="{'seleccionada': seleccion[i] === j}"
+                 (click)="seleccionar(i, j)"
+                 [style.background-color]="seleccion[i] === j ? grupo.color : ''">
+              {{ palabra }}
+            </div>
+        </div>
+    </div>
+</form>

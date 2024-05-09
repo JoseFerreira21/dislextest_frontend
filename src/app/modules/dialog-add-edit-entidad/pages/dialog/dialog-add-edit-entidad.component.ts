@@ -15,6 +15,7 @@ import {
   FormBuilder,
 } from '@angular/forms';
 import { EntidadService } from '@services/entidad.service';
+import { RequestStatus } from '@models/request-status.model';
 
 export const MY_DATE_FORMATS = {
   parse: {
@@ -57,6 +58,8 @@ export class DialogAddEditEntidadComponent implements OnInit {
 
   listaEntidades: Entidad[] = [];
 
+  status: RequestStatus = 'init';
+
   constructor(
     private _dialogoReferencia: MatDialogRef<DialogAddEditEntidadComponent>,
     private _formBuilder: FormBuilder,
@@ -95,6 +98,21 @@ export class DialogAddEditEntidadComponent implements OnInit {
     console.log(this.formEntidad)
     console.log(this.formEntidad.value)
   }
+
+  registrarEntidad() {
+    this.alumnosService.postAlumno(this.formEntidad.value).subscribe(
+      (res) => {
+        //this.recuperarEntidad(this.entidad.controls['nroDocumento'].value)
+
+        this.myNgForm.resetForm();
+        this.entidad.reset({
+          tipoEntidad: 'AL',
+        });
+      },
+      (err) => console.log(err)
+    );
+  }
+
 
 
   ngOnInit(): void {}

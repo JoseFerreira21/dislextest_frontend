@@ -3,17 +3,19 @@ import { CommonModule } from '@angular/common';
 import { TestComponent } from './pages/test.component';
 import { TestRoutingModule } from './test-routing.module';
 import { CdkTableModule } from '@angular/cdk/table';
-import { TestPipe } from './pipes/test.pipe';
+import { LayoutModule } from '../layout/layout.module';
+//import { TestPipe } from './pipes/test.pipe';
 
 
 @NgModule({
     declarations: [
-      TestComponent, TestPipe
+      TestComponent
     ],
     imports: [
       CommonModule,
       TestRoutingModule,
-      CdkTableModule
+      CdkTableModule,
+      LayoutModule
     ]
   })
   export class TestModule { }
