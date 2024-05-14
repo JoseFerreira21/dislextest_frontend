@@ -4,10 +4,10 @@ import { HttpClient, HttpHeaders  } from '@angular/common/http';
 import { environment } from '@environments/environment';
 
 import { TokenService } from '@services/token.service';
-import { Alumnos } from '@models/alumnos.model';
 import { checkToken } from 'src/interceptors/token.interceptor';
 import { Entidad } from '../interfaces/entidad';
 import { alumnoEntidad } from '../interfaces/alumnoEntidad';
+import { Alumno } from '../interfaces/alumno';
 
 @Injectable({
   providedIn: 'root'
@@ -24,37 +24,15 @@ export class AlumnosService {
   }
 
 
-  postAlumno(entidad: any) {
-    console.log('Objeto alumno que recibira la Api');
-    console.log(entidad);
+  createAlumno(alumno: any) {
+    //console.log('Objeto entidad que recibira la Api');
     const token = this.tokenService.getToken();
     const headers = new HttpHeaders({
       'content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`})
-    
-    return this.http.post(`${this.apiUrl}/entidad`, JSON.stringify(entidad), {headers: headers});   
+      Authorization: `Bearer ${token}`,
+    });
+    return this.http.post<Alumno>(`${this.apiUrl}/alumno/`, JSON.stringify(alumno), {
+      headers: headers,
+    });
   }
-
-  updateAlumno(id: number, entidad: any) {
-    console.log('Objeto alumno que recibira la Api');
-    console.log(entidad);
-    const token = this.tokenService.getToken();
-    const headers = new HttpHeaders({
-      'content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`})
-    
-    return this.http.put(`${this.apiUrl}/entidad/${id}`, JSON.stringify(entidad), {headers: headers});   
-  }
-
-  deleteAlumno(id: number) {
-    console.log('Objeto alumno que recibira la Api');
-    const token = this.tokenService.getToken();
-    const headers = new HttpHeaders({
-      'content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`})
-    
-    return this.http.delete(`${this.apiUrl}/entidad/${id}`, {headers: headers});   
-  }
-
-
 }

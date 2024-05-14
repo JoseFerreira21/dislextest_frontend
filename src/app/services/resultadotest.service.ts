@@ -15,8 +15,8 @@ export class ResultadoTestService {
 
   apiUrl = environment.API_URL;
 
-  getResultados() {
-    return this.http.get<ResultadoTest[]>(`${this.apiUrl}/resultadotest`, {
+  getResultados(idProfesor :number) {
+    return this.http.get<ResultadoTest[]>(`${this.apiUrl}/resultadotest/profesor/${idProfesor}`, {
       context: checkToken(),
     });
   }

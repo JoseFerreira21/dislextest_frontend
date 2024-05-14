@@ -20,6 +20,9 @@ import { Entidad } from 'src/app/interfaces/entidad';
 import { AlumnosComponent } from '../../../alumnos/pages/alumnos/alumnos.component';
 import { MatTableDataSource } from '@angular/material/table';
 import { alumnoEntidad } from 'src/app/interfaces/alumnoEntidad';
+import { TokenService } from '@services/token.service';
+import { ProfesorService } from '@services/profesor.service';
+import { Alumno } from 'src/app/interfaces/alumno';
 
 export const MY_DATE_FORMATS = {
   parse: {
@@ -48,6 +51,10 @@ export class RegistrarAlumnoComponent implements OnInit {
   listaAlumnos: Entidad[] = [];
   dataSource = new MatTableDataSource<Entidad>();
   
+  aluProfe = {
+    entidadId: 0,
+    profesorId: 0  
+  }
   
   constructor(
     private _dialogoReferencia: MatDialogRef<RegistrarAlumnoComponent>,
@@ -55,6 +62,8 @@ export class RegistrarAlumnoComponent implements OnInit {
     private _snackBar: MatSnackBar,
     private _entidadService: EntidadService,
     private _alumnosService : AlumnosService,
+    private _tokenService: TokenService,
+    private _profesorService: ProfesorService,
     @Inject(MAT_DIALOG_DATA) public dataAlumno: alumnoEntidad
   ) {
     this.formAlumno = this._formBuilder.group({
@@ -86,33 +95,68 @@ export class RegistrarAlumnoComponent implements OnInit {
   }
 
   agregarEditarAlumno(){
-    const fechaNacimiento = moment(this.formAlumno.value.fechaNacimiento, "DD/MM/YYYY").toDate();
-    if (!moment(fechaNacimiento).isValid()) {
-        console.error("La fecha de nacimiento no es válida.");
-        return;
-    }
-    console.log(this.formAlumno.value);
-    console.log(fechaNacimiento);
-    const modelo : Entidad = {
-      id :0,
+     const fechaNacimiento = moment(this.formAlumno.value.fechaNacimiento).format("DD/MM/YYYY");
+     const fechaISO: string = moment(fechaNacimiento, "DD/MM/YYYY").toISOString();
+     const modelo : Entidad = {
       tipoEntidad: 'AL',
       nombre: this.formAlumno.value.nombre,
       apellido: this.formAlumno.value.apellido,
-      fechaNacimiento: fechaNacimiento,
+      fechaNacimiento: fechaISO,
       telefono: this.formAlumno.value.telefono,
       direccion: this.formAlumno.value.direccion,
-      nroDocumento: this.formAlumno.value.nroDocumento
+      nroDocumento: this.formAlumno.value.nroDocumento,
+      usuarioId: null,
     }
+
     
     if (this.dataAlumno === null){
       this._entidadService.createEntidad(modelo).subscribe({
         next: (data) => {
           console.log(data);
+          //Acá implementar post al servicio alumnos, con el id del profesor y recuperar id entidad.
+          let respuesta: any;
+          respuesta = JSON.parse(JSON.stringify(data));
+          this.aluProfe.entidadId = respuesta.id;
+          
+          let sub: number;
+          sub = this._tokenService.getSub();
+          // Si 'sub' existe, usamos para llamar a los servicios
+          if (sub) {
+            this._profesorService.getProfesorId(sub).subscribe({
+              next: (dataResponse) => {
+                // Verificar si el array de objetos no está vacío
+                if (dataResponse.length > 0) {
+                  // Obtener el primer objeto del array y acceder a su propiedad 'id'
+                  const idProfesor = dataResponse[0].id;
+                  //console.log('ID del profesor:', idProfesor);
+                  this.aluProfe.profesorId = idProfesor;
+                  
+                  this._alumnosService.createAlumno(this.aluProfe).subscribe({
+                    next: (data) => {
+                    },
+                    error: (e) => {
+                      console.log(this.aluProfe);
+                    }, 
+                  });   
+                
+                } else {
+                  console.error('El array de objetos está vacío.');
+                }
+              },
+              error: (e) => {
+                console.error('Error al obtener el ID del profesor:', e);
+              },
+            });
+          } else {
+            console.error("No se pudo obtener el campo 'sub' del token.");
+          }
+          //---------------------------------------------------------//
           this.mostrarAlerta("Alumno fue registrado con éxito!", "Listo")
           this._dialogoReferencia.close("creado")
         },
         error: (e) => {
           this.mostrarAlerta("No se pudo registrar el alumno", "Error")
+          console.log(modelo);
         },
       });
     } else {
@@ -123,6 +167,7 @@ export class RegistrarAlumnoComponent implements OnInit {
           this._dialogoReferencia.close("editado")
         },
         error: (e) => {
+          console.log(modelo);
           this.mostrarAlerta("No se pudo actualizar el alumno", "Error")
         },
       });

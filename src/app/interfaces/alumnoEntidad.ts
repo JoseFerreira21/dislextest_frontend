@@ -4,10 +4,10 @@ export interface alumnoEntidad {
     tipoEntidad: string,
     nombre: string,
     apellido?: string,
-    fechaNacimiento?: Date,
+    fechaNacimiento?: string,
     edad?: string,
     telefono?: string,
     direccion?: string,
     nroDocumento?: string,
-    usuarioId?: number
+    usuarioId?: number | null;
 }

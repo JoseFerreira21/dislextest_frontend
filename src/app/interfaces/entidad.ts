@@ -1,11 +1,10 @@
 export interface Entidad {
-    id: number,
     tipoEntidad: string,
     nombre: string,
     apellido?: string,
-    fechaNacimiento?: Date,
+    fechaNacimiento?: string,
     telefono?: string,
     direccion?: string,
     nroDocumento?: string,
-    usuarioId?: number
+    usuarioId?: number | null;
 }
