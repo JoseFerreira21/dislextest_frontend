@@ -198,7 +198,7 @@ export class RegistrarAlumnoComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.dataAlumno) {
-      console.log(this.dataAlumno);
+      //console.log(this.dataAlumno);
       this.formAlumno.patchValue({
         nombre: this.dataAlumno.nombre,
         apellido: this.dataAlumno.apellido,
