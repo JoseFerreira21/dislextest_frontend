@@ -8,10 +8,10 @@ import { Component } from '@angular/core';
 export class TestSeleccionarPalabraComponent {
 
   grupos = [
-    { color: 'red', palabras: ['rtáon', 'ratón', 'rantó'] },
-    { color: 'blue', palabras: ['glloa', 'golla', 'gallo'] },
-    { color: 'green', palabras: ['conejo', 'cenojo', 'conjeo'] },
-    { color: 'purple', palabras: ['loen', 'leon', 'lnoe'] }
+    { color: 'red', palabras: ['rtáon', 'ratón', 'rantó'], respuesta: 'ratón'},
+    { color: 'blue', palabras: ['glloa', 'golla', 'gallo'], respuesta: 'gallo'},
+    { color: 'green', palabras: ['conejo', 'cenojo', 'conjeo'], respuesta: 'conejo'},
+    { color: 'purple', palabras: ['loen', 'leon', 'lnoe'], respuesta: 'loen'}
   ];
 
   seleccion: { [key: number]: number } = {};

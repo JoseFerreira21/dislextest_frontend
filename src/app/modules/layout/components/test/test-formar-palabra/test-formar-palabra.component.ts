@@ -7,13 +7,13 @@ import { Component } from '@angular/core';
 })
 export class TestFormarPalabraComponent {
 
-  palabras = ['Perro', 'Gato', 'Leon', 'Raton']
+  palabras = ['perro', 'gato', 'leon', 'raton']
   respuestas: string[] = [];
 
   constructor() { }
 
   ngOnInit() {
-    console.log(this.palabras);
+    //console.log(this.palabras);
     this.respuestas = new Array(this.palabras.length);
   }
 
