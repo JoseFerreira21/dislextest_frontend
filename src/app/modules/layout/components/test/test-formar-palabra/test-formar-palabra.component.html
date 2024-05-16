@@ -1,15 +1,11 @@
 <form action="">
-    
-
     <div class="palabra-container-test">
-        <h2 class="h2-test">Formar palabras</h2>
-        <p class="p-test">Observa la palabra y ordena los nombres de animales.</p>
-    
-        <div *ngFor="let palabra of palabras, let i = index">
-            <span class="span-test">{{ palabra | test }}</span>
+        <div>
+            <p class="p-test">Observa la palabra y ordena los nombres de animales.</p>
+        </div>
+        <div *ngFor="let palabra of palabras, let i = index" class="palabra-input-group">
+            <span class="span-test">{{ palabra.palabra| test }}</span>
             <input type="text" class="input-test" (ngModel)="respuestas[i]" name="respuesta-{{i}}">
         </div>
-    
     </div>
-    
 </form>

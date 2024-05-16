@@ -1,13 +1,12 @@
-<form action="">
-    <div class="formar-container-test">
-        <div *ngFor="let grupo of grupos; let i = index" class="grupo" [style.border-color]="grupo.color">
-            <div *ngFor="let palabra of grupo.palabras; let j = index"
-                 class="palabra"
-                 [ngClass]="{'seleccionada': seleccion[i] === j}"
-                 (click)="seleccionar(i, j)"
-                 [style.background-color]="seleccion[i] === j ? grupo.color : ''">
-              {{ palabra }}
-            </div>
+
+<div style="font-size: 15px; text-align: center; font-family: 'Comic Sans MS', cursive, sans-serif">
+    <p class="p-test">Encierra la palabra escrita correctamente</p>
+</div>
+<div class="formar-container-test">
+    <div *ngFor="let grupo of grupos; let i = index" class="grupo">
+        <div *ngFor="let palabra of grupo.palabra; let j = index" class="palabra"
+            [class.seleccionada]="seleccion[i] === j" (click)="seleccionar(i, j)">
+            {{ palabra }}
         </div>
     </div>
-</form>
+</div>
