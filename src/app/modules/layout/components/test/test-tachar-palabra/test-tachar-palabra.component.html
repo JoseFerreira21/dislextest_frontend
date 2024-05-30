@@ -1,1 +1,14 @@
-<p>test-tachar-palabra works!</p>
+<div class="container">
+    <h1 class="tachar-titulo">Discriminación de palabras</h1>
+    <p class="tachar-descripcion">Tacha la palabra entre un conjunto de ellas.</p>
+
+    <div *ngFor="let opcion of opcionesGrupo">
+        <div class="opcion-texto">{{ opcion.buscar }}</div>
+        <div class="options">
+            <div class="palabras" *ngFor="let palabra of opcion.opcionesPalabras" [ngClass]="{'selected': palabra.estado}"
+                (click)="seleccionarRespuesta(opcion, palabra)">
+                {{ palabra.texto }}
+            </div>
+        </div>
+    </div>
+</div>
