@@ -1,4 +1,28 @@
-.palabra-container-test {
+.formar-container-test {
+    background-color: #ececec;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.356);
+    max-width: 800px;
+    margin: 20px auto;
+    text-align: center;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.title{
+    display: block;
+}
+
+.palabra-container {
+    background-color: #393535;
+    display: block; 
+    margin: 20px;    
+    height: 70px !important;
+}
+
+/*.palabra-container-test {
     background-color: #ececec;
     padding: 20px;
     border-radius: 8px;
@@ -7,7 +31,7 @@
     //max-height: 1000px;
     margin: 20px auto;
     text-align: center;
-}
+}*/
 
 .h2-test {
     font-size: 24px;
@@ -35,10 +59,10 @@
     margin: 10px;
     width: auto;
     margin-top: 5px;
-
     font-size: 18px;
     background-color: #e9e6e6;
     letter-spacing: 2px;
+    display: inline; 
 }
 
 .input-test {
@@ -70,4 +94,12 @@
     display: flex; 
     align-items: center; 
     margin-bottom: 10px; 
+  }
+
+  .selected {
+    background-color: red; 
+  }
+
+  .unselected {
+    background-color: yellow; 
   }
