@@ -20,6 +20,7 @@ export class TestSeleccionarPalabraComponent implements OnInit {
     this.testService.getDiscriminacionPalabra().subscribe({
       next: (data) => {
         this.grupos = data;
+        console.log('Datos en el componente: ', this.grupos);
       },
       error: (error) => console.error('Error al consultar al service:', error)
     });

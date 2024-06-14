@@ -17,8 +17,8 @@
 
 .palabra-container {
     background-color: #393535;
-    display: block; 
-    margin: 20px;    
+    display: block;
+    margin: 20px;
     height: 70px !important;
 }
 
@@ -62,7 +62,8 @@
     font-size: 18px;
     background-color: #e9e6e6;
     letter-spacing: 2px;
-    display: inline; 
+    display: inline;
+    cursor: pointer;
 }
 
 .input-test {
@@ -91,15 +92,15 @@
 }
 
 .palabra-input-group {
-    display: flex; 
-    align-items: center; 
-    margin-bottom: 10px; 
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
   }
 
   .selected {
-    background-color: red; 
+    background-color: red;
   }
 
   .unselected {
-    background-color: yellow; 
+    background-color: yellow;
   }

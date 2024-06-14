@@ -11,6 +11,7 @@ import { TestFormarPalabraComponent } from './components/test/test-formar-palabr
 import { TestSeleccionarPalabraComponent } from './components/test/test-seleccionar-palabra/test-seleccionar-palabra.component';
 import { TestTacharPalabraComponent } from './components/test/test-tachar-palabra/test-tachar-palabra.component';
 import { TestPipe } from '../../pipes/test.pipe';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { TestPipe } from '../../pipes/test.pipe';
     LayoutRoutingModule,
     OverlayModule,
     FontAwesomeModule,
-    SharedModule
+    SharedModule,
+    DragDropModule
   ],
   exports: [
     TestFormarPalabraComponent,

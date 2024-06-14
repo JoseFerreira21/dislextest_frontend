@@ -11,31 +11,31 @@ const routes: Routes = [
     children: [
       {
         path: 'alumnos',
-        canActivate: [AuthGuard],
+        //canActivate: [AuthGuard],
         loadChildren: () =>
           import('../alumnos/alumnos.module').then((m) => m.AlumnosModule),
       },
       {
         path: 'resultados',
-        canActivate: [AuthGuard],
+        //canActivate: [AuthGuard],
         loadChildren: () =>
           import('../resultados/resultados.module').then((m) => m.ResultadosModule),
       },
       {
         path: 'registrar-alumno',
-        canActivate: [AuthGuard],
+        //canActivate: [AuthGuard],
         loadChildren: () =>
           import('../dialogs/registrar-editar-alumno/registrar-editar-alumno.module').then((m) => m.RegistrarAlumnosModule),
       },
       {
         path: 'eliminar-alumno',
-        canActivate: [AuthGuard],
+       // canActivate: [AuthGuard],
         loadChildren: () =>
           import('../dialogs/eliminar-alumno/eliminar-alumno.module').then((m) => m.EliminarAlumnosModule),
       },
       {
         path: 'test',
-        canActivate: [AuthGuard],
+        //canActivate: [AuthGuard],
         loadChildren: () =>
           import('../test/test.module').then((m) => m.TestModule),
       },
