@@ -9,8 +9,9 @@ export class AdminComponentesService {
   cargarEjercicios(viewContainerRef: ViewContainerRef, component: Type<any>) {
     // Limpiar el contenedor antes de cargar un nuevo componente
     viewContainerRef.clear();
-
+    
     // Crear el componente en el contenedor
-    viewContainerRef.createComponent(component);
+    let componentInstance = viewContainerRef.createComponent(component);
+    return componentInstance;
   }
 }

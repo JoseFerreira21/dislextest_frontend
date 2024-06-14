@@ -16,6 +16,7 @@ export class TestComponent {
   @ViewChild('componentContainer', { read: ViewContainerRef, static: true }) componentContainer!: ViewContainerRef;
   components = [TestFormarPalabraComponent, TestSeleccionarPalabraComponent, TestTacharPalabraComponent];
   currentComponentIndex = 0;
+  componentsInstance : any[] = [];
   resultadoTest: ResultadoTest;
 
   constructor(private adminComponentesService: AdminComponentesService, private resultadosService: ResultadosService) {
@@ -39,13 +40,17 @@ export class TestComponent {
   }
 
   siguienteEjercicio() {
+    console.log(this.componentsInstance[this.currentComponentIndex]);
+    this.componentsInstance[this.currentComponentIndex].instance.guardar();
     this.currentComponentIndex = (this.currentComponentIndex + 1) % this.components.length;
     this.cargarEjercicios(this.currentComponentIndex);
 
   }
 
   cargarEjercicios(index: number) {
-    this.adminComponentesService.cargarEjercicios(this.componentContainer, this.components[index]);
+    
+    let componentsInstance :any = this.adminComponentesService.cargarEjercicios(this.componentContainer, this.components[index]);
+    this.componentsInstance.push(componentsInstance);
   }
 
   insertarResultado(){

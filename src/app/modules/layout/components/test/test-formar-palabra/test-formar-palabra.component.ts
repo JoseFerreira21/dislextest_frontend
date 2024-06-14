@@ -47,7 +47,7 @@ export class TestFormarPalabraComponent implements OnInit {
     return -1;
   }
 
-  guardar() {
+  public guardar = () => {
     console.log(this.palabras);
     for (let index = 0; index < this.palabras.length; index++) {
       const element = this.palabras[index];
