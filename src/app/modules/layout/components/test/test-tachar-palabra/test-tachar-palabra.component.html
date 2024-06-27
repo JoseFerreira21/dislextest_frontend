@@ -1,47 +1,16 @@
-<!-- <div class="container">
-    <h1 class="tachar-titulo">Discriminación de palabras</h1>
-    <p class="tachar-descripcion">Tacha la palabra entre un conjunto de ellas.</p>
-
-    <div *ngFor="let opcion of opcionesGrupo">
-        <div class="opcion-texto">{{ opcion.palabras }}</div>
-        <div class="options">
-            <div class="palabras"  [ngClass]="{'selected': opcion.estado}"
-                (click)="seleccionarRespuesta(opcion)">
-                {{ opcion.palabras }}
-            </div>
-        </div>
-    </div>
-</div> -->
-
-<!-- <div class="container">
-    <h1 class="tachar-titulo">Discriminación de palabras</h1>
-    <p class="tachar-descripcion">Tacha la palabra entre un conjunto de ellas.</p>
-
-    <div *ngFor="let opciones of opcionesGrupo">
-        <div class="opcion-texto">{{ opciones.respuesta }}</div>
-        <div class="options">
-            <div *ngFor="let palabra of opciones.palabra" 
-                 class="palabras" 
-                 [ngClass]="{'selected': opciones.estado && opciones.respuesta === palabra}"
-                 (click)="seleccionarRespuesta(opciones, palabra)">
-                {{ palabra }}
-            </div>
-        </div>
-    </div>
-</div> -->
-
 <div class="container">
     <h1 class="tachar-titulo">Discriminación de palabras</h1>
     <p class="tachar-descripcion">Tacha la palabra entre un conjunto de ellas.</p>
 
-    <div *ngFor="let opciones of opcionesGrupo">
+    <div *ngFor="let opciones of opcionesGrupo; let i = index">
         <div class="opcion-texto">{{ opciones.respuesta }}</div>
         <div class="options">
-            <div *ngFor="let palabra of opciones.palabra" 
-                 class="palabras" 
-                 [ngClass]="{'selected': opciones.estado && opciones.respuesta === palabra}"
-                 (click)="seleccionarRespuesta(opciones, palabra)">
-                {{ palabra }}
+                 <div *ngFor="let palabra of opciones.palabras; let j = index"
+                 class="palabras"
+                 [ngClass]="{'selected': palabra.estado}"
+                 (click)="seleccionarRespuesta(i,palabra.opcion, j)"
+                 >
+                {{ palabra.opcion }}
             </div>
         </div>
     </div>

@@ -1,10 +1,15 @@
 
-<div class="formar-container-test">
-    <!--<p class="tachar-descripcion">Encierra la palabra escrita correctamente</p>-->
+ <div class="formar-container-test-title">
+  <div class="title">
+    <p class="tachar-descripcion">Selecciona la palabra escrita correctamente</p>
+  </div>
+  <div class="formar-container-test">
     <div *ngFor="let grupo of grupos; let i = index" class="grupo">
-        <div *ngFor="let palabra of grupo.palabra; let j = index" class="palabra"
-            [class.seleccionada]="seleccion[i] === j" (click)="seleccionar(i, j)">
-            {{ palabra }}
+        <div *ngFor="let palabra of grupo.palabras; let j = index" class="palabra"
+            [class.seleccionada]="seleccion[i] === j" (click)="seleccionar(i,palabra.opcion, j)">
+            {{ palabra.opcion }}
         </div>
     </div>
-</div>
+  </div>
+ </div>
+

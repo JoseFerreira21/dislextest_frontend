@@ -8,37 +8,33 @@ import { TestService } from '@services/test.service';
   styleUrls: ['./test-tachar-palabra.component.scss']
 })
 export class TestTacharPalabraComponent {
-  //? Se comenta la opcion con datos estaticos, una vez funcione con el service eliminar el bloque comentado
-  // opcionesGrupo: TacharPalabra[] = [
-  //   {
-  //     buscar: 'gusano',
-  //     opcionesPalabras: [
-  //       { texto: 'golazo', estado: false },
-  //       { texto: 'guisado', estado: false },
-  //       { texto: 'gusano', estado: false },
-  //       { texto: 'goma', estado: false }
-  //     ]
-  //   },
-  //   {
-  //     buscar: 'tortuga',
-  //     opcionesPalabras: [
-  //       { texto: 'tierra', estado: false },
-  //       { texto: 'tienda', estado: false },
-  //       { texto: 'tortuga', estado: false },
-  //       { texto: 'torunda', estado: false }
-  //     ]
-  //   }
-  // ];
 
   respuesta: String = '';
-
+  puntos: number = 0;
 
   opcionesGrupo: TacharPalabraEstructura[] = [];
 
   constructor(private testService: TestService) { }
 
   ngOnInit() {
+    this.puntos = 0 ;
     this.cargarPalabras();
+  }
+
+  public guardar = () => {
+    console.log(this.opcionesGrupo);
+    for (let index = 0; index < this.opcionesGrupo.length; index++) {
+      const element = this.opcionesGrupo[index];
+      console.log('La respuesta correcta: ', element.respuesta);
+      for (let j = 0; j < this.opcionesGrupo[index].palabras.length; j++) {
+        const element = this.opcionesGrupo[index].palabras[j];
+        if (element.estado && this.opcionesGrupo[index].respuesta == element.opcion) {
+          console.log('seleccionado correcto', element);
+          this.puntos++
+        }
+      }
+    }
+    console.log('Puntaje total del ejercicio 2: ', this.puntos);
   }
 
   cargarPalabras() {
@@ -51,16 +47,15 @@ export class TestTacharPalabraComponent {
     });
   }
 
-  seleccionarRespuesta(opcion: TacharPalabraEstructura, palabra: string): void {
-    // Desactivar todas las opciones primero
-    this.opcionesGrupo.forEach(opt => opt.estado = false);
+  seleccionarRespuesta(grupoIndex: number, palabra: String, palabraIndex: number): void {
+    const grupo = this.opcionesGrupo[grupoIndex];
+    this.opcionesGrupo[grupoIndex].palabras.forEach(opt => opt.estado = false);
+    console.log('Grupo: ', grupo);
 
-    // Activar la opción seleccionada y asignar la respuesta
-    opcion.estado = true;
-    this.respuesta = palabra;
-    console.log('Entra');
-}
+    const palabraSeleccionada = grupo.palabras[palabraIndex];
+    palabraSeleccionada.estado = true;
 
+    console.log(`Respuesta para el grupo ${grupoIndex + 1}: ${palabraSeleccionada.opcion}`);
 
-
+  }
 }
