@@ -18,6 +18,7 @@ export class TestComponent {
   currentComponentIndex = 0;
   componentsInstance : any[] = [];
   resultadoTest: ResultadoTest;
+  resultadoTestId: number = 0;
 
   constructor(private adminComponentesService: AdminComponentesService, private resultadosService: ResultadosService) {
     this.resultadoTest = {
@@ -34,35 +35,36 @@ export class TestComponent {
       indicador: 'S',
       observacion: 'alguna',
       alumnoId: 1,
-      profesorId: 1
+      profesorId: 2
     };
     this.insertarResultado();
   }
 
   siguienteEjercicio() {
     console.log(this.componentsInstance[this.currentComponentIndex]);
-    this.componentsInstance[this.currentComponentIndex].instance.guardar();
-    this.currentComponentIndex = (this.currentComponentIndex + 1) % this.components.length;
-    this.cargarEjercicios(this.currentComponentIndex);
 
+    this.componentsInstance[this.currentComponentIndex].instance.guardar(this.resultadoTestId);
+
+    setTimeout(() => {
+      this.currentComponentIndex = (this.currentComponentIndex + 1) % this.components.length;
+      this.cargarEjercicios(this.currentComponentIndex);
+    }, 9000);
   }
 
   cargarEjercicios(index: number) {
-    
     let componentsInstance :any = this.adminComponentesService.cargarEjercicios(this.componentContainer, this.components[index]);
     this.componentsInstance.push(componentsInstance);
   }
 
-  insertarResultado(){
+  insertarResultado() {
     this.resultadosService.postResultadoTest(this.resultadoTest).subscribe({
-      next(response: ResultadoTestPost) {
+      next: (response: ResultadoTestPost) => {
         console.log('Respuesta del insert de resultado: ', response);
+        this.resultadoTestId = response.id;
       },
       error: (error) => {
         console.error('Error:', error);
       }
     });
-
   }
-
 }

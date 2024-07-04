@@ -17,6 +17,8 @@ export interface Palabra {
   letras:               Letra[];
   letrasRespuesta:      Letra[];
   respuesta:            string;
+  areaId:               number;
+  validez:              string;
 }
 
 export interface Letra {

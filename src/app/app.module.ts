@@ -15,7 +15,6 @@ import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatRadioModule } from '@angular/material/radio';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
 import { MatCardModule } from '@angular/material/card';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 
@@ -41,14 +40,15 @@ import { MatDialogModule } from '@angular/material/dialog';
 // Para trabajar con cuadriculas
 import { MatGridListModule } from '@angular/material/grid-list';
 
-// Angular Material CDK 
+// Angular Material CDK
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import {ObserversModule} from '@angular/cdk/observers';
 import {CdkStepperModule} from '@angular/cdk/stepper';
+import { ModalAvisoComponent } from './modules/layout/components/modal-aviso/modal-aviso.component';
 
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, ModalAvisoComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
