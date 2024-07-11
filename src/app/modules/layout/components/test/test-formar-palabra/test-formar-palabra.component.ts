@@ -2,10 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { Palabra, Letra } from '@models/formar-palabras.model';
 import { TestService } from '@services/test.service';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
-import { ResultadoItem } from '@models/resultados-item.model';
+import { ResultadoItem, ResultadoItemRespuesta } from '@models/resultados-item.model';
 import { ResultadosService } from '@services/resultados.service';
 import { ModalAvisoComponent } from '../../modal-aviso/modal-aviso.component';
 import { MatDialog } from '@angular/material/dialog';
+import { ResultadoEjercicio } from '@models/resultados-ejercicio.model';
 
 @Component({
   selector: 'app-test-formar-palabra',
@@ -14,7 +15,8 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class TestFormarPalabraComponent implements OnInit {
   palabras: Palabra[] = [];
-  respuestas: string[] = [];
+  resultadoItemId: number = 0;
+  respuestas: ResultadoEjercicio[] = [];
   resultadoTest: ResultadoItem;
   puntaje: number = 0;
   imagenesEjercicio: string[] = [];
@@ -69,7 +71,7 @@ export class TestFormarPalabraComponent implements OnInit {
     return -1;
   }
 
-  public guardar = (testId: number) => {
+  public guardar = async (testId: number) => {
     this.mostrarImagenes();
     this.mostrarMensaje();
     console.log(this.palabras);
@@ -80,14 +82,14 @@ export class TestFormarPalabraComponent implements OnInit {
       this.resultadoTest.ResultadoTestId = testId;
       //this.resultadoTest.indicador = element.descripcionEjercicio;
       console.log(element.letras);
-      console.log(this.aparicionAleatoria(element) + `-` + this.respuestaPalabra(element, element));
+      console.log(this.aparicionAleatoria(element) + `-` + this.respuestaPalabra(element));
     }
     this.resultadoTest.ResultadoTestId = testId;
     this.resultadoTest.pObtenido = this.puntaje;
 
     console.log('Puntaje obtenido: ', this.puntaje);
 
-    this.guardarResultado();
+    await this.guardarResultado();
   }
 
   aparicionAleatoria(element: Palabra): string {
@@ -99,19 +101,33 @@ export class TestFormarPalabraComponent implements OnInit {
     return retorno;
   }
 
-  respuestaPalabra(element: Palabra, opcionPalabra: Palabra): string {
+  respuestaPalabra(element: Palabra): string {
+
     let retorno = '';
     for (let index = 0; index < element.letrasRespuesta.length; index++) {
       const letrasRespuesta = element.letrasRespuesta[index].letra;
       retorno += letrasRespuesta;
     }
-    if (retorno == opcionPalabra.respuesta) {
+    let resultado: ResultadoEjercicio = {
+      respuestaRespondida: retorno,
+      acierto: false,
+      ejercicioId: element.ejercicioId,
+      ejercicioOpcionesId: element.ejercicioOpcionesId,
+      alumnoId: 1,
+      resultadoItemId: 0
+    };
+
+    if (retorno == element.respuesta) {
+      this.respuestas
       this.puntaje++;
-      opcionPalabra.validez = this.rutaImagenCheck+'correcto.png';
+      element.validez = this.rutaImagenCheck+'correcto.png';
+      resultado.acierto = true;
     }else {
-      opcionPalabra.validez = this.rutaImagenCheck+'incorrecto.png';
+      element.validez = this.rutaImagenCheck+'incorrecto.png';
     }
+    this.respuestas.push(resultado);
     return retorno;
+
   }
 
   async cargarPalabras() {
@@ -134,7 +150,6 @@ export class TestFormarPalabraComponent implements OnInit {
   }
 
   cargarImagenes() {
-    console.log('llega?', this.palabras.length);
     for (let i = 0; i < this.palabras.length; i++) {
       const element = this.palabras[i];
       const rutaImagen = 'assets/images/';
@@ -148,16 +163,34 @@ export class TestFormarPalabraComponent implements OnInit {
     this.mostrarImagen = true;
   }
 
-  guardarResultado() {
-    console.log('Resultado guardado de Formar Palabras.');
-    this.resultadosService.postResultadoEjercicio(this.resultadoTest).subscribe({
-      next: (response) => {
-        console.log('datos insertados: ', response);
+  async guardarResultado() {
+
+    this.resultadosService.postResultadoItem(this.resultadoTest).subscribe({
+      next: (response: ResultadoItemRespuesta) => {
+        console.log('Respuesta del insert de resultado: ', response);
+        this.resultadoItemId = response.id;
+        this.guardarResultadoEjercicio()
       },
       error: (error) => {
         console.error('Error:', error);
       }
     });
+
+  }
+
+  guardarResultadoEjercicio() {
+    for (let index = 0; index < this.respuestas.length; index++) {
+      const element = this.respuestas[index];
+      element.resultadoItemId = this.resultadoItemId;
+      this.resultadosService.postResultadoEjercicio(element).subscribe({
+        next: (response) => {
+          console.log('datos insertados del ejercicio: ', response);
+        },
+        error: (error) => {
+          console.error('Error:', error);
+        }
+      });
+    }
   }
 
   mostrarMensaje() {

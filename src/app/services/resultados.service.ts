@@ -5,7 +5,8 @@ import { environment } from 'src/environments/environment';
 
 import { TokenService } from '@services/token.service';
 import { ResultadoTest, ResultadoTestPost } from '@models/resultados.model';
-import { ResultadoItem } from '@models/resultados-item.model';
+import { ResultadoItem, ResultadoItemRespuesta } from '@models/resultados-item.model';
+import { ResultadoEjercicio } from '@models/resultados-ejercicio.model';
 
 @Injectable({
   providedIn: 'root'
@@ -29,13 +30,24 @@ export class ResultadosService {
       headers: headers,
     });
   }
-  postResultadoEjercicio(resultado: ResultadoItem){
+  postResultadoItem(resultado: ResultadoItem):Observable<ResultadoItemRespuesta>{
     const token = this.tokenService.getToken();
     const headers = new HttpHeaders({
       'content-Type': 'application/json',
       Authorization: `Bearer ${token}`,
     });
-    return this.http.post<ResultadoItem>(`${this.apiUrl}/resultadotestitem/`, JSON.stringify(resultado), {
+    return this.http.post<ResultadoItemRespuesta>(`${this.apiUrl}/resultadotestitem/`, JSON.stringify(resultado), {
+      headers: headers,
+    });
+  }
+
+  postResultadoEjercicio(resultado: ResultadoEjercicio){
+    const token = this.tokenService.getToken();
+    const headers = new HttpHeaders({
+      'content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    });
+    return this.http.post<ResultadoItemRespuesta>(`${this.apiUrl}/resultadoejercicio/`, JSON.stringify(resultado), {
       headers: headers,
     });
   }
