@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { DiscriminacionPalabra } from '@models/discriminacion-palabras.model';
 import { ResultadoEjercicio } from '@models/resultados-ejercicio.model';
 import { ResultadoItem, ResultadoItemRespuesta } from '@models/resultados-item.model';
 import { ResultadosService } from '@services/resultados.service';
 import { TestService } from '@services/test.service';
+import { TextToSpeechService } from '@services/text-to-speech.service'; // Importar el servicio
+import { SoundService } from '@services/sound.service'; // Importar el servicio
 
 @Component({
   selector: 'app-test-seleccionar-palabra',
@@ -19,18 +21,47 @@ export class TestSeleccionarPalabraComponent implements OnInit {
   resultadoTest: ResultadoItem;
   resultadoItemId: number = 0;
   respuestas: ResultadoEjercicio[] = [];
+  inactivityTimer: any;
 
-  constructor(private testService: TestService, private resultadosService: ResultadosService) {
+  constructor(
+    private testService: TestService,
+    private resultadosService: ResultadosService,
+    private textToSpeechService: TextToSpeechService, // Inyectar el servicio
+    private soundService: SoundService // Inyectar el servicio
+  ) {
     this.resultadoTest = {
       AreaId: 0,
       indicador: '',
       observacion: '',
       pObtenido: 0,
       ResultadoTestId: 0
-    };}
+    };
+  }
 
-  ngOnInit() {
-    this.cargarPalabras();
+  async ngOnInit() {
+    try {
+      await this.cargarPalabras();
+      this.textToSpeechService.speak('Selecciona la palabra escrita correctamente'); // llamar al metodo speak con el texto necesario para la pantalla
+    } catch (error) {
+      console.error('Error en ngOnInit: ', error);
+    }
+  }
+
+  // Registrar eventos de actividad del usuario
+  @HostListener('window:click')
+  @HostListener('window:mousemove')
+  @HostListener('window:keypress')
+  resetInactivityTimer() {
+    if (this.inactivityTimer) {
+      clearTimeout(this.inactivityTimer);
+    }
+    this.inactivityTimer = setTimeout(() => {
+      this.textToSpeechService.speak('Favor, oprima el botón siguiente si ya terminó los ejercicios');
+    }, 10000); // 10 segundos
+  }
+
+  todosGruposSeleccionados(): boolean {
+    return this.grupos.every((grupo, index) => this.seleccion[index] !== undefined);
   }
 
   cargarPalabras() {
@@ -41,17 +72,6 @@ export class TestSeleccionarPalabraComponent implements OnInit {
       error: (error) => console.error('Error al consultar al service:', error)
     });
   }
-
-  // guardar() {
-  //   this.grupos.forEach((grupo, index) => {
-  //     grupo.palabras.forEach(palabra => {
-  //       if (palabra.estado && grupo.respuesta === palabra.opcion) {
-  //         this.puntos++;
-  //       }
-  //     });
-  //   });
-  //   console.log('Puntaje total del ejercicio 2: ', this.puntos);
-  // }
 
   public guardar = async (testId: number) => {
     console.log(this.grupos);
@@ -70,25 +90,16 @@ export class TestSeleccionarPalabraComponent implements OnInit {
       };
       for (let j = 0; j < this.grupos[index].palabras.length; j++) {
         const element = this.grupos[index].palabras[j];
-        // let resultado: ResultadoEjercicio = {
-        //   respuestaRespondida: element.opcion,
-        //   acierto: false,
-        //   ejercicioId: this.grupos[index].ejercicioId,
-        //   ejercicioOpcionesId: element.ejercicioOpcionesId,
-        //   alumnoId: 1,
-        //   resultadoItemId: 0
-        // };
 
         if (element.estado) {
-          resultado.respuestaRespondida = element.opcion
+          resultado.respuestaRespondida = element.opcion;
         }
 
-        if (element.estado && this.grupos[index].respuesta == element.opcion) {
+        if (element.estado && this.grupos[index].respuesta === element.opcion) {
           console.log('seleccionado correcto', element);
-          this.puntos++
+          this.puntos++;
           resultado.acierto = true;
         }
-
       }
       this.respuestas.push(resultado);
     }
@@ -99,18 +110,16 @@ export class TestSeleccionarPalabraComponent implements OnInit {
   }
 
   async guardarResultado() {
-
     this.resultadosService.postResultadoItem(this.resultadoTest).subscribe({
       next: (response: ResultadoItemRespuesta) => {
         console.log('Respuesta del insert de resultado 2: ', response);
         this.resultadoItemId = response.id;
-        this.guardarResultadoEjercicio()
+        this.guardarResultadoEjercicio();
       },
       error: (error) => {
         console.error('Error:', error);
       }
     });
-
   }
 
   guardarResultadoEjercicio() {
@@ -128,13 +137,14 @@ export class TestSeleccionarPalabraComponent implements OnInit {
     }
   }
 
-
   seleccionar(grupoIndex: number, palabra: String, palabraIndex: number): void {
     const grupo = this.grupos[grupoIndex];
     grupo.palabras.forEach((palabra, index) => {
       palabra.estado = (index === palabraIndex);
     });
     this.seleccion[grupoIndex] = palabraIndex;
+    this.soundService.ClickSeleccionarSonido();
+    this.resetInactivityTimer(); // Resetear el temporizador al seleccionar una palabra
   }
 
   getGrupoClasses(i: number) {

@@ -1,11 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { Palabra, Letra } from '@models/formar-palabras.model';
 import { TestService } from '@services/test.service';
-import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
-import { ResultadoItem, ResultadoItemRespuesta } from '@models/resultados-item.model';
 import { ResultadosService } from '@services/resultados.service';
-import { ModalAvisoComponent } from '../../modal-aviso/modal-aviso.component';
 import { MatDialog } from '@angular/material/dialog';
+import { TextToSpeechService } from '@services/text-to-speech.service';
+import { SoundService } from '@services/sound.service';
+import { ModalAvisoComponent } from '../../modal-aviso/modal-aviso.component';
+import { ResultadoItem, ResultadoItemRespuesta } from '@models/resultados-item.model';
 import { ResultadoEjercicio } from '@models/resultados-ejercicio.model';
 
 @Component({
@@ -21,9 +22,17 @@ export class TestFormarPalabraComponent implements OnInit {
   puntaje: number = 0;
   imagenesEjercicio: string[] = [];
   mostrarImagen: boolean = false;
-  porcentajeRespuesta : number = 0;
+  porcentajeRespuesta: number = 0;
   rutaImagenCheck: string = 'assets/images/';
-  constructor(private testService: TestService, private resultadosService: ResultadosService, private dialog: MatDialog) {
+  inactivityTimer: any;
+
+  constructor(
+    private testService: TestService,
+    private resultadosService: ResultadosService,
+    private dialog: MatDialog,
+    private textToSpeechService: TextToSpeechService,
+    private soundService: SoundService
+  ) {
     this.resultadoTest = {
       AreaId: 0,
       indicador: '',
@@ -38,10 +47,25 @@ export class TestFormarPalabraComponent implements OnInit {
       await this.cargarPalabras();
       this.puntaje = 0;
       this.cargarImagenes();
+      this.textToSpeechService.speak('Observa la palabra, y ordena los nombres de los animales.');
     } catch (error) {
       console.error('Error en ngOnInit: ', error);
     }
   }
+
+  // Registrar eventos de actividad del usuario
+  @HostListener('window:click')
+  @HostListener('window:mousemove')
+  @HostListener('window:keypress')
+  resetInactivityTimer() {
+    if (this.inactivityTimer) {
+      clearTimeout(this.inactivityTimer);
+    }
+    this.inactivityTimer = setTimeout(() => {
+      this.textToSpeechService.speak('Favor, oprima el botón siguiente si ya terminó los ejercicios');
+    }, 10000); // 10 segundos
+  }
+
   seleccionarLetra(palabra: Palabra, letter: Letra) {
     if (!letter.estado) {
       const lugarLibre = this.buscarLugarLibre(palabra.letrasRespuesta);
@@ -50,6 +74,8 @@ export class TestFormarPalabraComponent implements OnInit {
         letter.estado = true;
       }
     }
+    this.soundService.ClickSeleccionarSonido();
+    this.resetInactivityTimer();
   }
 
   deSeleccionarLetra(palabra: Palabra, letter: Letra, index: number) {
@@ -60,6 +86,10 @@ export class TestFormarPalabraComponent implements OnInit {
         originalLetter.estado = false;
       }
     }
+    this.soundService.ClickDeseleccionarSonido();
+    // Iniciar un temporizador de inactividad para verificar si el usuario no realiza ninguna acción después de deseleccionar una letra
+    this.startInactivityTimerForDeselection();
+    this.resetInactivityTimer();
   }
 
   buscarLugarLibre(letrasRespuesta: Letra[]): number {
@@ -68,7 +98,25 @@ export class TestFormarPalabraComponent implements OnInit {
         return index;
       }
     }
-    return -1;
+    return -1; // Indica que no hay lugares libres
+  }
+
+  startInactivityTimer() {
+    if (this.inactivityTimer) {
+      clearTimeout(this.inactivityTimer);
+    }
+    this.inactivityTimer = setTimeout(() => {
+      this.textToSpeechService.speak('Favor, oprima el botón siguiente si ya terminó los ejercicios');
+    }, 10000); // 10 segundos
+  }
+
+  startInactivityTimerForDeselection() {
+    if (this.inactivityTimer) {
+      clearTimeout(this.inactivityTimer);
+    }
+    this.inactivityTimer = setTimeout(() => {
+      this.textToSpeechService.speak('Favor, completa el ejercicio y oprima el botón siguiente');
+    }, 10000); // 10 segundos
   }
 
   public guardar = async (testId: number) => {
@@ -80,7 +128,6 @@ export class TestFormarPalabraComponent implements OnInit {
       const element = this.palabras[index];
       this.resultadoTest.AreaId = element.areaId;
       this.resultadoTest.ResultadoTestId = testId;
-      //this.resultadoTest.indicador = element.descripcionEjercicio;
       console.log(element.letras);
       console.log(this.aparicionAleatoria(element) + `-` + this.respuestaPalabra(element));
     }
@@ -102,7 +149,6 @@ export class TestFormarPalabraComponent implements OnInit {
   }
 
   respuestaPalabra(element: Palabra): string {
-
     let retorno = '';
     for (let index = 0; index < element.letrasRespuesta.length; index++) {
       const letrasRespuesta = element.letrasRespuesta[index].letra;
@@ -120,14 +166,13 @@ export class TestFormarPalabraComponent implements OnInit {
     if (retorno == element.respuesta) {
       this.respuestas
       this.puntaje++;
-      element.validez = this.rutaImagenCheck+'correcto.png';
+      element.validez = this.rutaImagenCheck + 'correcto.png';
       resultado.acierto = true;
-    }else {
-      element.validez = this.rutaImagenCheck+'incorrecto.png';
+    } else {
+      element.validez = this.rutaImagenCheck + 'incorrecto.png';
     }
     this.respuestas.push(resultado);
     return retorno;
-
   }
 
   async cargarPalabras() {
@@ -154,7 +199,7 @@ export class TestFormarPalabraComponent implements OnInit {
       const element = this.palabras[i];
       const rutaImagen = 'assets/images/';
       console.log('carga de imagenes: ', element.respuesta);
-      this.imagenesEjercicio.push(rutaImagen+element.respuesta+'.jpg');
+      this.imagenesEjercicio.push(rutaImagen + element.respuesta + '.jpg');
     }
     console.log('array de rutas: ', this.imagenesEjercicio);
   }
@@ -164,18 +209,16 @@ export class TestFormarPalabraComponent implements OnInit {
   }
 
   async guardarResultado() {
-
     this.resultadosService.postResultadoItem(this.resultadoTest).subscribe({
       next: (response: ResultadoItemRespuesta) => {
         console.log('Respuesta del insert de resultado: ', response);
         this.resultadoItemId = response.id;
-        this.guardarResultadoEjercicio()
+        this.guardarResultadoEjercicio();
       },
       error: (error) => {
         console.error('Error:', error);
       }
     });
-
   }
 
   guardarResultadoEjercicio() {
@@ -196,8 +239,6 @@ export class TestFormarPalabraComponent implements OnInit {
   mostrarMensaje() {
     this.dialog.open(ModalAvisoComponent, {
       data: { value: 50 }
-    });;
+    });
   }
-
 }
-

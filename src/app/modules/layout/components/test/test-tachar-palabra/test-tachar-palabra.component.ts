@@ -60,9 +60,11 @@
 //   }
 // }
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { TacharPalabraEstructura } from '@models/tachar-palabra.model';
 import { TestService } from '@services/test.service';
+import { TextToSpeechService } from '@services/text-to-speech.service'; // Importar el servicio
+import { SoundService } from '@services/sound.service'; // Importar el servicio
 
 @Component({
   selector: 'app-test-tachar-palabra',
@@ -74,12 +76,35 @@ export class TestTacharPalabraComponent implements OnInit {
   puntos: number = 0;
   opcionesGrupo: TacharPalabraEstructura[] = [];
   colores: string[] = ['color-0', 'color-1'];
+  inactivityTimer: any;
 
-  constructor(private testService: TestService) { }
+  constructor(
+    private testService: TestService,
+    private textToSpeechService: TextToSpeechService, // Inyectar el servicio
+    private soundService: SoundService // Inyectar el servicio
+  ) { }
 
-  ngOnInit() {
+  async ngOnInit() {
     this.puntos = 0;
-    this.cargarPalabras();
+    try {
+      await this.cargarPalabras();
+      this.textToSpeechService.speak('Tacha la palabra entre un conjunto de ellas'); // llamar al metodo speak con el texto necesario para la pantalla
+    } catch (error) {
+      console.error('Error en ngOnInit: ', error);
+    }
+  }
+
+  // Registrar eventos de actividad del usuario
+  @HostListener('window:click')
+  @HostListener('window:mousemove')
+  @HostListener('window:keypress')
+  resetInactivityTimer() {
+    if (this.inactivityTimer) {
+      clearTimeout(this.inactivityTimer);
+    }
+    this.inactivityTimer = setTimeout(() => {
+      this.textToSpeechService.speak('Favor, oprima el botón siguiente si ya terminó los ejercicios');
+    }, 10000); // 10 segundos
   }
 
   public guardar = () => {
@@ -90,7 +115,7 @@ export class TestTacharPalabraComponent implements OnInit {
         }
       });
     });
-    console.log('Puntaje total del ejercicio 2: ', this.puntos);
+    console.log('Puntaje total del ejercicio 3: ', this.puntos);
   }
 
   cargarPalabras() {
@@ -109,6 +134,8 @@ export class TestTacharPalabraComponent implements OnInit {
     const palabraSeleccionada = grupo.palabras[palabraIndex];
     palabraSeleccionada.estado = true;
     console.log(`Respuesta para el grupo ${grupoIndex + 1}: ${palabraSeleccionada.opcion}`);
+    this.soundService.ClickSeleccionarSonido();
+    this.resetInactivityTimer(); // Resetear el temporizador al seleccionar una palabra
   }
 
   getGrupoClasses(i: number) {
@@ -116,3 +143,4 @@ export class TestTacharPalabraComponent implements OnInit {
     return colorClass;
   }
 }
+

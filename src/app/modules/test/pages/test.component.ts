@@ -5,6 +5,7 @@ import { TestTacharPalabraComponent } from '../../layout/components/test/test-ta
 import { AdminComponentesService } from '@services/admin-componentes.service';
 import { ResultadoTest, ResultadoTestPost } from '@models/resultados.model';
 import { ResultadosService } from '@services/resultados.service';
+import { SoundService } from '@services/sound.service';
 
 @Component({
   selector: 'app-test',
@@ -20,7 +21,9 @@ export class TestComponent {
   resultadoTest: ResultadoTest;
   resultadoTestId: number = 0;
 
-  constructor(private adminComponentesService: AdminComponentesService, private resultadosService: ResultadosService) {
+  constructor(private adminComponentesService: AdminComponentesService, 
+              private resultadosService: ResultadosService,
+              private soundService: SoundService) {
     this.resultadoTest = {
       indicador: '',
       observacion: '',
@@ -35,14 +38,15 @@ export class TestComponent {
       indicador: 'S',
       observacion: 'alguna',
       alumnoId: 1,
-      profesorId: 2
+      profesorId: 1
     };
     this.insertarResultado();
   }
 
+
   siguienteEjercicio() {
     console.log(this.componentsInstance[this.currentComponentIndex]);
-
+    this.soundService.ClickSiguienteSound();
     this.componentsInstance[this.currentComponentIndex].instance.guardar(this.resultadoTestId);
 
     setTimeout(() => {
