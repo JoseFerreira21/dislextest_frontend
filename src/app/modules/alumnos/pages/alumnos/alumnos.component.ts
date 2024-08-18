@@ -1,7 +1,5 @@
 import { AlumnosService } from '@services/alumnos.service';
 import { AuthService } from '@services/auth.service';
-import { ProfesorService } from '@services/profesor.service';
-import { TokenService } from '@services/token.service';
 
 import { AfterViewInit, Component, ViewChild, OnInit } from '@angular/core';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
@@ -9,6 +7,7 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 
 import { Entidad } from 'src/app/interfaces/entidad';
 import { EntidadService } from '@services/entidad.service';
+import { GlobalService } from '@services/global.service';
 
 //Para trabajar con iconos de material
 import { MatIconModule } from '@angular/material/icon';
@@ -18,8 +17,12 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { MatGridListModule } from '@angular/material/grid-list';
 import { alumnoEntidad } from 'src/app/interfaces/alumnoEntidad';
-import { RegistrarAlumnoComponent } from 'src/app/modules/dialogs/registrar-editar-alumno/pages/registrar-editar-alumno.component';
-import { EliminarAlumnoComponent } from 'src/app/modules/dialogs/eliminar-alumno/pages/eliminar-alumno.component';
+import { RegistrarAlumnoComponent } from 'src/app/modules/layout/components/dialogs/registrar-editar-alumno/registrar-editar-alumno.component'; 
+import { EliminarAlumnoComponent } from 'src/app/modules/layout/components/dialogs/eliminar-alumno/eliminar-alumno.component';
+
+import { Router } from '@angular/router';
+import { BienvenidaAlumnoComponent } from 'src/app/modules/layout/components/dialogs/bienvenida-alumno/bienvenida-alumno.component';
+import { TextToSpeechService } from '@services/text-to-speech.service';
 
 @Component({
   selector: 'alumnos',
@@ -32,6 +35,7 @@ import { EliminarAlumnoComponent } from 'src/app/modules/dialogs/eliminar-alumno
     MatIconModule,
     MatGridListModule,
   ],
+  entryComponents: [BienvenidaAlumnoComponent] // Para asegurar que el modal esté disponible
 })
 export class AlumnosComponent implements AfterViewInit, OnInit {
   displayedColumns: string[] = [
@@ -44,15 +48,20 @@ export class AlumnosComponent implements AfterViewInit, OnInit {
     'Dirección',
     'N° Documento',
     'Acciones',
+    'Comenzar',
   ];
   dataSource = new MatTableDataSource<alumnoEntidad>();
+
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+
   constructor(
+    private router: Router,
     private entidadService: EntidadService,
     private alumnoService: AlumnosService,
-    private _profesorService: ProfesorService,
-    private _tokenService: TokenService,
+    private globalService: GlobalService, 
     public dialog: MatDialog,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    private textToSpeechService: TextToSpeechService
   ) {}
 
   ngOnInit(): void {
@@ -60,42 +69,21 @@ export class AlumnosComponent implements AfterViewInit, OnInit {
   }
 
   mostrarAlumnosDelProfesor() {
-    let sub: number;
-    sub = this._tokenService.getSub();
-    
-    // Si 'sub' existe, usamos para llamar a los servicios
-    if (sub) {
-      this._profesorService.getProfesorId(sub).subscribe({
-        next: (dataResponse) => {
-          // Verificar si el array de objetos no está vacío
-          if (dataResponse.length > 0) {
-            // Obtener el primer objeto del array y acceder a su propiedad 'id'
-            const idProfesor = dataResponse[0].id;
-            //console.log('ID del profesor:', idProfesor);
-            
-            this.alumnoService.getAlumnosDelProfesor(idProfesor).subscribe({
-              next: (dataResponse) => {
-                //console.log(dataResponse);
-                this.dataSource.data = dataResponse;
-              },
-              error: (e) => {
-                console.error('Error al obtener alumnos del profesor:', e);
-              },
-            });
-          } else {
-            console.error('El array de objetos está vacío.');
-          }
-        },
-        error: (e) => {
-          console.error('Error al obtener el ID del profesor:', e);
-        },
-      });
-    } else {
-      console.error("No se pudo obtener el campo 'sub' del token.");
-    }
+    this.globalService.getProfesorId().subscribe(profesorId => {
+      if (profesorId !== null) {
+        this.alumnoService.getAlumnosDelProfesor(profesorId).subscribe({
+          next: (dataResponse) => {
+            this.dataSource.data = dataResponse;
+          },
+          error: (e) => {
+            console.error('Error al obtener alumnos del profesor:', e);
+          },
+        });
+      } else {
+        console.error('No se pudo obtener el ID del profesor.');
+      }
+    });
   }
-
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
@@ -163,5 +151,26 @@ export class AlumnosComponent implements AfterViewInit, OnInit {
           });
         }
       });
+  }
+  
+  comenzarEjercicio(alumno: any): void {
+    const dialogRef = this.dialog.open(BienvenidaAlumnoComponent, {
+      width: '300px',
+      data: alumno
+    
+    });
+
+    this.textToSpeechService.speak('Bienvenido, ' + alumno.nombre);
+    
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        console.log('El juego ha comenzado para el alumno:', result.nombre);
+        this.iniciarTest(result.alumnoId);
+      }
+    });
+  }
+
+  iniciarTest(alumnoId: number) {
+    this.router.navigate(['/test'], { queryParams: { alumnoId: alumnoId } });
   }
 }

@@ -16,7 +16,7 @@ import { EntidadService } from '@services/entidad.service';
 import { RequestStatus } from '@models/request-status.model';
 import { AlumnosService } from '@services/alumnos.service';
 import { Entidad } from 'src/app/interfaces/entidad';
-import { AlumnosComponent } from '../../../alumnos/pages/alumnos/alumnos.component';
+import { AlumnosComponent } from 'src/app/modules/alumnos/pages/alumnos/alumnos.component'; 
 import { MatTableDataSource } from '@angular/material/table';
 import { alumnoEntidad } from 'src/app/interfaces/alumnoEntidad';
 import { TokenService } from '@services/token.service';

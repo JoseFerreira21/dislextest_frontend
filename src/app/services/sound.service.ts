@@ -9,7 +9,9 @@ export class SoundService {
   private clickSeleccionSonido: Howl;
   private clickDeseleccionarSonido: Howl;
   private aplausoSonido: Howl;
-  
+
+  private empezarTestSonido: Howl;
+  private cancelarTestSonido: Howl;
   
 
   constructor() {
@@ -28,6 +30,13 @@ export class SoundService {
       src: ['assets/sounds/small-applause.mp3']
     });
     
+    this.empezarTestSonido = new Howl({
+      src: ['assets/sounds/start-button.mp3']
+    });
+
+    this.cancelarTestSonido = new Howl({
+      src: ['assets/sounds/cancel-button.mp3']
+    });
   }
 
   ClickSiguienteSound(): void {
@@ -44,5 +53,13 @@ export class SoundService {
   
   AplausoSonido(): void {
     this.aplausoSonido.play();
+  }
+  
+  EmpezarTestSonido(): void {
+    this.empezarTestSonido.play();
+  }
+
+  CancelarTestSonido(): void {
+    this.cancelarTestSonido.play();
   }
 }

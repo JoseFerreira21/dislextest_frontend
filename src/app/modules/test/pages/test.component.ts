@@ -7,10 +7,13 @@ import { ResultadoTest, ResultadoTestPost } from '@models/resultados.model';
 import { ResultadosService } from '@services/resultados.service';
 import { SoundService } from '@services/sound.service';
 
+import { ActivatedRoute } from '@angular/router';
+import { GlobalService } from '@services/global.service';
+
 @Component({
   selector: 'app-test',
   templateUrl: './test.component.html',
-  styleUrls: ['./test.component.scss']
+  styleUrls: ['./test.component.css']
 })
 export class TestComponent {
 
@@ -21,9 +24,11 @@ export class TestComponent {
   resultadoTest: ResultadoTest;
   resultadoTestId: number = 0;
 
-  constructor(private adminComponentesService: AdminComponentesService, 
+  constructor(private route: ActivatedRoute,
+              private adminComponentesService: AdminComponentesService, 
               private resultadosService: ResultadosService,
-              private soundService: SoundService) {
+              private soundService: SoundService,
+              private globalService: GlobalService) {
     this.resultadoTest = {
       indicador: '',
       observacion: '',
@@ -33,15 +38,32 @@ export class TestComponent {
   }
 
   ngOnInit() {
-    this.cargarEjercicios(this.currentComponentIndex);
-    this.resultadoTest = {
-      indicador: 'S',
-      observacion: 'alguna',
-      alumnoId: 1,
-      profesorId: 1
-    };
-    this.insertarResultado();
-  }
+    // Capturar el alumnoId desde los queryParams
+     this.route.queryParams.subscribe(params => {
+       const alumnoId = +params['alumnoId']; // El operador `+` convierte la cadena a número
+       this.resultadoTest.alumnoId = alumnoId; // Asignar el id del alumno capturado
+       //console.log('Alumno ID recibido:', alumnoId);
+     }); 
+    // Obtener el profesorId desde el servicio global
+     this.globalService.getProfesorId().subscribe(profesorId => {
+       if (profesorId !== null) {
+         this.resultadoTest.profesorId = profesorId;
+         //console.log('Profesor ID recibido:', profesorId);
+         
+         this.cargarEjercicios(this.currentComponentIndex);
+         this.resultadoTest = {
+           indicador: 'S',
+           observacion: 'alguna',
+           alumnoId: this.resultadoTest.alumnoId, 
+           profesorId: this.resultadoTest.profesorId
+         };
+         this.insertarResultado();
+       } else {
+         console.error('No se pudo obtener el ID del profesor.');
+       }
+     });
+   
+   }
 
 
   siguienteEjercicio() {
@@ -61,14 +83,15 @@ export class TestComponent {
   }
 
   insertarResultado() {
+    //console.log('ResultadoTest antes del POST:', this.resultadoTest); 
     this.resultadosService.postResultadoTest(this.resultadoTest).subscribe({
-      next: (response: ResultadoTestPost) => {
-        console.log('Respuesta del insert de resultado: ', response);
-        this.resultadoTestId = response.id;
-      },
-      error: (error) => {
-        console.error('Error:', error);
-      }
+        next: (response: ResultadoTestPost) => {
+            //console.log('Respuesta del insert de resultado: ', response);
+            this.resultadoTestId = response.id;
+        },
+        error: (error) => {
+            console.error('Error:', error);
+        }
     });
   }
 }

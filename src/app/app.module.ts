@@ -44,11 +44,13 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import {ObserversModule} from '@angular/cdk/observers';
 import {CdkStepperModule} from '@angular/cdk/stepper';
-import { ModalAvisoComponent } from './modules/layout/components/modal-aviso/modal-aviso.component';
-
+import { ModalAvisoComponent } from './modules/layout/components/dialogs/modal-aviso/modal-aviso.component';
+import { BienvenidaAlumnoComponent } from './modules/layout/components/dialogs/bienvenida-alumno/bienvenida-alumno.component'; 
+import { EliminarAlumnoComponent } from './modules/layout/components/dialogs/eliminar-alumno/eliminar-alumno.component';
+import { RegistrarAlumnoComponent } from './modules/layout/components/dialogs/registrar-editar-alumno/registrar-editar-alumno.component'; 
 
 @NgModule({
-  declarations: [AppComponent, ModalAvisoComponent],
+  declarations: [AppComponent, RegistrarAlumnoComponent, EliminarAlumnoComponent, ModalAvisoComponent, BienvenidaAlumnoComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -71,7 +73,6 @@ import { ModalAvisoComponent } from './modules/layout/components/modal-aviso/mod
     MomentDateModule,
     MatStepperModule,
     MatSnackBarModule,
-    MatIconModule,
     MatDialogModule,
     MatGridListModule,
     DragDropModule,

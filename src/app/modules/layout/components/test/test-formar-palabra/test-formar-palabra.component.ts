@@ -5,7 +5,7 @@ import { ResultadosService } from '@services/resultados.service';
 import { MatDialog } from '@angular/material/dialog';
 import { TextToSpeechService } from '@services/text-to-speech.service';
 import { SoundService } from '@services/sound.service';
-import { ModalAvisoComponent } from '../../modal-aviso/modal-aviso.component';
+import { ModalAvisoComponent } from '../../dialogs/modal-aviso/modal-aviso.component';
 import { ResultadoItem, ResultadoItemRespuesta } from '@models/resultados-item.model';
 import { ResultadoEjercicio } from '@models/resultados-ejercicio.model';
 
