@@ -21,7 +21,6 @@ const routes: Routes = [
         loadChildren: () =>
           import('../resultados/resultados.module').then((m) => m.ResultadosModule),
       },
-      
       {
         path: 'test',
         //canActivate: [AuthGuard],

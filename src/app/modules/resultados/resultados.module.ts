@@ -4,18 +4,22 @@ import { CdkTableModule } from '@angular/cdk/table';
 
 import { ResultadosRoutingModule } from './resultados-routing.module';
 import { ResultadosComponent } from './pages/resultados-table/resultados.component';
-//import { ResultadosTableComponent } from './pages/resultados-table/resultados-table.component'; 
+import { FormsModule } from '@angular/forms'; 
+import { MatIconModule } from '@angular/material/icon';
+import { MatDialogModule } from '@angular/material/dialog';
 
 
 @NgModule({
   declarations: [
     ResultadosComponent
-    //ResultadosTableComponent
   ],
   imports: [
     CommonModule,
     ResultadosRoutingModule,
-    CdkTableModule
+    CdkTableModule,
+    FormsModule,
+    MatIconModule,
+    MatDialogModule,
   ]
 })
 export class ResultadosModule { }

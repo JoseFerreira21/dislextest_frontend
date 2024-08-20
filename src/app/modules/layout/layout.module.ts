@@ -12,6 +12,7 @@ import { TestSeleccionarPalabraComponent } from './components/test/test-seleccio
 import { TestTacharPalabraComponent } from './components/test/test-tachar-palabra/test-tachar-palabra.component';
 import { TestPipe } from '../../pipes/test.pipe';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { ReportComponent } from './components/report/report.component';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     TestFormarPalabraComponent,
     TestSeleccionarPalabraComponent,
     TestTacharPalabraComponent,
-    TestPipe
+    TestPipe,
+    ReportComponent
   ],
   imports: [
     CommonModule,
