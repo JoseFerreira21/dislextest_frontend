@@ -1,0 +1,27 @@
+
+<div class="formar-container-test-title">
+  <div class="title">
+    <p class="p-test">Observa la palabra y ordena los nombres de animales.</p>
+  </div>
+
+  <div class="formar-container-test">
+    <ng-container *ngFor="let palabra of palabras; let i = index" class="palabra-input-group">
+      <div class="palabra-container">
+        <ng-container *ngFor="let letter of palabra.letras; let j = index" class="palabra-input-group">
+          <span cdkDrag class="span-test" [class.selected]="letter.estado" [class.unselected]="!letter.estado"
+            (click)="seleccionarLetra(palabra, letter)">{{ letter.letra }}</span>
+        </ng-container>
+      </div>
+  
+      <div class="palabra-container">
+        <ng-container *ngFor="let letter of palabra.letrasRespuesta; let j = index" class="palabra-input-group">
+          <span class="span-test" [class.selected]="false" [class.unselected]="false"
+            (click)="deSeleccionarLetra(palabra, letter, j)">{{ letter.letra }}</span>
+        </ng-container>
+      </div>
+    </ng-container>
+  </div>
+  
+</div>
+
+

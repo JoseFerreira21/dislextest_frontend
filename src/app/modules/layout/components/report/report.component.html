@@ -1,0 +1,120 @@
+<div class="report-container">
+    <h1>Reporte de Resultados</h1>
+  
+    <div *ngFor="let resultado of resultados">
+      <h2>{{ resultado.nombre_alumno }}</h2>
+      <p>Edad: {{ resultado.edad }} años</p>
+      <p>Nroº de documento: {{ resultado.nro_documento }}</p>
+      <p>Indicador general: {{ resultado.indicador }}</p>
+      <p>Observación general: {{ resultado.observacion }}</p>
+  
+      <table class="report-table">
+        <thead>
+          <tr>
+            <th>Área</th>
+            <th>Puntaje obtenido</th>
+            <th>Puntaje minimo esperado</th>
+            <th>Puntaje óptimo</th>
+            <th>Indicador</th>
+            <th>Observación</th>
+          </tr>
+        </thead>
+        <tbody>
+            <tr >
+              <td>Formar palabras</td>
+              <td> {{ resultado.fp_pobtenido}} </td>
+              <td>{{resultado.fp_pminimo}}</td>
+              <td>{{resultado.fp_pesperado}}</td>
+              <td> {{ resultado.fp_indicador }}</td>
+              <td> {{ resultado.fp_observacion }} </td>
+            </tr>
+  
+            <tr >
+              <td> Discriminación Visual encerrar palabras</td>
+              <td> {{ resultado.dva_pobtenido}} </td>
+              <td>{{resultado.dva_pminimo}}</td>
+              <td>{{resultado.dva_pesperado}}</td>
+              <td> {{ resultado.dva_indicador }}</td>
+              <td> {{ resultado.dva_observacion }} </td>
+            </tr>
+  
+            <tr >
+              <td> Discriminación de palabras </td>
+              <td> {{ resultado.dp_pobtenido}} </td>
+              <td>{{resultado.dp_pminimo}}</td>
+              <td>{{resultado.dp_pesperado}}</td>
+              <td> {{ resultado.dp_indicador }}</td>
+              <td> {{ resultado.dp_observacion }} </td>
+              
+            </tr>
+  
+            <tr >
+              <td> Encontrar letras en palabras </td>
+              <td> {{ resultado.elp_pobtenido}} </td>
+              <td>{{resultado.elp_pminimo}}</td>
+              <td>{{resultado.elp_pesperado}}</td>
+              <td> {{ resultado.elp_indicador }}</td>
+              <td> {{ resultado.elp_observacion }} </td>
+            </tr>
+  
+            <tr >
+              <td> Nombre correcto de una imagen </td>
+              <td> {{ resultado.nc_pobtenido}} </td>
+              <td>{{resultado.nc_pminimo}}</td>
+              <td>{{resultado.nc_pesperado}}</td>
+              <td> {{ resultado.nc_indicador }}</td>
+              <td> {{ resultado.nc_observacion }} </td>
+            </tr>
+  
+            <tr >
+              <td> Letras desordenadas </td>
+              <td> {{ resultado.ld_pobtenido}} </td>
+              <td>{{resultado.ld_pminimo}}</td>
+              <td>{{resultado.ld_pesperado}}</td>
+              <td> {{ resultado.ld_indicador }}</td>
+              <td> {{ resultado.ld_observacion }} </td>
+            </tr>
+  
+            <tr >
+                <td> Discriminación Visual contar palabras </td>
+                <td> {{ resultado.dvb_pobtenido}} </td>
+                <td>{{resultado.dvb_pminimo}}</td>
+                <td>{{resultado.dvb_pesperado}}</td>
+                <td> {{ resultado.dvb_indicador }}</td>
+                <td> {{ resultado.dvb_observacion }} </td>
+            </tr>
+  
+            
+            <tr >
+                <td> Conciencia Silábica </td>
+                <td> {{ resultado.cs_pobtenido}} </td>
+                <td>{{resultado.cs_pminimo}}</td>
+                <td>{{resultado.cs_pesperado}}</td>
+                <td> {{ resultado.cs_indicador }}</td>
+                <td> {{ resultado.cs_observacion }} </td>
+            </tr>
+            
+            <tr > 
+                <td> Conciencia Fonológica </td>
+                <td> {{ resultado.cf_pobtenido}} </td>
+                <td>{{resultado.cf_pminimo}}</td>
+                <td>{{resultado.cf_pesperado}}</td>
+                <td> {{ resultado.cf_indicador }}</td>
+                <td> {{ resultado.cf_observacion }} </td>
+            </tr>
+  
+            <tr >
+                <td> Derecha e Izquierda </td>
+                <td> {{ resultado.di_pobtenido}} </td>
+                <td>{{resultado.di_pminimo}}</td>
+                <td>{{resultado.di_pesperado}}</td>
+                <td> {{ resultado.di_indicador }}</td>
+                <td> {{ resultado.di_observacion }} </td>
+            </tr>
+  
+          </tbody>
+      </table>
+  
+      <hr>
+    </div>
+  </div>

@@ -1,0 +1,71 @@
+.grupo {
+  margin-bottom: 15px;
+  padding: 10px;
+}
+
+.formar-container-test {
+  background-color: #FFDE59;
+  padding: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.356);
+  max-width: 1000px;
+  margin: 20px auto;
+  text-align: center;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.palabra {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border: 5px solid #FF8482;
+  border-radius: 5px;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: border-color 0.2s;
+  color: black;
+  font-weight: bold;
+  text-align: center;
+  cursor: pointer;
+}
+
+.seleccionada {
+  background-color: #c8e6c9;
+  font-weight: bold;
+  border: 5px solid black;
+}
+
+.formar-container-test-title {
+  background-color: #FFDE59;
+  border-radius: 8px;
+  max-width: 1000px;
+  margin: 20px auto;
+  text-align: center;
+  grid-template-columns: repeat(1, 1fr);
+}
+
+.title {
+  display: block;
+  margin: 25px;
+  font-family: 'Comic Sans MS', cursive, sans-serif;
+  font-weight: bold;
+  color: #000000;
+  font-size: 25px;
+}
+
+/* Clases de color específicas para grupos */
+.color-0 {
+  background-color: #FF914D; /* Primer color */
+}
+
+.color-1 {
+  background-color: #38B6FF; /* Segundo color */
+}
+
+.color-2 {
+  background-color: #FFDE59; /* Tercer color */
+}
+
+.color-3 {
+  background-color: #C9E265; /* Cuarto color */
+}

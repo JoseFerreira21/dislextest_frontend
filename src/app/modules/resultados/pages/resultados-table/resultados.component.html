@@ -1,128 +1,192 @@
 <div class="w-full h-full grow bg-white-600 p-6">
   <div class="container mx-auto">
     <h1 class="text-xl text-gray-700 font-semibold italic mb-5">Lista de Resultados</h1>
-    <div class="tabla">
-        <div class="contenedor">
-          <div *ngFor="let resultado of resultados">
-            <span class="titulos">Nombre del alumno: <span class="informacion"> {{resultado.nombre_alumno}} </span> </span><br>
-            <span class="titulos">Edad: <span class="informacion"> {{resultado.edad}} años</span> </span><br>
-            <span class="titulos">Nroº de documento: <span class="informacion"> {{resultado.nro_documento}} </span> </span><br>
-            <span class="titulos">
-              Indicador general: <span class="informacion">{{resultado.indicador}}</span>
-            </span><br>
-            <span class="titulos">
-              Observación general: <span class="informacion"> {{resultado.observacion}} </span>
-            </span><br><br>
-            <span class="titulos">Perfil detallado</span> <br> <br>
-            <table class="table table-striped">
-              <thead class="bg-white border-b">
-                
-                <tr class="bg-white border-b">
-                  <th scope="col" class="text-left">Área</th>
-                  <th scope="col" class="text-left">Puntaje obtenido</th>
-                  <th scope="col" class="text-left">Puntaje minimo esperado</th>
-                  <th scope="col" class="text-left">Puntaje óptimo</th>
-                  <th scope="col" class="text-left">Indicador </th>
-                  <th scope="col" class="text-center">Observación</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr class="bg-gray-100 border-b">
-                  <td class="text-sm font-semibold text-gray-900 px-6 py-4 text-left">Formar palabras</td>
-                  <td class="text-sm font-semibold text-gray-900 px-6 py-4 text-left"> {{ resultado.fp_pobtenido}} </td>
-                  <td class="text-sm font-semibold text-gray-900 px-6 py-4 text-left">{{resultado.fp_pesperado * 0.6 }}</td>
-                  <td class="text-sm font-semibold text-gray-900 px-6 py-4 text-left">{{resultado.fp_pesperado}}</td>
-                  <td class="text-sm font-semibold text-gray-900 px-6 py-4 text-left"> {{ resultado.fp_indicador }}</td>
-                  <td class="text-sm font-semibold text-gray-900 px-6 py-4 text-left"> {{ resultado.fp_observacion }} </td>
-                </tr>
-      
-                <tr class="bg-white-100 border-b">
-                  <td class="text-sm font-semibold text-gray-900 px-6 py-4 text-left"> Discriminación Visual encerrar palabras</td>
-                  <td class="text-sm font-semibold text-gray-900 px-6 py-4 text-left"> {{ resultado.dva_pobtenido}} </td>
-                  <td class="text-sm font-semibold text-gray-900 px-6 py-4 text-left">{{resultado.dva_pesperado * 0.6 }}</td>
-                  <td class="text-sm font-semibold text-gray-900 px-6 py-4 text-left">{{resultado.dva_pesperado}}</td>
-                  <td class="text-sm font-semibold text-gray-900 px-6 py-4 text-left"> {{ resultado.dva_indicador }}</td>
-                  <td class="text-sm font-semibold text-gray-900 px-6 py-4 text-left"> {{ resultado.dva_observacion }} </td>
-                </tr>
-      
-                <tr class="bg-gray-100 border-b">
-                  <td class="text-sm font-semibold text-gray-900 px-6 py-4 text-left"> Discriminación de palabras </td>
-                  <td class="text-sm font-semibold text-gray-900 px-6 py-4 text-left"> {{ resultado.dp_pobtenido}} </td>
-                  <td class="text-sm font-semibold text-gray-900 px-6 py-4 text-left">{{resultado.dp_pesperado * 0.6 }}</td>
-                  <td class="text-sm font-semibold text-gray-900 px-6 py-4 text-left">{{resultado.dp_pesperado}}</td>
-                  <td class="text-sm font-semibold text-gray-900 px-6 py-4 text-left"> {{ resultado.dp_indicador }}</td>
-                  <td class="text-sm font-semibold text-gray-900 px-6 py-4 text-left"> {{ resultado.dp_observacion }} </td>
-                  
-                </tr>
-      
-                <tr class="bg-white-100 border-b">
-                  <td class="text-sm font-semibold text-gray-900 px-6 py-4 text-left"> Encontrar letras en palabras </td>
-                  <td class="text-sm font-semibold text-gray-900 px-6 py-4 text-left"> {{ resultado.elp_pobtenido}} </td>
-                  <td class="text-sm font-semibold text-gray-900 px-6 py-4 text-left">{{resultado.elp_pesperado * 0.6 }}</td>
-                  <td class="text-sm font-semibold text-gray-900 px-6 py-4 text-left">{{resultado.elp_pesperado}}</td>
-                  <td class="text-sm font-semibold text-gray-900 px-6 py-4 text-left"> {{ resultado.elp_indicador }}</td>
-                  <td class="text-sm font-semibold text-gray-900 px-6 py-4 text-left"> {{ resultado.elp_observacion }} </td>
-                </tr>
-      
-                <tr class="bg-gray-100 border-b">
-                  <td class="text-sm font-semibold text-gray-900 px-6 py-4 text-left"> Nombre correcto de una imagen </td>
-                  <td class="text-sm font-semibold text-gray-900 px-6 py-4 text-left"> {{ resultado.nc_pobtenido}} </td>
-                  <td class="text-sm font-semibold text-gray-900 px-6 py-4 text-left">{{resultado.nc_pesperado * 0.6 }}</td>
-                  <td class="text-sm font-semibold text-gray-900 px-6 py-4 text-left">{{resultado.nc_pesperado}}</td>
-                  <td class="text-sm font-semibold text-gray-900 px-6 py-4 text-left"> {{ resultado.nc_indicador }}</td>
-                  <td class="text-sm font-semibold text-gray-900 px-6 py-4 text-left"> {{ resultado.nc_observacion }} </td>
-                </tr>
-      
-                <tr class="bg-white-100 border-b">
-                  <td class="text-sm font-semibold text-gray-900 px-6 py-4 text-left"> Letras desordenadas </td>
-                  <td class="text-sm font-semibold text-gray-900 px-6 py-4 text-left"> {{ resultado.ld_pobtenido}} </td>
-                  <td class="text-sm font-semibold text-gray-900 px-6 py-4 text-left">{{resultado.ld_pesperado * 0.6 }}</td>
-                  <td class="text-sm font-semibold text-gray-900 px-6 py-4 text-left">{{resultado.ld_pesperado}}</td>
-                  <td class="text-sm font-semibold text-gray-900 px-6 py-4 text-left"> {{ resultado.ld_indicador }}</td>
-                  <td class="text-sm font-semibold text-gray-900 px-6 py-4 text-left"> {{ resultado.ld_observacion }} </td>
-                </tr>
 
-                <tr class="bg-gray-100 border-b">
-                    <td class="text-sm font-semibold text-gray-900 px-6 py-4 text-left"> Discriminación Visual contar palabras </td>
-                    <td class="text-sm font-semibold text-gray-900 px-6 py-4 text-left"> {{ resultado.dvb_pobtenido}} </td>
-                    <td class="text-sm font-semibold text-gray-900 px-6 py-4 text-left">{{resultado.dvb_pesperado * 0.6 }}</td>
-                    <td class="text-sm font-semibold text-gray-900 px-6 py-4 text-left">{{resultado.dvb_pesperado}}</td>
-                    <td class="text-sm font-semibold text-gray-900 px-6 py-4 text-left"> {{ resultado.dvb_indicador }}</td>
-                    <td class="text-sm font-semibold text-gray-900 px-6 py-4 text-left"> {{ resultado.dvb_observacion }} </td>
-                </tr>
+    <!-- Campo de búsqueda -->
+    <div class="mb-4">
+      <input type="text" [(ngModel)]="filterText" placeholder="Buscar por nombre del alumno" (input)="filterResultados()" class="px-4 py-2 border rounded w-full">
+    </div>
 
-                
-                <tr class="bg-white-100 border-b">
-                    <td class="text-sm font-semibold text-gray-900 px-6 py-4 text-left"> Conciencia Silábica </td>
-                    <td class="text-sm font-semibold text-gray-900 px-6 py-4 text-left"> {{ resultado.cs_pobtenido}} </td>
-                    <td class="text-sm font-semibold text-gray-900 px-6 py-4 text-left">{{resultado.cs_pesperado * 0.6 }}</td>
-                    <td class="text-sm font-semibold text-gray-900 px-6 py-4 text-left">{{resultado.cs_pesperado}}</td>
-                    <td class="text-sm font-semibold text-gray-900 px-6 py-4 text-left"> {{ resultado.cs_indicador }}</td>
-                    <td class="text-sm font-semibold text-gray-900 px-6 py-4 text-left"> {{ resultado.cs_observacion }} </td>
-                </tr>
-                
-                <tr class="bg-gray-100 border-b"> 
-                    <td class="text-sm font-semibold text-gray-900 px-6 py-4 text-left"> Conciencia Fonológica </td>
-                    <td class="text-sm font-semibold text-gray-900 px-6 py-4 text-left"> {{ resultado.cf_pobtenido}} </td>
-                    <td class="text-sm font-semibold text-gray-900 px-6 py-4 text-left">{{resultado.cf_pesperado * 0.6 }}</td>
-                    <td class="text-sm font-semibold text-gray-900 px-6 py-4 text-left">{{resultado.cf_pesperado}}</td>
-                    <td class="text-sm font-semibold text-gray-900 px-6 py-4 text-left"> {{ resultado.cf_indicador }}</td>
-                    <td class="text-sm font-semibold text-gray-900 px-6 py-4 text-left"> {{ resultado.cf_observacion }} </td>
-                </tr>
+    <div class="mb-4 flex justify-end">
+      <button (click)="generateReport()" class="px-4 py-2 bg-green-500 text-white rounded">Generar Reporte</button>
+    </div>
 
-                <tr class="bg-white-100 border-b">
-                    <td class="text-sm font-semibold text-gray-900 px-6 py-4 text-left"> Derecha e Izquierda </td>
-                    <td class="text-sm font-semibold text-gray-900 px-6 py-4 text-left"> {{ resultado.di_pobtenido}} </td>
-                    <td class="text-sm font-semibold text-gray-900 px-6 py-4 text-left">{{resultado.di_pesperado * 0.6 }}</td>
-                    <td class="text-sm font-semibold text-gray-900 px-6 py-4 text-left">{{resultado.di_pesperado}}</td>
-                    <td class="text-sm font-semibold text-gray-900 px-6 py-4 text-left"> {{ resultado.di_indicador }}</td>
-                    <td class="text-sm font-semibold text-gray-900 px-6 py-4 text-left"> {{ resultado.di_observacion }} </td>
-                </tr>
-      
-              </tbody>
-            </table>
-          </div>
-        </div>
+    <div class="contenedor" *ngFor="let resultado of filteredResultados">
+      <div class="resultado-info">
+        <span class="titulos">Nombre del alumno: <span class="informacion"> {{resultado.nombre_alumno}} </span> </span><br>
+        <span class="titulos">Edad: <span class="informacion"> {{resultado.edad}} años</span> </span><br>
+        <span class="titulos">Nroº de documento: <span class="informacion"> {{resultado.nro_documento}} </span> </span><br>
+        <span class="titulos">Indicador general: <span class="informacion">{{resultado.indicador}}</span></span><br>
+        <span class="titulos">Observación general: <span class="informacion"> {{resultado.observacion}} </span></span><br><br>
+        <span class="titulos">Perfil detallado</span> <br> <br>
       </div>
+      <table class="table table-striped">
+        <thead class="bg-white border-b">
+          <tr class="bg-white border-b">
+            <th scope="col" class="text-left">Área</th>
+            <th scope="col" class="text-left">Puntaje obtenido</th>
+            <th scope="col" class="text-left">Puntaje minimo esperado</th>
+            <th scope="col" class="text-left">Puntaje óptimo</th>
+            <th scope="col" class="text-left">Indicador</th>
+            <th scope="col" class="text-center">Observación</th>
+            <th scope="col" class="text-center">Detalles</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr >
+            <td>Formar palabras</td>
+            <td> {{ resultado.fp_pobtenido}} </td>
+            <td>{{resultado.fp_pminimo}}</td>
+            <td>{{resultado.fp_pesperado}}</td>
+            <td> {{ resultado.fp_indicador }}</td>
+            <td> {{ resultado.fp_observacion }} </td>
+            <td class="text-center">
+              <button class="details-button" title="Detalles del ejercicio" 
+                      (click)="mostrarDetalles(resultado.id_alumno, resultado.fp_item_id)">
+                <mat-icon>info</mat-icon>
+              </button>
+            </td>
+          </tr>
+
+          <tr >
+            <td> Discriminación Visual encerrar palabras</td>
+            <td> {{ resultado.dva_pobtenido}} </td>
+            <td>{{resultado.dva_pminimo}}</td>
+            <td>{{resultado.dva_pesperado}}</td>
+            <td> {{ resultado.dva_indicador }}</td>
+            <td> {{ resultado.dva_observacion }} </td>
+            <td class="text-center">
+              <button class="details-button" title="Detalles del ejercicio" 
+                      (click)="mostrarDetalles(resultado.id_alumno, resultado.dva_item_id)">
+                <mat-icon>info</mat-icon>
+              </button>
+            </td>
+          </tr>
+
+          <tr >
+            <td> Discriminación de palabras </td>
+            <td> {{ resultado.dp_pobtenido}} </td>
+            <td>{{resultado.dp_pminimo}}</td>
+            <td>{{resultado.dp_pesperado}}</td>
+            <td> {{ resultado.dp_indicador }}</td>
+            <td> {{ resultado.dp_observacion }} </td>
+            <td class="text-center">
+              <button class="details-button" title="Detalles del ejercicio" 
+                      (click)="mostrarDetalles(resultado.id_alumno, resultado.dp_item_id)">
+                <mat-icon>info</mat-icon>
+              </button>
+            </td>
+          </tr>
+
+          <tr >
+            <td> Encontrar letras en palabras </td>
+            <td> {{ resultado.elp_pobtenido}} </td>
+            <td>{{resultado.elp_pminimo}}</td>
+            <td>{{resultado.elp_pesperado}}</td>
+            <td> {{ resultado.elp_indicador }}</td>
+            <td> {{ resultado.elp_observacion }} </td>
+            <td class="text-center">
+              <button class="details-button" title="Detalles del ejercicio" 
+                      (click)="mostrarDetalles(resultado.id_alumno, resultado.elp_item_id)">
+                <mat-icon>info</mat-icon>
+              </button>
+            </td>
+          </tr>
+
+          <tr >
+            <td> Nombre correcto de una imagen </td>
+            <td> {{ resultado.nc_pobtenido}} </td>
+            <td>{{resultado.nc_pminimo}}</td>
+            <td>{{resultado.nc_pesperado}}</td>
+            <td> {{ resultado.nc_indicador }}</td>
+            <td> {{ resultado.nc_observacion }} </td>
+            <td class="text-center">
+              <button class="details-button" title="Detalles del ejercicio" 
+                      (click)="mostrarDetalles(resultado.id_alumno, resultado.nc_item_id)">
+                <mat-icon>info</mat-icon>
+              </button>
+            </td>
+          </tr>
+
+          <tr >
+            <td> Letras desordenadas </td>
+            <td> {{ resultado.ld_pobtenido}} </td>
+            <td>{{resultado.ld_pminimo}}</td>
+            <td>{{resultado.ld_pesperado}}</td>
+            <td> {{ resultado.ld_indicador }}</td>
+            <td> {{ resultado.ld_observacion }} </td>
+            <td class="text-center">
+              <button class="details-button" title="Detalles del ejercicio" 
+                      (click)="mostrarDetalles(resultado.id_alumno, resultado.ld_item_id)">
+                <mat-icon>info</mat-icon>
+              </button>
+            </td>
+          </tr>
+
+          <tr >
+              <td> Discriminación Visual contar palabras </td>
+              <td> {{ resultado.dvb_pobtenido}} </td>
+              <td>{{resultado.dvb_pminimo}}</td>
+              <td>{{resultado.dvb_pesperado}}</td>
+              <td> {{ resultado.dvb_indicador }}</td>
+              <td> {{ resultado.dvb_observacion }} </td>
+              <td class="text-center">
+                <button class="details-button" title="Detalles del ejercicio" 
+                        (click)="mostrarDetalles(resultado.id_alumno, resultado.dvb_item_id)">
+                  <mat-icon>info</mat-icon>
+                </button>
+              </td>
+          </tr>
+
+          
+          <tr >
+              <td> Conciencia Silábica </td>
+              <td> {{ resultado.cs_pobtenido}} </td>
+              <td>{{resultado.cs_pminimo}}</td>
+              <td>{{resultado.cs_pesperado}}</td>
+              <td> {{ resultado.cs_indicador }}</td>
+              <td> {{ resultado.cs_observacion }} </td>
+              <td class="text-center">
+                <button class="details-button" title="Detalles del ejercicio" 
+                        (click)="mostrarDetalles(resultado.id_alumno, resultado.cs_item_id)">
+                  <mat-icon>info</mat-icon>
+                </button>
+              </td>
+          </tr>
+          
+          <tr > 
+              <td> Conciencia Fonológica </td>
+              <td> {{ resultado.cf_pobtenido}} </td>
+              <td>{{resultado.cf_pminimo}}</td>
+              <td>{{resultado.cf_pesperado}}</td>
+              <td> {{ resultado.cf_indicador }}</td>
+              <td> {{ resultado.cf_observacion }} </td>
+              <td class="text-center">
+                <button class="details-button" title="Detalles del ejercicio" 
+                        (click)="mostrarDetalles(resultado.id_alumno, resultado.cf_item_id)">
+                  <mat-icon>info</mat-icon>
+                </button>
+              </td>
+          </tr>
+
+          <tr >
+              <td> Derecha e Izquierda </td>
+              <td> {{ resultado.di_pobtenido}} </td>
+              <td>{{resultado.di_pminimo}}</td>
+              <td>{{resultado.di_pesperado}}</td>
+              <td> {{ resultado.di_indicador }}</td>
+              <td> {{ resultado.di_observacion }} </td>
+              <td class="text-center">
+                <button class="details-button" title="Detalles del ejercicio" 
+                        (click)="mostrarDetalles(resultado.id_alumno, resultado.di_item_id)">
+                  <mat-icon>info</mat-icon>
+                </button>
+              </td>
+          </tr>
+
+        </tbody>
+      </table>
+      <div class="espaciador"></div>
+    </div>
   </div>
 </div>

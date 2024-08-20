@@ -1,35 +1,76 @@
 import { Component, OnInit } from '@angular/core';
-import { TestService } from '../../../../services/test.service';
-import { HttpClient } from '@angular/common/http';
-
 import { ResultadoTestService } from '@services/resultadotest.service';
-
-import { environment } from '@environments/environment';
-
-import { TokenService } from '@services/token.service';
-import { ResultadoTest } from '@models/resultadotest.model';
+import { GlobalService } from '@services/global.service';
+import { DataSourceResultados } from './data-source';
+import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { DetallesEjercicioComponent } from 'src/app/modules/layout/components/dialogs/detalles-ejercicio/detalles-ejercicio.component'; 
 
 @Component({
   selector: 'app-resultados',
   templateUrl: './resultados.component.html',
-  styleUrls: ['./resultados.component.scss'],
+  styleUrls: ['./resultados.component.css'],
 })
 export class ResultadosComponent implements OnInit {
-  resultados: any;
+  resultados: any[] = [];  // Cambiamos a un array para facilitar el filtrado
+  filteredResultados: any[] = []; // Resultados filtrados
   resultadosItems: [] = [];
+  dataSource = new DataSourceResultados();
+  filterText: string = ''; // Texto del filtro
 
-  constructor(private resultadoTestService: ResultadoTestService) {
+  constructor(
+    public dialog: MatDialog,
+    private router: Router,
+    private _resultadoTestService: ResultadoTestService,
+    private globalService: GlobalService // Inyectamos GlobalService
+  ) {
     this.obtenerResultados();
   }
 
-  apiUrl = environment.API_URL;
-
   obtenerResultados() {
-    this.resultadoTestService.getResultados().subscribe((data) => {
-      this.resultados = data;
-      console.log('Resultados: ', this.resultados);
+    this.globalService.getProfesorId().subscribe(profesorId => {
+      if (profesorId !== null) {
+        this._resultadoTestService.getResultados(profesorId).subscribe({
+          next: (data) => {
+            this.resultados = data;
+            this.filteredResultados = data; // Inicialmente, todos los resultados están en la lista filtrada
+          },
+          error: (e) => {
+            console.error('Error al obtener los resultados:', e);
+          },
+        });
+      } else {
+        console.error('No se pudo obtener el ID del profesor.');
+      }
     });
   }
 
-  ngOnInit(): void {}
+  // Método para filtrar los resultados
+  filterResultados() {
+    if (!this.filterText) {
+      this.filteredResultados = this.resultados; // Si no hay filtro, mostrar todos
+    } else {
+      this.filteredResultados = this.resultados.filter(resultado =>
+        resultado.nombre_alumno.toLowerCase().includes(this.filterText.toLowerCase())
+      );
+    }
   }
+
+  mostrarDetalles(alumnoId: number, itemId: number): void {
+    const dialogRef = this.dialog.open(DetallesEjercicioComponent, {
+      width: '400px',
+      data: { alumnoId: alumnoId, itemId: itemId }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+    });
+  }
+
+  // Nueva función para generar el reporte
+  generateReport() {
+    this.router.navigate(['/report'], { state: { data: this.filteredResultados } });
+  }
+
+
+  ngOnInit(): void {}
+}

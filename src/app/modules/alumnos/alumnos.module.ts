@@ -1,19 +1,22 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CdkTableModule } from '@angular/cdk/table';
 
 import { AlumnosRoutingModule } from './alumnos-routing.module';
-import { AlumnosTableComponent } from './pages/alumnos-table/alumnos-table.component';
+import { AlumnosComponent } from './pages/alumnos/alumnos.component';
+import { MatIconModule } from '@angular/material/icon';
+import { MatDialogModule } from '@angular/material/dialog';
 
 
 @NgModule({
   declarations: [
-    AlumnosTableComponent,
+    //AlumnosComponent,
   ],
   imports: [
     CommonModule,
     AlumnosRoutingModule,
-    CdkTableModule
-  ]
+    AlumnosComponent,
+    MatIconModule,
+    MatDialogModule,
+  ],
 })
-export class AlumnosModule { }
+export class AlumnosModule {}

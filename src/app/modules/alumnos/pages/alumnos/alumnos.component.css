@@ -1,0 +1,15 @@
+table {
+    width: 100%;
+  }
+
+  /* Tamaño button grande */
+.large-button {
+  font-size: 20px;
+  padding: 12px 24px;
+}
+
+/* Tamaño button pequeño */
+.small-button {
+  font-size: 12px;
+  padding: 6px 12px;
+}

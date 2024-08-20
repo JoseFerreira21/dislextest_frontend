@@ -1,0 +1,33 @@
+<!-- <div class="container">
+    <h1 class="tachar-titulo">Discriminación de palabras</h1>
+    <p class="tachar-descripcion">Tacha la palabra entre un conjunto de ellas.</p>
+
+    <div *ngFor="let opciones of opcionesGrupo; let i = index">
+        <div class="opcion-texto">{{ opciones.respuesta }}</div>
+        <div class="options">
+                 <div *ngFor="let palabra of opciones.palabras; let j = index"
+                 class="palabras"
+                 [ngClass]="{'selected': palabra.estado}"
+                 (click)="seleccionarRespuesta(i,palabra.opcion, j)"
+                 >
+                {{ palabra.opcion }}
+            </div>
+        </div>
+    </div>
+</div> -->
+
+<div class="container">
+  <h1 class="tachar-titulo">Tacha la palabra entre un conjunto de ellas.</h1>
+
+  <div *ngFor="let opciones of opcionesGrupo; let i = index" [ngClass]="getGrupoClasses(i)">
+    <div class="opcion-texto">{{ opciones.respuesta }}</div>
+    <div class="options">
+      <div *ngFor="let palabra of opciones.palabras; let j = index"
+           class="palabras"
+           [ngClass]="{'selected': palabra.estado}"
+           (click)="seleccionarRespuesta(i, palabra.opcion, j)">
+        {{ palabra.opcion }}
+      </div>
+    </div>
+  </div>
+</div>

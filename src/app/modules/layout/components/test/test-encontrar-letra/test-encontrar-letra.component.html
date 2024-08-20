@@ -1,0 +1,23 @@
+<div class="formar-container-test-title">
+  <div class="title">
+    <p class="p-test">Encierra la letra que se te indica.</p>
+  </div>
+
+  <div>
+    <ng-container *ngFor="let task of encontrarLetras">
+      <div class="letra-title">
+        {{ task.respuesta }}
+      </div>
+      <div *ngFor="let palabra of task.palabras">
+        <div class="div-letras">
+          <span *ngFor="let letras of palabra.letras"
+                class="span-test"
+                [ngClass]="{'seleccionado': letras.estado}"
+                (click)="toggleSeleccion(letras)">
+            {{letras.letra}}
+          </span>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</div>

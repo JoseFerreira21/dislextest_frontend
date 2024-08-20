@@ -4,33 +4,35 @@ import { HttpClient, HttpHeaders  } from '@angular/common/http';
 import { environment } from '@environments/environment';
 
 import { TokenService } from '@services/token.service';
-import { Alumnos } from '@models/alumnos.model';
 import { checkToken } from 'src/interceptors/token.interceptor';
+import { Entidad } from '../interfaces/entidad';
+import { alumnoEntidad } from '../interfaces/alumnoEntidad';
+import { Alumno } from '../interfaces/alumno';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AlumnosService {
 
-  constructor(private http: HttpClient, private tokenService: TokenService) {}
+  constructor(private http: HttpClient, 
+             private tokenService: TokenService) {}
 
   apiUrl = environment.API_URL;
 
-  getAlumnos() {
-    return this.http.get<Alumnos[]>(`${this.apiUrl}/alumno`, {context: checkToken()});
+  getAlumnosDelProfesor(idProfesor :number) {
+    return this.http.get<alumnoEntidad[]>(`${this.apiUrl}/alumno/profesor/${idProfesor}`, {context: checkToken()});
   }
 
 
-  postAlumno(entidad: any) {
-    console.log('Objeto alumno que recibira la Api');
-    console.log(entidad);
+  createAlumno(alumno: any) {
+    //console.log('Objeto entidad que recibira la Api');
     const token = this.tokenService.getToken();
     const headers = new HttpHeaders({
       'content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`})
-    
-    return this.http.post(`${this.apiUrl}/entidad`, JSON.stringify(entidad), {headers: headers});   
+      Authorization: `Bearer ${token}`,
+    });
+    return this.http.post<Alumno>(`${this.apiUrl}/alumno/`, JSON.stringify(alumno), {
+      headers: headers,
+    });
   }
-
-
 }

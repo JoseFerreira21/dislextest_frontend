@@ -1,0 +1,27 @@
+<div class="formar-container-test-title">
+  <div class="title">
+    <p class="tachar-descripcion">Selecciona la palabra escrita correctamente</p>
+  </div>
+  <div class="formar-container-test">
+
+    <div *ngFor="let palabra of palabras; let i = index" class="grupo">
+
+      <div *ngFor="let opcion of palabra.opciones; let j = index" [ngClass]="getGrupoClasses(i)" class="palabra"
+        [class.seleccionada]="seleccion[i] === j" (click)="seleccionar(i, opcion.palabra, j)">
+        {{ opcion.palabra }}
+      </div>
+    </div>
+    <div class="imagenes-container">
+      <div  class="imagen-ejercicio">
+        <img src="../../../../../../assets/images/elefante.jpg">
+      </div>
+
+    </div>
+    <div class="imagenes-container">
+      <div  class="imagen-ejercicio">
+        <img src="../../../../../../assets/images/tigre.jpg">
+      </div>
+
+    </div>
+  </div>
+</div>

@@ -7,19 +7,36 @@ import { SharedModule } from '@shared/shared.module';
 import { LayoutRoutingModule } from './layout-routing.module';
 import { LayoutComponent } from './components/layout/layout.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { TestFormarPalabraComponent } from './components/test/test-formar-palabra/test-formar-palabra.component';
+import { TestSeleccionarPalabraComponent } from './components/test/test-seleccionar-palabra/test-seleccionar-palabra.component';
+import { TestTacharPalabraComponent } from './components/test/test-tachar-palabra/test-tachar-palabra.component';
+import { TestPipe } from '../../pipes/test.pipe';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { ReportComponent } from './components/report/report.component';
 
 
 @NgModule({
   declarations: [
     LayoutComponent,
-    NavbarComponent
+    NavbarComponent,
+    TestFormarPalabraComponent,
+    TestSeleccionarPalabraComponent,
+    TestTacharPalabraComponent,
+    TestPipe,
+    ReportComponent
   ],
   imports: [
     CommonModule,
     LayoutRoutingModule,
     OverlayModule,
     FontAwesomeModule,
-    SharedModule
+    SharedModule,
+    DragDropModule
+  ],
+  exports: [
+    TestFormarPalabraComponent,
+    TestSeleccionarPalabraComponent,
+    TestTacharPalabraComponent
   ]
 })
 export class LayoutModule { }

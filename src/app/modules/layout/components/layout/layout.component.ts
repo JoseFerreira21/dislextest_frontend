@@ -9,7 +9,5 @@ export class LayoutComponent implements OnInit{
   constructor(private authService: AuthService) {}
  
   ngOnInit() {
-   this.authService.getProfile()
-   .subscribe();
   }
 }

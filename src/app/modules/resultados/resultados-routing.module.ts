@@ -7,7 +7,7 @@ import { ResultadosComponent } from './pages/resultados-table/resultados.compone
 const routes: Routes = [
   {
     path: '',
-    component: ResultadosComponent //ResultadosTableComponent 
+    component: ResultadosComponent
   }
 ];
 

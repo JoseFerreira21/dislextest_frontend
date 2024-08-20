@@ -4,84 +4,49 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 import { TokenService } from '@services/token.service';
-
+import { Palabra } from '@models/formar-palabras.model';
+import { DiscriminacionPalabra } from '@models/discriminacion-palabras.model';
+import { TacharPalabraEstructura } from '@models/tachar-palabra.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TestService {
 
-  private _url: string = `${environment.API_URL}`;
+  apiUrlTest = environment.API_URL + '/test/';
+  apiUrlDiccionario = environment.API_URL + '/diccionario/';
 
-  constructor(private http: HttpClient, private tokenService: TokenService) {
-    console.log('Se conecta al service');
+  constructor(private http: HttpClient,
+              private tokenService: TokenService) {
   };
 
-  getUser() {
-    return this.http.get(`${this._url}/userProfile`);
-  };
+  getObtenerPalabras(): Observable<Palabra[]> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${this.tokenService.getToken()}`
+    });
 
-  getUserId(id: number) {
-    return this.http.get(`${this._url}/userProfile${id}`);
-  };
-
-  getAlumnoProfesor(doc: string) {
-    return this.http.get(`${this._url}/alumnoDelProfesor${doc}`);
-  };
-
-  getResultadoTest() {
-    return this.http.get(`${this._url}/resultadotest`);
+    return this.http.get<Palabra[]>(`${this.apiUrlDiccionario}formar-palabras`, { headers: headers });
   }
 
-  getResultadoItemList() {
-    return this.http.get(`${this._url}/ResultadoItemList`);
+  getDiscriminacionPalabra(): Observable<DiscriminacionPalabra[]> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${this.tokenService.getToken()}`
+    });
+    //let datos: DiscriminacionPalabra[] = [];
+    let datos:Observable<DiscriminacionPalabra[]> = this.http.get<DiscriminacionPalabra[]>(`${this.apiUrlDiccionario}discriminacion-visual-v2`, { headers: headers });
+    console.log('datos del service: ', datos);
+     return this.http.get<DiscriminacionPalabra[]>(`${this.apiUrlDiccionario}discriminacion-visual-v2`, { headers: headers });
   }
 
-  postResultadoTest(resultadoTest: any) {
-    console.log('Lo que recibira la API: ', resultadoTest );
-    const headers =  { 'content-type': 'application/json'}  
-    return this.http.post(`${this._url}/ResultadoTest`, resultadoTest, {'headers': headers});
-  };
+  getTacharPalabra(): Observable<TacharPalabraEstructura[]> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${this.tokenService.getToken()}`
+    });
 
-  
-  postResultadoItem(item: any) {
-    console.log('Lo que recibira la API: ', item );
-    const headers =  { 'content-type': 'application/json'}  
-    return this.http.post(`${this._url}/ResultadoItemList`, item, {'headers': headers});
-  };
-  
-  putResultadoTest(resultadoTest: any, idAlumno: number) {
-    console.log('Lo que recibira la API para el PUT: ', resultadoTest );
-    const headers =  { 'content-type': 'application/json'}  
-    return this.http.put(`${this._url}/ResultadoTest${idAlumno}`, resultadoTest, {'headers': headers});
-  };
-
-  postAlumno(alumno: any) {
-    console.log('Objeto alumno que recibira la Api');
-    const headers =  { 'content-type': 'application/json'};
-    return this.http.post(`${this._url}/alumno`, alumno, {'headers': headers});
-  };
-
-
-  getEntidad(doc: string) {
-    return this.http.get(`${this._url}/entidad/doc${doc}`);
+    return this.http.get<TacharPalabraEstructura[]>(`${this.apiUrlDiccionario}discriminacion-palabras-v2`, { headers: headers });
   }
-
-  getProfesor(id: number) {
-    return this.http.get(`${this._url}/profesor${id}`);
-  }
-
-  postAluProfe(aluProfe: any) {
-    console.log('Objeto alumno que recibira la Api');
-    const headers =  { 'content-type': 'application/json'};
-    return this.http.post(`${this._url}/AluProfe`, aluProfe, {'headers': headers});
-  }
-
-  getAlumnos() {
-    return this.http.get(`${this._url}/alumno`);
-
-  }
-
-
 
 }

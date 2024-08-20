@@ -9,14 +9,17 @@ import { ResponseLogin } from '@models/auth.model';
 import { User } from '@models/user.model';
 import { BehaviorSubject } from 'rxjs';
 import { checkToken } from 'src/interceptors/token.interceptor';
+import jwt_decode from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
   apiUrl = environment.API_URL;
+  private user: any;
+  token: string | undefined;
 
-  user$ = new BehaviorSubject<User | null>(null);
+  //user$ = new BehaviorSubject<User | null>(null);
 
   constructor(private http: HttpClient, private tokenService: TokenService) {}
 
@@ -29,20 +32,23 @@ export class AuthService {
       .pipe(
         tap((response: { access_token: string }) => {
           this.tokenService.saveToken(response.access_token);
+          //console.log(response.access_token);
         })
       );
-  }
+    }
 
-  register(name: string, email: string, password: string) {
-    return this.http.post(`${this.apiUrl}/auth/register`, {
+  register(name: string, email: string, password: string, role: string) {
+    return this.http.post(`${this.apiUrl}/usuario`, {
       name,
       email,
       password,
+      role
     });
   }
 
-  registerAndLogin(name: string, email: string, password: string) {
-    return this.register(name, email, password).pipe(
+  registerAndLogin(name: string, email: string, password: string,
+                   role: string) {
+    return this.register(name, email, password, role).pipe(
       switchMap(() => this.login(email, password))
     );
   }
@@ -70,19 +76,16 @@ export class AuthService {
     });
   }
 
-  getProfile() {
-    //const token = this.tokenService.getToken();
-    //console.log(token);
-    return this.http
-      .get<User>(`${this.apiUrl}/auth/profile`, { context: checkToken() })
-      .pipe(
-        tap((user) => {
-          this.user$.next(user);
-        })
-      );
-  }
-
   logout() {
     this.tokenService.removeToken();
+  }
+
+  setUserFromToken(token: string) {
+    this.token = this.tokenService.getToken();
+    this.user = jwt_decode(token);
+  }
+
+  getUser() {
+    return this.user;
   }
 }

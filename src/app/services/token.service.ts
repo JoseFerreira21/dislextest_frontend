@@ -36,6 +36,17 @@ export class TokenService {
     return false;
   }
 
+  getSub(){
+    let token: string | undefined; 
+    token = this.getToken();
+    // Decodificar el token para obtener su contenido
+    const decodedToken: any = jwt_decode(token || '');
+
+    // Obtener el campo 'sub' del token
+    const sub: number = decodedToken.sub;
+    return sub;
+  }
+
   //Guardar token JWT en local storage navegador
   /*
   saveToken(token: string){

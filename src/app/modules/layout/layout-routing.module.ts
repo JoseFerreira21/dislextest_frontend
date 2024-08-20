@@ -10,28 +10,22 @@ const routes: Routes = [
     component: LayoutComponent,
     children: [
       {
-        path: 'perfil',
-        canActivate: [AuthGuard],
-        loadChildren: () =>
-          import('../profile/profile.module').then((m) => m.ProfileModule),
-      },
-      {
         path: 'alumnos',
-        canActivate: [AuthGuard],
+        //canActivate: [AuthGuard],
         loadChildren: () =>
           import('../alumnos/alumnos.module').then((m) => m.AlumnosModule),
       },
       {
         path: 'resultados',
-        canActivate: [AuthGuard],
+        //canActivate: [AuthGuard],
         loadChildren: () =>
           import('../resultados/resultados.module').then((m) => m.ResultadosModule),
       },
       {
-        path: 'registrar-alumno',
-        canActivate: [AuthGuard],
+        path: 'test',
+        //canActivate: [AuthGuard],
         loadChildren: () =>
-          import('../registrar-alumno/registrar-alumnos.module').then((m) => m.RegistrarAlumnosModule),
+          import('../test/test.module').then((m) => m.TestModule),
       },
     ],
   },
