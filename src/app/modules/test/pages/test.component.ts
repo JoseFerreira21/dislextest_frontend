@@ -9,6 +9,7 @@ import { SoundService } from '@services/sound.service';
 
 import { ActivatedRoute } from '@angular/router';
 import { GlobalService } from '@services/global.service';
+import { SharedService } from '@services/shared.service';
 
 @Component({
   selector: 'app-test',
@@ -28,7 +29,8 @@ export class TestComponent {
               private adminComponentesService: AdminComponentesService, 
               private resultadosService: ResultadosService,
               private soundService: SoundService,
-              private globalService: GlobalService) {
+              private globalService: GlobalService,
+              private sharedService: SharedService) {
     this.resultadoTest = {
       indicador: '',
       observacion: '',
@@ -41,6 +43,7 @@ export class TestComponent {
     // Capturar el alumnoId desde los queryParams
      this.route.queryParams.subscribe(params => {
        const alumnoId = +params['alumnoId']; // El operador `+` convierte la cadena a número
+       this.sharedService.setAlumnoId(alumnoId); // Almacenar en el servicio compartido
        this.resultadoTest.alumnoId = alumnoId; // Asignar el id del alumno capturado
        //console.log('Alumno ID recibido:', alumnoId);
      }); 

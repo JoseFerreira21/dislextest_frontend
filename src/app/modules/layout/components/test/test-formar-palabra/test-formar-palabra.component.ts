@@ -9,12 +9,15 @@ import { ModalAvisoComponent } from '../../dialogs/modal-aviso/modal-aviso.compo
 import { ResultadoItem, ResultadoItemRespuesta } from '@models/resultados-item.model';
 import { ResultadoEjercicio } from '@models/resultados-ejercicio.model';
 
+import { SharedService } from '@services/shared.service'; 
+
 @Component({
   selector: 'app-test-formar-palabra',
   templateUrl: './test-formar-palabra.component.html',
   styleUrls: ['./test-formar-palabra.component.scss']
 })
 export class TestFormarPalabraComponent implements OnInit {
+  alumnoId: number; 
   palabras: Palabra[] = [];
   resultadoItemId: number = 0;
   respuestas: ResultadoEjercicio[] = [];
@@ -31,7 +34,8 @@ export class TestFormarPalabraComponent implements OnInit {
     private resultadosService: ResultadosService,
     private dialog: MatDialog,
     private textToSpeechService: TextToSpeechService,
-    private soundService: SoundService
+    private soundService: SoundService,
+    private sharedService: SharedService 
   ) {
     this.resultadoTest = {
       AreaId: 0,
@@ -40,6 +44,7 @@ export class TestFormarPalabraComponent implements OnInit {
       pObtenido: 0,
       ResultadoTestId: 0
     };
+    this.alumnoId = this.sharedService.getAlumnoId(); // Obtener el alumnoId del servicio compartido
   }
 
   async ngOnInit() {
@@ -88,8 +93,8 @@ export class TestFormarPalabraComponent implements OnInit {
     }
     this.soundService.ClickDeseleccionarSonido();
     // Iniciar un temporizador de inactividad para verificar si el usuario no realiza ninguna acción después de deseleccionar una letra
-    this.startInactivityTimerForDeselection();
-    this.resetInactivityTimer();
+    //this.startInactivityTimerForDeselection();
+    //this.resetInactivityTimer();
   }
 
   buscarLugarLibre(letrasRespuesta: Letra[]): number {
@@ -159,7 +164,7 @@ export class TestFormarPalabraComponent implements OnInit {
       acierto: false,
       ejercicioId: element.ejercicioId,
       ejercicioOpcionesId: element.ejercicioOpcionesId,
-      alumnoId: 1,
+      alumnoId: this.alumnoId, // Usar el alumnoId del servicio compartido
       resultadoItemId: 0
     };
 

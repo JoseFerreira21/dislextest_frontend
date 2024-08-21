@@ -6,6 +6,7 @@ import { ResultadosService } from '@services/resultados.service';
 import { TestService } from '@services/test.service';
 import { TextToSpeechService } from '@services/text-to-speech.service'; // Importar el servicio
 import { SoundService } from '@services/sound.service'; // Importar el servicio
+import { SharedService } from '@services/shared.service'; // Importar SharedService
 
 @Component({
   selector: 'app-test-seleccionar-palabra',
@@ -13,6 +14,7 @@ import { SoundService } from '@services/sound.service'; // Importar el servicio
   styleUrls: ['./test-seleccionar-palabra.component.scss']
 })
 export class TestSeleccionarPalabraComponent implements OnInit {
+
   grupos: DiscriminacionPalabra[] = [];
   seleccion: { [key: number]: number } = {};
   puntos: number = 0;
@@ -22,12 +24,14 @@ export class TestSeleccionarPalabraComponent implements OnInit {
   resultadoItemId: number = 0;
   respuestas: ResultadoEjercicio[] = [];
   inactivityTimer: any;
+  alumnoId: number; // Variable para almacenar el alumnoId
 
   constructor(
     private testService: TestService,
     private resultadosService: ResultadosService,
     private textToSpeechService: TextToSpeechService, // Inyectar el servicio
-    private soundService: SoundService // Inyectar el servicio
+    private soundService: SoundService, // Inyectar el servicio
+    private sharedService: SharedService // Inyectar SharedService
   ) {
     this.resultadoTest = {
       AreaId: 0,
@@ -36,6 +40,7 @@ export class TestSeleccionarPalabraComponent implements OnInit {
       pObtenido: 0,
       ResultadoTestId: 0
     };
+    this.alumnoId = this.sharedService.getAlumnoId(); // Obtener el alumnoId del servicio compartido
   }
 
   async ngOnInit() {
@@ -47,7 +52,6 @@ export class TestSeleccionarPalabraComponent implements OnInit {
     }
   }
 
-  // Registrar eventos de actividad del usuario
   @HostListener('window:click')
   @HostListener('window:mousemove')
   @HostListener('window:keypress')
@@ -85,7 +89,7 @@ export class TestSeleccionarPalabraComponent implements OnInit {
         acierto: false,
         ejercicioId: this.grupos[index].ejercicioId,
         ejercicioOpcionesId: element.ejercicioOpcionesId,
-        alumnoId: 1,
+        alumnoId: this.alumnoId,  // Usar el alumnoId del servicio compartido
         resultadoItemId: 0
       };
       for (let j = 0; j < this.grupos[index].palabras.length; j++) {
