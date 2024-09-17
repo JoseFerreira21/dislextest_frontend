@@ -13,7 +13,10 @@
 
     <div class="contenedor" *ngFor="let resultado of filteredResultados">
       <div class="resultado-info">
-        <span class="titulos">Nombre del alumno: <span class="informacion"> {{resultado.nombre_alumno}} </span> </span><br>
+        <div class="fila">
+          <span class="titulos">Nombre del alumno: <span class="informacion"> {{resultado.nombre_alumno}} </span> </span>
+          <span class="titulos tiempo-total">Tiempo total empleado: <span class="informacion"> {{resultado.tiempo_total}} </span></span>
+        </div>
         <span class="titulos">Edad: <span class="informacion"> {{resultado.edad}} años</span> </span><br>
         <span class="titulos">Nroº de documento: <span class="informacion"> {{resultado.nro_documento}} </span> </span><br>
         <span class="titulos">Indicador general: <span class="informacion">{{resultado.indicador}}</span></span><br>
@@ -38,7 +41,7 @@
             <td> {{ resultado.fp_pobtenido}} </td>
             <td>{{resultado.fp_pminimo}}</td>
             <td>{{resultado.fp_pesperado}}</td>
-            <td> {{ resultado.fp_indicador }}</td>
+            <td>{{ resultado.fp_indicador === null ? null  : (resultado.fp_indicador === 'R' ? 'RIESGO' : 'SIN RIESGO') }}</td>
             <td> {{ resultado.fp_observacion }} </td>
             <td class="text-center">
               <button class="details-button" title="Detalles del ejercicio" 
@@ -53,7 +56,7 @@
             <td> {{ resultado.dva_pobtenido}} </td>
             <td>{{resultado.dva_pminimo}}</td>
             <td>{{resultado.dva_pesperado}}</td>
-            <td> {{ resultado.dva_indicador }}</td>
+            <td>{{ resultado.dva_indicador === null ? null  : (resultado.dva_indicador === 'R' ? 'RIESGO' : 'SIN RIESGO') }}</td>
             <td> {{ resultado.dva_observacion }} </td>
             <td class="text-center">
               <button class="details-button" title="Detalles del ejercicio" 
@@ -68,7 +71,7 @@
             <td> {{ resultado.dp_pobtenido}} </td>
             <td>{{resultado.dp_pminimo}}</td>
             <td>{{resultado.dp_pesperado}}</td>
-            <td> {{ resultado.dp_indicador }}</td>
+            <td>{{ resultado.dp_indicador === null ? null  : (resultado.dp_indicador === 'R' ? 'RIESGO' : 'SIN RIESGO') }}</td>
             <td> {{ resultado.dp_observacion }} </td>
             <td class="text-center">
               <button class="details-button" title="Detalles del ejercicio" 
@@ -83,7 +86,7 @@
             <td> {{ resultado.elp_pobtenido}} </td>
             <td>{{resultado.elp_pminimo}}</td>
             <td>{{resultado.elp_pesperado}}</td>
-            <td> {{ resultado.elp_indicador }}</td>
+            <td>{{ resultado.elp_indicador === null ? null  : (resultado.elp_indicador === 'R' ? 'RIESGO' : 'SIN RIESGO') }}</td>
             <td> {{ resultado.elp_observacion }} </td>
             <td class="text-center">
               <button class="details-button" title="Detalles del ejercicio" 
@@ -98,7 +101,7 @@
             <td> {{ resultado.nc_pobtenido}} </td>
             <td>{{resultado.nc_pminimo}}</td>
             <td>{{resultado.nc_pesperado}}</td>
-            <td> {{ resultado.nc_indicador }}</td>
+            <td>{{ resultado.nc_indicador === null ? null  : (resultado.nc_indicador === 'R' ? 'RIESGO' : 'SIN RIESGO') }}</td>
             <td> {{ resultado.nc_observacion }} </td>
             <td class="text-center">
               <button class="details-button" title="Detalles del ejercicio" 
@@ -113,7 +116,7 @@
             <td> {{ resultado.ld_pobtenido}} </td>
             <td>{{resultado.ld_pminimo}}</td>
             <td>{{resultado.ld_pesperado}}</td>
-            <td> {{ resultado.ld_indicador }}</td>
+            <td>{{ resultado.ld_indicador === null ? null  : (resultado.ld_indicador === 'R' ? 'RIESGO' : 'SIN RIESGO') }}</td>
             <td> {{ resultado.ld_observacion }} </td>
             <td class="text-center">
               <button class="details-button" title="Detalles del ejercicio" 
@@ -128,7 +131,7 @@
               <td> {{ resultado.dvb_pobtenido}} </td>
               <td>{{resultado.dvb_pminimo}}</td>
               <td>{{resultado.dvb_pesperado}}</td>
-              <td> {{ resultado.dvb_indicador }}</td>
+              <td>{{ resultado.dvb_indicador === null ? null  : (resultado.dvb_indicador === 'R' ? 'RIESGO' : 'SIN RIESGO') }}</td>
               <td> {{ resultado.dvb_observacion }} </td>
               <td class="text-center">
                 <button class="details-button" title="Detalles del ejercicio" 
@@ -144,7 +147,7 @@
               <td> {{ resultado.cs_pobtenido}} </td>
               <td>{{resultado.cs_pminimo}}</td>
               <td>{{resultado.cs_pesperado}}</td>
-              <td> {{ resultado.cs_indicador }}</td>
+              <td>{{ resultado.cs_indicador === null ? null  : (resultado.cs_indicador === 'R' ? 'RIESGO' : 'SIN RIESGO') }}</td>
               <td> {{ resultado.cs_observacion }} </td>
               <td class="text-center">
                 <button class="details-button" title="Detalles del ejercicio" 
@@ -159,7 +162,7 @@
               <td> {{ resultado.cf_pobtenido}} </td>
               <td>{{resultado.cf_pminimo}}</td>
               <td>{{resultado.cf_pesperado}}</td>
-              <td> {{ resultado.cf_indicador }}</td>
+              <td>{{ resultado.cf_indicador === null ? null  : (resultado.cf_indicador === 'R' ? 'RIESGO' : 'SIN RIESGO') }}</td>
               <td> {{ resultado.cf_observacion }} </td>
               <td class="text-center">
                 <button class="details-button" title="Detalles del ejercicio" 
@@ -174,7 +177,7 @@
               <td> {{ resultado.di_pobtenido}} </td>
               <td>{{resultado.di_pminimo}}</td>
               <td>{{resultado.di_pesperado}}</td>
-              <td> {{ resultado.di_indicador }}</td>
+              <td>{{ resultado.di_indicador === null ? null  : (resultado.di_indicador === 'R' ? 'RIESGO' : 'SIN RIESGO') }}</td>
               <td> {{ resultado.di_observacion }} </td>
               <td class="text-center">
                 <button class="details-button" title="Detalles del ejercicio" 

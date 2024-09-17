@@ -5,6 +5,12 @@ export interface TacharPalabraEstructura {
   ejercicioOpcionesId:  number;
   palabras:             Palabra[];
   respuesta:            string;
+  //validez:              string;
+   // Nuevos atributos añadidos
+   pEsperado: number;
+   pMinimo: number;
+   observacionR: string;
+   observacionSR: string;
 }
 
 export interface Palabra {
@@ -12,4 +18,5 @@ export interface Palabra {
   opcion:              string;
   estado:              boolean;
   grupo:               number;
+  validez:             string;
 }

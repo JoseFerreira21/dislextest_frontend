@@ -86,10 +86,12 @@ export interface ResultadoTest {
     di_indicador: string,
     di_observacion: string,
     indicador: string,
-    observacion: string
+    observacion: string,
+    tiempo_total: string
   }
 
   export interface ResultadoEjercicio {
+    tiempoEmpleado: string;
     respuestaCorrectaEjercicio: string;
     respuestaHechaAlumno: string;
     acierto: boolean;

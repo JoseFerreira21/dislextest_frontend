@@ -1,0 +1,43 @@
+.mat-form-fiel{
+   font-size: 14px;
+  width: 100%;
+ }
+
+ /* Estilos para el botón de volver */
+.volver-btn {
+   background-color: #f44336 !important;/* Color de fondo inicial */
+   color: white; /* Color del texto inicial */
+   border-radius: 20px;
+   padding: 15px 25px; /* Botones más grandes */
+   font-size: 1.2rem; /* Texto del botón más grande */
+   align-items: center;
+   justify-content: center;
+   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+   transition: transform 0.2s;
+ }
+ 
+ .volver-btn:hover {
+   transform: scale(1.05);
+   background-color: #e53935 ; /* Color de fondo al hacer hover */
+   color: white;
+ }
+ 
+ /* Estilos para el botón de eliminar */
+ .eliminar-btn {
+   background-color: #4caf50 !important; /* Color de fondo inicial */
+   color: #4caf50;/* Color del texto inicial */
+   padding: 15px 25px; /* Botones más grandes */
+   font-size: 1.2rem; /* Texto del botón más grande */
+   border-radius: 50px;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+   transition: transform 0.2s;
+ }
+ 
+ .eliminar-btn:hover {
+   transform: scale(1.1);
+   background-color: #43a047;
+   color: white;
+ }

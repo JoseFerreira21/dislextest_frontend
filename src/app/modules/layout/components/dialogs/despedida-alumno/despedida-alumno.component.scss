@@ -1,0 +1,60 @@
+mat-dialog-container {
+  background-color: #1e1e1e;
+  border-radius: 20px;
+  padding: 100px;
+  max-width: 1300px;
+  min-width: 1300px;
+  max-height: 90vh;
+}
+
+/* Estilos para el título de despedida */
+.despedida-titulo {
+  font-size: 4rem;
+  text-align: center;
+  color: #ffeb3b;
+  text-shadow: 2px 2px #000;
+  margin-top: 50px;
+}
+
+/* Estilos para el contenido de despedida */
+.despedida-contenido {
+  text-align: center;
+  font-size: 2.4rem;
+  margin: 30px auto; /* Centra el contenido horizontalmente */
+  color: #673ab7;
+  background-color: #ffffff;
+  padding: 280px;
+  border-radius: 15px;
+  max-width: 80%; /* Limita el ancho del contenido al 80% del ancho del modal */
+  overflow: hidden; /* Asegura que el contenido no genere barras de desplazamiento */
+  margin-bottom: 100px; /* Añadir un margen inferior para separación */
+}
+
+/* Estilos para las acciones de despedida */
+.despedida-acciones {
+  margin-top: 100px;
+  display: flex;
+  justify-content: center; /* Centra el botón horizontalmente */
+}
+
+/* Estilos para el botón de cerrar */
+.cerrar-btn {
+  background-color: #4caf50;
+  color: black;
+  border-radius: 20px;
+  padding: 15px 25px;
+  font-size: 1.2rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.cerrar-btn:hover {
+  transform: scale(1.05);
+  background-color: #43a047;
+  color: white; 
+}

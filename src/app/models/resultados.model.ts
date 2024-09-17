@@ -3,13 +3,15 @@ export interface ResultadoTest {
   observacion: string;
   alumnoId:    number;
   profesorId:  number;
+  tiempoTotal: number;  
 }
+
 export interface ResultadoTestPost {
+  id:          number;
   indicador:   string;
   observacion: string;
   alumnoId:    number;
   profesorId:  number;
-  id:          number;
   createAt:    Date;
   updateAt:    Date;
 }

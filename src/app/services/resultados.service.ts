@@ -30,6 +30,24 @@ export class ResultadosService {
       headers: headers,
     });
   }
+
+  
+
+  putResultadoTest(id: number, resultado: ResultadoTest): Observable<ResultadoTestPost> {
+    const token = this.tokenService.getToken();
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    });
+  
+    return this.http.put<ResultadoTestPost>(
+      `${this.apiUrl}/resultadoTest/${id}`,
+      JSON.stringify(resultado),
+      { headers: headers }
+    );
+  }
+
+
   postResultadoItem(resultado: ResultadoItem):Observable<ResultadoItemRespuesta>{
     const token = this.tokenService.getToken();
     const headers = new HttpHeaders({

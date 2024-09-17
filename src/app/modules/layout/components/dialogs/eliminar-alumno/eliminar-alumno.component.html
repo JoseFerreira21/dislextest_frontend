@@ -2,8 +2,8 @@
 <div mat-dialog-content>
   Desea eliminar el alumno "{{dataAlumno.nombre}}" ?
 <div mat-dialog-actions>
-  <button mat-raised-button mat-dialog-close color="warn">No, volver</button>
-  <button mat-raised-button style="background-color: #007bff; color: white"
+  <button mat-raised-button mat-dialog-close class="volver-btn">No, volver</button>
+  <button mat-raised-button class="eliminar-btn"
   (click)="confirmarEliminar()"
   cdkFocusInitial
   >Si</button>

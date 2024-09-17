@@ -1,14 +1,17 @@
-<h2 mat-dialog-title>Animo! Sigue asi!!</h2>
 <mat-dialog-content>
-  <ng-container *ngIf="data.value === 100">
-    Resultado mayor a 100.
-  </ng-container>
-  <ng-container *ngIf="data.value >= 50 && data.value !== 100">
-    Resultado mayor a 50 y menor a 100.
-    <img src="{{imagen}}" alt="">
-  </ng-container>
-  <ng-container *ngIf="data.value < 50">
-    Resultado menor a 50.
-  </ng-container>
+  <div class="modal-content">
+    <ng-container *ngIf="data.value === 60">
+      Excelente resultado!
+      <img [src]="imagen" alt="">
+    </ng-container>
+    <ng-container *ngIf="data.value === 30">
+      Buen trabajo, pero puedes mejorar.
+      <img [src]="imagen" alt="">
+    </ng-container>
+    <ng-container *ngIf="data.value === 10">
+      No te desanimes, sigue intentándolo.
+      <img [src]="imagen" alt="">
+    </ng-container>
+  </div>
 </mat-dialog-content>
 

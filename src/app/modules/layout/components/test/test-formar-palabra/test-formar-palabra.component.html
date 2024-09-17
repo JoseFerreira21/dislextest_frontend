@@ -1,6 +1,14 @@
- <div class="formar-container-test-title">
+ <div class="container-test-title">
   <div class="title">
     <p class="p-test">Observa la palabra y ordena los nombres de los animales.</p>
+    
+    <button (click)="escucharInstruccion()" class="audio-button">
+      <mat-icon class="icono-audio">volume_up</mat-icon> Escuchar instrucción
+    </button>
+    <!-- Mostrar tiempo transcurrido -->
+    <span class="tiempo-empleado">
+      <mat-icon class="icono-reloj">schedule</mat-icon> {{ getFormattedTime() }}
+    </span>
   </div>
 
   <div class="formar-container-test">

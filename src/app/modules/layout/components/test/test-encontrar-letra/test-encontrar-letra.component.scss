@@ -1,70 +1,167 @@
-
-
-.formar-container-test-title {
+.container-test-title {
   background-color: #ac61d8;
-  //padding: 20px;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.356);
   max-width: 1000px;
   margin: 20px auto;
   text-align: center;
-  grid-template-columns: repeat(1, 1fr);
+  padding: 40px 20px;
 }
 
-.div-letras {
-   display: inline-block;
-  // background-color: #ffffff;
-  // margin: 10px;
-   padding: 25px 0px 25px 0px;
-  // border-radius: 5px;
-   text-align: center;
- // display: flex;
-  justify-content: center;
+.title {
+  display: flex;
+  flex-direction: column;
   align-items: center;
-  background-color: #ffffff;
-  margin: 10px;
-  width: 50%;
-  border-radius: 5px;
+  justify-content: center;
+  text-align: center;
+  margin-bottom: 20px;
 }
 
-.span-test {
-  //display: block;
+.sub-title {
+  font-family: 'Comic Sans MS', cursive, sans-serif;
   font-weight: bold;
   color: #000000;
-  //border: 2px solid #FFFFFF;
-  //display: inline-block;
-  // border-radius: 10px;
-  //padding: 8px 0px;
-  //text-align: center;
-    //padding: 5px;
-  // margin-top: 10px;
-  //margin: 0 auto;
-  font-size: 38px;
- // background-color: #FFFFFF;
-  //letter-spacing: 2px;
-  //display: inline-block;
+  font-size: 32px; /* Aumentar el tamaño de la fuente del título */
+  margin: 0;
+  padding: 15px 0; /* Aumentar el padding para mayor espacio */
+}
+
+.container-test {
+  display: flex;
+  justify-content: center;
+  gap: 40px; /* Aumentar espacio entre grupos */
+  padding-bottom: 30px;
+}
+
+.grupo-letras {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.letra-titulo-container {
+  margin-bottom: 20px;
+  background-color: #6fcf97;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border: 7px solid #FF8482; /* Añadir el borde */
+}
+
+.letra-titulo {
+  font-size: 50px;
+  color: #000;
+  font-family: 'Comic Sans MS', cursive, sans-serif;
+  font-weight: bold;
+  padding: 10px;
+}
+
+.palabras-grupo {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.palabra-container {
+  background-color: #ffd700;
+  padding: 25px;
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 7px solid #FF8482;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 100%; /* Para asegurar que el contenedor tenga un tamaño consistente */
+  max-width: 300px; /* Ajustar según el espacio disponible */
+}
+
+.palabra-container.color-celeste {
+  background-color: #00bfff; /* Color celeste */
+}
+
+.palabra-container.color-amarillo {
+  background-color: #ffd700; /* Color amarillo */
+}
+
+.letra-span {
+  font-size: 36px; /* Aumentar el tamaño de la letra */
+  font-weight: bold;
+  color: #000;
+  margin: 0 8px;
+  cursor: pointer;
+  display: flex; /* Cambiar a 'flex' para alinear correctamente */
+  justify-content: center; /* Centrar horizontalmente */
+  align-items: center; /* Centrar verticalmente */
+  width: 48px; /* Tamaño fijo para evitar expansión */
+  height: 48px; /* Tamaño fijo para evitar expansión */
+}
+
+.letra-span.seleccionado {
+  border-radius: 50%; /* Para hacer el borde circular */
+  border: 5px solid #fff; /* Borde grueso alrededor de la letra seleccionada */
+  background-color: transparent; /* Sin fondo, solo el borde circular */
+}
+
+.imagen-check-container {
+  position: absolute;
+}
+
+.imagen-check {
+  width: 30px;
+  height: auto;
+  z-index: 10;
+}
+
+.boton-siguiente {
+  margin-top: 30px;
+  padding: 15px 40px;
+  font-size: 24px; /* Aumentar el tamaño de la fuente */
+  background-color: #28a745;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
   cursor: pointer;
 }
 
-.span-test.seleccionado {
-  background-color: #ffff00;
+.boton-siguiente:hover {
+  background-color: #218838;
 }
-.title{
-  display: block;
-}
-.letra-title {
-  font-size:50px;
-  color: #333;
-  margin-bottom: 10px;
-  font-family: 'Comic Sans MS', cursive, sans-serif;
-  font-weight: bold;
-  padding: 20px;
 
+.audio-button {
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  margin-top: 10px;
 }
-.p-test {
-  font-family: 'Comic Sans MS', cursive, sans-serif;
+
+.icono-audio {
+  margin-right: 8px;
+  color: #ff5722;
+}
+
+.audio-button:hover .icono-audio {
+  color: #f44336;
+}
+
+.tiempo-empleado {
+  font-size: 1.0rem;
+  color: black;
   font-weight: bold;
-  color: #000000;
-  font-size: 28px;
-  padding: 30px;
+  text-align: right;
+  display: flex;
+  align-items: center; /* Alinea el icono y el texto en la misma línea */
+  margin-top: 10px;
+}
+
+.icono-reloj {
+  margin-right: 5px;
+  color: black; /* Color del icono */
+  font-size: inherit; /* Hereda el tamaño de la fuente del contenedor */
+  width: 1.0em; /* Asegura que el icono sea proporcional al texto */
+  height: 1.0em;
+  line-height: 1; /* Alinea el icono correctamente */
 }

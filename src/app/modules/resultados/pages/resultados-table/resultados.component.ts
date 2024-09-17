@@ -9,7 +9,7 @@ import { DetallesEjercicioComponent } from 'src/app/modules/layout/components/di
 @Component({
   selector: 'app-resultados',
   templateUrl: './resultados.component.html',
-  styleUrls: ['./resultados.component.css'],
+  styleUrls: ['./resultados.component.scss'],
 })
 export class ResultadosComponent implements OnInit {
   resultados: any[] = [];  // Cambiamos a un array para facilitar el filtrado

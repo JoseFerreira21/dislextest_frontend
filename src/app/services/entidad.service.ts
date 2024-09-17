@@ -4,7 +4,7 @@ import { environment } from '@environments/environment';
 import { TokenService } from '@services/token.service';
 
 import { Observable } from 'rxjs';
-import { Entidad } from '../interfaces/entidad';
+import { Entidad } from '../models/entidad';
 import { checkToken } from 'src/interceptors/token.interceptor';
 
 @Injectable({

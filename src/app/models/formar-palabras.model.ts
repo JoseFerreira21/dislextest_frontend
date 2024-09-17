@@ -19,6 +19,11 @@ export interface Palabra {
   respuesta:            string;
   areaId:               number;
   validez:              string;
+  // Nuevos atributos añadidos
+  pEsperado: number;
+  pMinimo: number;
+  observacionR: string;
+  observacionSR: string;
 }
 
 export interface Letra {

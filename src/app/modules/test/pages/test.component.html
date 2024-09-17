@@ -1,4 +1,11 @@
+ <!--<app-test-encerrar-palabra></app-test-encerrar-palabra>-->
+
 <div>
   <ng-template #componentContainer></ng-template>
-  <button (click)="siguienteEjercicio()" class="siguiente-btn" >Siguiente</button>
+  <button 
+     (click)="onButtonClick()" 
+     class="siguiente-btn" 
+     [disabled]="!componentsInstance[currentComponentIndex]?.instance?.seleccionCompleta && !componentsInstance[currentComponentIndex]?.instance?.tareaCompleta">
+     {{ currentComponentIndex === components.length - 1 ? 'Finalizar' : 'Siguiente' }}
+  </button>
 </div>

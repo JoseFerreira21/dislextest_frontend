@@ -4,6 +4,7 @@ import { AuthGuard } from '@guards/auth.guard'
 import { RedirectGuard } from '@guards/redirect.guard'
 import { ResultadosComponent } from './modules/resultados/pages/resultados-table/resultados.component'; 
 import { ReportComponent } from './modules/layout/components/report/report.component'; 
+import { AlumnosComponent } from './modules/alumnos/pages/alumnos/alumnos.component';
 
 const routes: Routes = [
   {
@@ -19,6 +20,8 @@ const routes: Routes = [
   { path: 'test', loadChildren: () => import('./modules/test/test.module').then(m => m.TestModule) },
   { path: '', component: ResultadosComponent },
   { path: 'report', component: ReportComponent },
+  { path: 'alumnos', component: AlumnosComponent },
+
 ];
 
 @NgModule({

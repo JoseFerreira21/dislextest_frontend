@@ -19,7 +19,7 @@ export class PerfilService {
     private authService: AuthService
   ) {}
 
-  //user$ = this.authService.user$;
+  
   apiUrl = environment.API_URL;
 
   /*getPerfilEntidad() {
