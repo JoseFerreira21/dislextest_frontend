@@ -20,6 +20,6 @@ export class ProfesorService {
   apiUrl = environment.API_URL;
 
   getProfesorId(idUsuario :number){
-    return this.http.get<Profesor[]>(`${this.apiUrl}/profesor/usuario/${idUsuario}`, {context: checkToken()});
+    return this.http.get<Profesor>(`${this.apiUrl}/profesor/usuario/${idUsuario}`, {context: checkToken()});
   }
 }

@@ -1,70 +1,158 @@
 .container {
   background-color: #7ED957;
-  padding: 20px;
+  padding: 30px; /* Aumentar padding para expandir el contenido */
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.356);
-  max-width: 1000px;
-  margin: 20px auto;
+  max-width: 1200px; /* Aumentar el ancho máximo del contenedor */
   text-align: center;
 }
 
+.container-test-title {
+  background-color: #7ED957;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.356);
+  max-width: 1200px; /* Aumentar el ancho máximo del contenedor */
+  margin: 20px auto; 
+  text-align: center;
+  padding: 15px 0; /* Aumentar el padding para mayor espacio vertical */
+}
+
 .options {
-  margin: 10px;
+  margin: 25px 0; /* Aumentar el margen entre grupos de palabras */
   border: 7px solid #FF8482;
-  border-radius: 15px;
+  border-radius: 15px; /* Cambiar el borde a redondeado */
   font-weight: bold;
   letter-spacing: 2px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Crear dos columnas para las palabras */
+  gap: 15px; /* Aumentar el espacio entre las palabras */
+  padding: 15px; /* Aumentar el padding interno del contenedor de opciones */
 }
 
 .options div {
-  margin: 10px;
-  padding: 10px;
-  border-radius: 5px;
+  padding: 15px; /* Aumentar el padding para que las palabras estén bien separadas */
   cursor: pointer;
+  font-size: 24px; /* Aumentar el tamaño de la fuente de las opciones */
+  background-color: transparent; /* Fondo transparente para heredar color de grupo */
+  border-radius: 10px; /* Borde redondeado para las palabras */
+  color: inherit; /* Heredar el color del texto del grupo */
 }
 
 .options div.selected {
-  text-decoration: 2px line-through;
-  text-decoration-color: black;
-  background-color: #38c75c;
-  color: #623dbb;
+  text-decoration: line-through;
+  text-decoration-color: white;
+  text-decoration-thickness: 4px;
+  background-color: inherit; /* Mantener el color de fondo del grupo */
+  color: #ffffff; /* Cambiar el color del texto para que sea visible */
 }
 
-.tachar-titulo {
-  font-size: 28px;
-  color: black;
-  margin-bottom: 10px;
+.title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin-bottom: 25px; /* Aumentar el margen inferior */
+}
+
+.p-test {
   font-family: 'Comic Sans MS', cursive, sans-serif;
   font-weight: bold;
-}
-
-.tachar-descripcion {
-  font-family: 'Comic Sans MS', cursive, sans-serif;
-  font-size: 20px;
+  color: #000000;
+  font-size: 32px; /* Aumentar el tamaño de la fuente del título */
+  margin: 0;
+  padding: 15px 0; /* Aumentar el padding para mayor espacio */
 }
 
 .opcion-texto {
   font-weight: bold;
-  font-size: 18px;
+  font-size: 24px; /* Aumentar el tamaño de la fuente de las respuestas */
   letter-spacing: 2px;
   border: 7px solid #FF8482;
   display: inline-block;
   border-radius: 10px;
-  padding: 8px 12px;
-  margin: 10px;
-  background-color: #e9e6e6;
-  text-align: left; /* Alinea el texto a la izquierda */
+  padding: 15px 20px; /* Aumentar el padding de las respuestas */
+  margin-bottom: 15px;
+  text-align: center; /* Centramos el texto en la opción */
+  background-color: inherit; /* Heredar el color de fondo del grupo */
+  color: inherit; /* Heredar el color del texto del grupo */
+}
+
+.imagen-check-container {
+  position: absolute;
+}
+
+.imagen-check {
+  width: 50px;
+  height: auto;
+  z-index: 10;
 }
 
 
-/* Clases de color específicas para grupos */
-.color-0 .options div,
+.color-0 .options {
+  background-color: #CB6CE6; /* Relleno para todo el grupo de palabras en el primer color */
+  padding: 15px; /* Añadir padding para espacio interno */
+  border-radius: 15px; /* Bordes redondeados para el grupo */
+}
+
 .color-0 .opcion-texto {
-  background-color: #CB6CE6; /* Primer color */
+  background-color: #CB6CE6; /* Hereda el color del grupo */
+  color:  #000000;  /* Color de texto en negro para contraste */
 }
 
-.color-1 .options div,
+.color-1 .options {
+  background-color: #5CE1E6; /* Relleno para todo el grupo de palabras en el segundo color */
+  padding: 15px; /* Añadir padding para espacio interno */
+  border-radius: 15px; /* Bordes redondeados para el grupo */
+}
+
 .color-1 .opcion-texto {
-  background-color: #5CE1E6; /* Segundo color */
+  background-color: #5CE1E6; /* Hereda el color del grupo */
+  color: #000000; /* Color de texto en negro para contraste */
 }
 
+.color-0 .options div.selected {
+  color: #000000; /* Mantener el color del texto negro para que sea visible */
+}
+
+.color-1 .options div.selected {
+  color: #000000; /* Mantener el color del texto negro para que sea visible */
+}
+
+.audio-button {
+  display: flex;
+  align-items: center;
+  font-size: 18px; /* Aumentar el tamaño de la fuente del botón */
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  margin-top: 15px; /* Aumentar el margen superior */
+}
+
+.icono-audio {
+  margin-right: 10px;
+  color: #ff5722;
+}
+
+.audio-button:hover .icono-audio {
+  color: #f44336;
+}
+
+.tiempo-empleado {
+  font-size: 1.0rem;
+  color: black;
+  font-weight: bold;
+  text-align: right;
+  display: flex;
+  align-items: center; /* Alinea el icono y el texto en la misma línea */
+  margin-top: 10px;
+}
+
+.icono-reloj {
+  margin-right: 5px;
+  color: black; /* Color del icono */
+  font-size: inherit; /* Hereda el tamaño de la fuente del contenedor */
+  width: 1.0em; /* Asegura que el icono sea proporcional al texto */
+  height: 1.0em;
+  line-height: 1; /* Alinea el icono correctamente */
+}

@@ -1,61 +1,117 @@
-<h1 mat-dialog-title>{{tituloAccion}} Alumno</h1>
-<div mat-dialog-content class="mat-form-fiel">
-
+<h1 mat-dialog-title style="display: block; justify-content: space-between; align-items: center;">
+  {{ tituloAccion }} Alumno
+  <div *ngIf="tituloAccion === 'Nuevo'" style="display: flex; gap: 10px;"> <!-- Añadimos un gap para separar los botones -->
+    <button mat-raised-button class="planilla-button" (click)="crearAlumnosDesdePlanilla()">
+      <mat-icon>description</mat-icon>
+      Planilla
+    </button>
+    <button mat-icon-button class="details-button" (click)="mostrarDetallesPlanilla()">
+      <mat-icon>info</mat-icon>
+    </button>
+  </div>
+</h1>
+<div mat-dialog-content class="mat-form-fiel-registrar-alumno">
   <form [formGroup]="formAlumno">
+    <mat-grid-list cols="1" rowHeight="80px">
+      <mat-grid-tile>
+        <mat-form-field appearance="fill" style="width: 100%">
+          <mat-label>Nombres</mat-label>
+          <input matInput formControlName="nombre" autocomplete="off" />
+        </mat-form-field>
+      </mat-grid-tile>
 
-  <mat-grid-list cols="1" rowHeight="80px">
-    <mat-grid-tile>
-      <mat-form-field appearance="fill" style="width: 100%">
-        <mat-label>Nombres</mat-label>
-        <input matInput formControlName="nombre" autocomplete="off">
-      </mat-form-field>
-    </mat-grid-tile>
-  
-    <mat-grid-tile>
-      <mat-form-field appearance="fill" style="width: 100%;">
-        <mat-label>Apellidos</mat-label>
-        <input matInput formControlName="apellido" autocomplete="off">
-      </mat-form-field>
-    </mat-grid-tile>
-  
-    <mat-grid-tile>
-      <mat-form-field appearance="fill" style="width: 100%;">
-        <mat-label>Fecha Nacimiento</mat-label>
-        <input matInput [matDatepicker]="picker" formControlName="fechaNacimiento">
-        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
-      </mat-form-field>
-    </mat-grid-tile>
+      <mat-grid-tile>
+        <mat-form-field appearance="fill" style="width: 100%">
+          <mat-label>Apellidos</mat-label>
+          <input matInput formControlName="apellido" autocomplete="off" />
+        </mat-form-field>
+      </mat-grid-tile>
 
-    <mat-grid-tile>
-      <mat-form-field appearance="fill" style="width: 100%;">
-        <mat-label>Teléfono</mat-label>
-        <input matInput formControlName="telefono" autocomplete="off">
-      </mat-form-field>
-    </mat-grid-tile>
+      <mat-grid-tile>
+        <mat-form-field appearance="fill" style="width: 100%">
+          <mat-label>Fecha Nacimiento</mat-label>
+          <input
+            matInput
+            [matDatepicker]="picker"
+            formControlName="fechaNacimiento"
+          />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="picker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </mat-grid-tile>
 
-    <mat-grid-tile>
-      <mat-form-field appearance="fill" style="width: 100%;">
-        <mat-label>Dirección</mat-label>
-        <input matInput formControlName="direccion" autocomplete="off">
-      </mat-form-field>
-    </mat-grid-tile>
+      <mat-grid-tile>
+        <mat-label>Sexo</mat-label>
+        <mat-radio-group
+          formControlName="sexo"
+          class="sexo-radio-group"
+          color="primary"
+        >
+          <mat-radio-button value="M">Masculino</mat-radio-button>
+          <mat-radio-button value="F">Femenino</mat-radio-button>
+        </mat-radio-group>
+      </mat-grid-tile>
 
-    <mat-grid-tile>
-      <mat-form-field appearance="fill" style="width: 100%;">
-        <mat-label>N° Documento</mat-label>
-        <input matInput formControlName="nroDocumento" autocomplete="off">
-      </mat-form-field>
-    </mat-grid-tile>
-  
-  </mat-grid-list>
+      <mat-grid-tile>
+        <mat-form-field appearance="fill" style="width: 100%">
+          <mat-label>Teléfono</mat-label>
+          <input matInput formControlName="telefono" autocomplete="off" />
+        </mat-form-field>
+      </mat-grid-tile>
 
-</form>
+      <mat-grid-tile>
+        <mat-form-field appearance="fill" style="width: 100%">
+          <mat-label>Dirección</mat-label>
+          <input matInput formControlName="direccion" autocomplete="off" />
+        </mat-form-field>
+      </mat-grid-tile>
 
-<div mat-dialog-actions>
-  <button mat-raised-button mat-dialog-close color="warn">Volver</button>
-  <button mat-raised-button class="button:hover" style="background-color: #007bff; color: white"
-  (click)="agregarEditarAlumno()"
-  [disabled]="formAlumno.invalid"
-  >{{botonAccion}}</button>
+      <mat-grid-tile>
+        <mat-form-field appearance="fill" style="width: 100%">
+          <mat-label>N° Documento</mat-label>
+          <input matInput formControlName="nroDocumento" autocomplete="off" />
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile>
+        <mat-form-field appearance="fill" style="width: 100%">
+          <mat-label>Grado</mat-label>
+          <input matInput formControlName="grado" autocomplete="off" />
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile>
+        <mat-form-field appearance="fill" style="width: 100%">
+          <mat-label>Año</mat-label>
+          <input matInput formControlName="año" autocomplete="off" />
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile>
+        <mat-form-field appearance="fill" style="width: 100%">
+          <mat-label>Institución</mat-label>
+          <input matInput formControlName="institucion" autocomplete="off" />
+        </mat-form-field>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </form>
+
+  <div mat-dialog-actions>
+    <button mat-raised-button mat-dialog-close class="volver-btn">
+      Volver
+    </button>
+    <button
+      mat-raised-button
+      class="guardar-btn"
+      (click)="agregarEditarAlumno()"
+      [disabled]="formAlumno.invalid"
+    >
+      {{ botonAccion }}
+    </button>
+  </div>
 </div>
+
+

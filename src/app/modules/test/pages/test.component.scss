@@ -1,0 +1,23 @@
+.siguiente-btn {
+    background-color: #4caf50;
+    color: black;
+    font-size: 1.5rem; /* Texto del botón más grande */
+    padding: 15px 50px; /* Botones más grandes */
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s;
+    display: block; /* Hacer el botón un bloque para centrarlo fácilmente */
+    margin: 20px auto 0;
+    cursor: pointer;
+  }
+
+  
+  .siguiente-btn:hover {
+    transform: scale(1.1);
+    background-color: #43a047;
+    color: white;
+  }

@@ -4,52 +4,8 @@
 @tailwind utilities;
 
 @import '@angular/cdk/overlay-prebuilt.css';
-@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
 
-// .palabra-container-test {
-//     font-family: Arial, sans-serif;
-//     background-color: #538b87;
-//     padding: 20px;
-//     border-radius: 8px;
-//     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-//     width: 500px;
-//     margin: auto;
-//   }
-  
-//    .h2-test {
-//     color: #ffffff;
-//     text-align: center;
-//   }
-  
-//    .p-test {
-//     text-align: center;
-//     color: #ffffff;
-//   }
-  
-//    .input-test {
-//     background-color: #dee045; 
-//     border: 1px solid #ffa726; 
-//     border-radius: 0;
-//     padding: 10px 20px; 
-//     font-size: 16px;
-//     text-align: center;
-//     margin:  5px; 
-//     position: relative; 
-//     width: 200px; 
-//     display: inline-block;
-//   }
 
-//   .span-test {
-//     background-color: #dee045; 
-//     border: 1px solid #ffa726; 
-//     border-radius: 0; 
-//     padding: 10px 20px; 
-//     font-size: 16px;
-//     text-align: center;
-//     margin: 0 10px; 
-//     position: relative; 
-//     width: 100px; 
-//     display: inline-block
-//   }
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

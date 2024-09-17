@@ -1,6 +1,10 @@
 <h2 mat-dialog-title>Detalles del Ejercicio</h2>
 <mat-dialog-content>
-  <table class="table table-striped">
+  <!-- Mostramos solo una vez el Tiempo Empleado agrupado -->
+  <div style="margin-bottom: 20px;">
+    <strong>Tiempo Empleado: </strong>{{ tiempoEmpleado }}
+  </div>
+  <table class="table" >
     <thead>
       <tr>
         <th>Respuesta Correcta</th>
@@ -16,7 +20,7 @@
           <span [style.color]="detalle.acierto ? 'green' : 'red'">
             {{ detalle.acierto ? '✔️' : '❌' }}
           </span>
-         </td>
+        </td>
       </tr>
     </tbody>
   </table>

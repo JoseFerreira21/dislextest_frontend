@@ -1,18 +1,20 @@
 .grupo {
   margin-bottom: 15px;
   padding: 10px;
+  position: relative; /* Necesario para posicionar los emoticones */
 }
 
 .formar-container-test {
   background-color: #FFDE59;
-  padding: 20px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.356);
-  max-width: 1000px;
+  padding: 25px;
+  max-width: 1100px;
   margin: 20px auto;
   text-align: center;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 20px;
+  min-height: 600px;
+
 }
 
 .palabra {
@@ -20,52 +22,111 @@
   padding: 10px;
   margin-top: 5px;
   border: 5px solid #FF8482;
-  border-radius: 5px;
+  border-radius: 0px;
   box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
   transition: border-color 0.2s;
   color: black;
   font-weight: bold;
+  font-size: 20px;
   text-align: center;
   cursor: pointer;
 }
 
 .seleccionada {
-  background-color: #c8e6c9;
+  background-color: rgba(0, 0, 0, 0.2);
   font-weight: bold;
-  border: 5px solid black;
+  border: 5px solid white;
+  color: white;
 }
 
 .formar-container-test-title {
   background-color: #FFDE59;
   border-radius: 8px;
-  max-width: 1000px;
+  max-width: 1100px;
   margin: 20px auto;
   text-align: center;
-  grid-template-columns: repeat(1, 1fr);
+  min-height: 150px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.356);
 }
 
 .title {
-  display: block;
-  margin: 25px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.p-test {
   font-family: 'Comic Sans MS', cursive, sans-serif;
   font-weight: bold;
   color: #000000;
   font-size: 25px;
+  margin: 0;
+  padding: 10px 0;
 }
 
 /* Clases de color específicas para grupos */
 .color-0 {
-  background-color: #FF914D; /* Primer color */
+  background-color: #FF914D;
 }
 
 .color-1 {
-  background-color: #38B6FF; /* Segundo color */
+  background-color: #38B6FF;
 }
 
 .color-2 {
-  background-color: #FFDE59; /* Tercer color */
+  background-color: #FFDE59;
 }
 
 .color-3 {
-  background-color: #C9E265; /* Cuarto color */
+  background-color: #C9E265;
+}
+
+.imagen-check-container {
+  position: absolute;
+}
+
+.imagen-check {
+  width: 50px;
+  height: auto;
+  z-index: 10;
+}
+
+.audio-button {
+  display: flex;
+  align-items: center;
+  font-size: 16px; /* Ajusta el tamaño del texto si es necesario */
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  margin-top: 10px; /* Espacio entre el título y el botón */
+}
+
+.icono-audio {
+  margin-right: 8px;
+  color: #ff5722; /* Cambia este valor para ajustar el color del icono */
+}
+
+.audio-button:hover .icono-audio {
+  color: #f44336; /* Cambia el color del icono cuando se pasa el cursor por encima */
+}
+
+.tiempo-empleado {
+  font-size: 1.0rem;
+  color: black;
+  font-weight: bold;
+  text-align: right;
+  display: flex;
+  align-items: center; /* Alinea el icono y el texto en la misma línea */
+  margin-top: 10px;
+}
+
+.icono-reloj {
+  margin-right: 5px;
+  color: black; /* Color del icono */
+  font-size: inherit; /* Hereda el tamaño de la fuente del contenedor */
+  width: 1.0em; /* Asegura que el icono sea proporcional al texto */
+  height: 1.0em;
+  line-height: 1; /* Alinea el icono correctamente */
 }

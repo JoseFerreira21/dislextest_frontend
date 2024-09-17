@@ -19,35 +19,34 @@ export class AuthService {
   private user: any;
   token: string | undefined;
 
-  //user$ = new BehaviorSubject<User | null>(null);
-
   constructor(private http: HttpClient, private tokenService: TokenService) {}
 
   login(email: string, password: string) {
     return this.http
-      .post<ResponseLogin>(`${this.apiUrl}/auth/login`, {
-        email,
-        password,
-      })
+      .post<ResponseLogin>(`${this.apiUrl}/auth/login`, { email, password })
       .pipe(
-        tap((response: { access_token: string }) => {
+        tap((response) => {
           this.tokenService.saveToken(response.access_token);
-          //console.log(response.access_token);
+          this.setUserFromToken(response.access_token); // Asegúrate de llamar esto para almacenar el usuario
         })
       );
-    }
+  }
 
   register(name: string, email: string, password: string, role: string) {
     return this.http.post(`${this.apiUrl}/usuario`, {
       name,
       email,
       password,
-      role
+      role,
     });
   }
 
-  registerAndLogin(name: string, email: string, password: string,
-                   role: string) {
+  registerAndLogin(
+    name: string,
+    email: string,
+    password: string,
+    role: string
+  ) {
     return this.register(name, email, password, role).pipe(
       switchMap(() => this.login(email, password))
     );
@@ -82,10 +81,18 @@ export class AuthService {
 
   setUserFromToken(token: string) {
     this.token = this.tokenService.getToken();
-    this.user = jwt_decode(token);
+    if (this.token) {
+      this.user = jwt_decode(this.token);
+      //console.log('Usuario decodificado desde el token:', this.user); // Añadir esto para depuración
+    }
   }
 
   getUser() {
+    this.token = this.tokenService.getToken();
+    if (this.token) {
+      this.user = jwt_decode(this.token);
+      //console.log('Usuario obtenido desde el token:', this.user); // Añadir esto para depuración
+    }
     return this.user;
   }
 }

@@ -1,0 +1,72 @@
+mat-dialog-container {
+  background-color: #1e1e1e;
+  border-radius: 20px;
+  padding: 20px;
+  max-width: 1000px; /* Incrementa el ancho máximo del modal */
+  min-width: 1000px; /* Incrementa el ancho mínimo del modal */
+  max-height: 90vh; /* Limita la altura para que no sobrepase la pantalla */
+}
+
+.bienvenida-titulo {
+  font-size: 3rem; /* Título más grande */
+  text-align: center;
+  color: #ffeb3b;
+  text-shadow: 2px 2px #000;
+  margin-bottom: 20px; /* Espacio adicional debajo del título */
+  margin-top: 50px;
+}
+
+.bienvenida-contenido {
+  text-align: center;
+    font-size: 1.4rem;
+    margin: 30px auto; /* Centra el contenido horizontalmente */
+    color:  #673ab7;
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 15px;
+    max-width: 80%; /* Limita el ancho del contenido al 80% del ancho del modal */
+}
+
+.bienvenida-acciones {
+  margin-top: 30px; /* Espacio adicional encima de los botones */
+  display: flex;
+  justify-content: center;
+  gap: 20px; /* Añade espacio entre los botones */
+}
+
+.cancelar-btn {
+  background-color: #f44336;
+  color: black;
+  border-radius: 20px;
+  padding: 15px 25px; /* Botones más grandes */
+  font-size: 1.2rem; /* Texto del botón más grande */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s;
+}
+
+.cancelar-btn:hover {
+  transform: scale(1.05);
+  background-color: #e53935;
+  color: white;
+}
+
+.play-btn {
+  background-color: #4caf50;
+  color: black;
+  font-size: 1.5rem; /* Texto del botón más grande */
+  padding: 15px 50px; /* Botones más grandes */
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s;
+  margin-block-end: 20px;
+}
+
+.play-btn:hover {
+  transform: scale(1.1);
+  background-color: #43a047;
+  color: white;
+}

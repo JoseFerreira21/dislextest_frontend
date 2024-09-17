@@ -44,7 +44,7 @@ export class LoginFormComponent {
       .subscribe({
         next: () => {
           this.status = 'success';
-          this.router.navigate(['/app']);
+          this.router.navigate(['/app/alumnos']);
         },
         error: () => {
           this.status = 'failed';

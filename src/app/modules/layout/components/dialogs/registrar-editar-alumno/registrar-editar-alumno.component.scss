@@ -1,0 +1,95 @@
+.mat-dialog-container {
+  max-width: 90vw; /* Ajusta el ancho máximo del modal al 90% del viewport */
+  width: 90vw;     /* El ancho real del modal */
+}
+
+.mat-form-fiel-registrar-alumno {
+  font-size: 15px;
+  width: 100%;
+}
+
+ .sexo-radio-group {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 10px;
+
+  mat-radio-button {
+    margin-right: 15px;
+  }
+}
+
+.sexo-label {
+  font-size: 16px;
+  color: #000;
+  font-weight: normal;
+  margin-bottom: 5px;
+}
+ 
+/* Estilos para el botón de cancelar */
+.volver-btn {
+  background-color: #f44336 !important;/* Color de fondo inicial */
+  color: white; /* Color del texto inicial */
+  border-radius: 20px;
+  padding: 15px 25px; /* Botones más grandes */
+  font-size: 1.2rem; /* Texto del botón más grande */
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s;
+}
+
+.volver-btn:hover {
+  transform: scale(1.05);
+  background-color: #e53935 ; /* Color de fondo al hacer hover */
+  color: white;
+}
+
+/* Estilos para el botón de validar */
+.guardar-btn {
+  background-color: #4caf50 !important; /* Color de fondo inicial */
+  color: #4caf50;/* Color del texto inicial */
+  padding: 15px 25px; /* Botones más grandes */
+  font-size: 1.2rem; /* Texto del botón más grande */
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s;
+}
+
+.guardar-btn:hover {
+  transform: scale(1.1);
+  background-color: #43a047;
+  color: white;
+}
+
+
+.planilla-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px; /* Reduce el tamaño del texto */
+  padding: 5px 10px; /* Reduce el padding */
+  background-color: #43a047 !important; /* Verde */
+  color: white;
+  min-width: 100px; /* Ancho mínimo más reducido */
+  margin-top: 10px;
+}
+
+.details-button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  color: #007bff;
+  margin-right: 10px;
+  margin-top: 5px;
+}
+
+.details-button:hover {
+  color: #0056b3;
+}
+
+.details-button mat-icon {
+  font-size: 24px;
+}

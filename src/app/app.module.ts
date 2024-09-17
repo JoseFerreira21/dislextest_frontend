@@ -44,14 +44,27 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import {ObserversModule} from '@angular/cdk/observers';
 import {CdkStepperModule} from '@angular/cdk/stepper';
+
+// Componentes
 import { ModalAvisoComponent } from './modules/layout/components/dialogs/modal-aviso/modal-aviso.component';
 import { BienvenidaAlumnoComponent } from './modules/layout/components/dialogs/bienvenida-alumno/bienvenida-alumno.component'; 
+import { ModalDespedidaComponent } from './modules/layout/components/dialogs/despedida-alumno/despedida-alumno.component';
 import { EliminarAlumnoComponent } from './modules/layout/components/dialogs/eliminar-alumno/eliminar-alumno.component';
 import { RegistrarAlumnoComponent } from './modules/layout/components/dialogs/registrar-editar-alumno/registrar-editar-alumno.component'; 
 import { DetallesEjercicioComponent } from './modules/layout/components/dialogs/detalles-ejercicio/detalles-ejercicio.component';
+import { PasswordPromptComponent } from './modules/layout/components/dialogs/password-prompt/password-prompt.component';
 
 @NgModule({
-  declarations: [AppComponent, RegistrarAlumnoComponent, EliminarAlumnoComponent, ModalAvisoComponent, BienvenidaAlumnoComponent, DetallesEjercicioComponent],
+  declarations: [
+    AppComponent, 
+    RegistrarAlumnoComponent, 
+    EliminarAlumnoComponent, 
+    ModalAvisoComponent, 
+    BienvenidaAlumnoComponent, 
+    ModalDespedidaComponent, 
+    PasswordPromptComponent,
+    DetallesEjercicioComponent],
+  entryComponents: [PasswordPromptComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

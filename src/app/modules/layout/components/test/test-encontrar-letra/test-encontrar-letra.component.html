@@ -1,23 +1,44 @@
-<div class="formar-container-test-title">
+<div class="container-test-title">
   <div class="title">
-    <p class="p-test">Encierra la letra que se te indica.</p>
+    <p class="sub-title">Encierra la letra que se te indica.</p>
+    <button (click)="escucharInstruccion()" class="audio-button">
+      <mat-icon class="icono-audio">volume_up</mat-icon> Escuchar instrucción
+    </button>
+    <!-- Mostrar tiempo transcurrido -->
+    <span class="tiempo-empleado">
+      <mat-icon class="icono-reloj">schedule</mat-icon> {{ getFormattedTime() }}
+    </span>
   </div>
 
-  <div>
-    <ng-container *ngFor="let task of encontrarLetras">
-      <div class="letra-title">
-        {{ task.respuesta }}
-      </div>
-      <div *ngFor="let palabra of task.palabras">
-        <div class="div-letras">
-          <span *ngFor="let letras of palabra.letras"
-                class="span-test"
-                [ngClass]="{'seleccionado': letras.estado}"
-                (click)="toggleSeleccion(letras)">
-            {{letras.letra}}
-          </span>
+  <div class="container-test">
+    <div *ngFor="let grupo of encontrarLetras; let i = index" class="grupo-letras">
+      <div class="letra-titulo-container">
+        <div class="letra-titulo">
+          {{ grupo.respuesta }}
         </div>
       </div>
-    </ng-container>
+      <div class="palabras-grupo">
+        <div *ngFor="let palabra of grupo.palabras" 
+             class="palabra-container" 
+             [ngClass]="{'color-celeste': i % 2 === 0, 'color-amarillo': i % 2 !== 0}">
+          <span *ngFor="let letra of palabra.letras" 
+                class="letra-span"
+                [ngClass]="{'seleccionado': letra.estado}" 
+                (click)="toggleSeleccion(letra, palabra.grupo)">
+            {{letra.letra}}
+            <div class="imagen-check-container" *ngIf="mostrarImagen && letra.validez">
+              <img class="imagen-check" [src]="letra.validez">
+            </div>
+          </span>
+          
+          <!--<div class="imagen-check-container" *ngIf="mostrarImagen && palabra.validez">
+            <img class="imagen-check" [src]="palabra.validez">
+          </div>-->
+        
+        </div>
+      </div>
+    </div>
   </div>
 </div>
+
+ 

@@ -10,9 +10,12 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { TestFormarPalabraComponent } from './components/test/test-formar-palabra/test-formar-palabra.component';
 import { TestSeleccionarPalabraComponent } from './components/test/test-seleccionar-palabra/test-seleccionar-palabra.component';
 import { TestTacharPalabraComponent } from './components/test/test-tachar-palabra/test-tachar-palabra.component';
+import { TestEncontrarLetraComponent } from './components/test/test-encontrar-letra/test-encontrar-letra.component';
 import { TestPipe } from '../../pipes/test.pipe';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { ReportComponent } from './components/report/report.component';
+import { TestEncerrarPalabraComponent } from './components/test/test-encerrar-palabra/test-encerrar-palabra.component';
+import { MatIconModule } from '@angular/material/icon';
 
 
 @NgModule({
@@ -22,8 +25,11 @@ import { ReportComponent } from './components/report/report.component';
     TestFormarPalabraComponent,
     TestSeleccionarPalabraComponent,
     TestTacharPalabraComponent,
+    TestEncontrarLetraComponent,
+    TestEncerrarPalabraComponent,
     TestPipe,
     ReportComponent
+    
   ],
   imports: [
     CommonModule,
@@ -31,12 +37,15 @@ import { ReportComponent } from './components/report/report.component';
     OverlayModule,
     FontAwesomeModule,
     SharedModule,
-    DragDropModule
+    DragDropModule,
+    MatIconModule
   ],
   exports: [
     TestFormarPalabraComponent,
     TestSeleccionarPalabraComponent,
-    TestTacharPalabraComponent
+    TestTacharPalabraComponent,
+    TestEncontrarLetraComponent,
+    TestEncerrarPalabraComponent,
   ]
 })
 export class LayoutModule { }

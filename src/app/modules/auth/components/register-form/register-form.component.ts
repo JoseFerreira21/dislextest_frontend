@@ -20,7 +20,7 @@ export class RegisterFormComponent {
     {
       name: ['', [Validators.required]],
       email: ['', [Validators.email, Validators.required]],
-      password: ['', [Validators.minLength(6), Validators.required]],
+      password: ['', [Validators.minLength(8), Validators.required]],
       confirmPassword: ['', [Validators.required]],
       role: ['profesor']
     },
@@ -56,7 +56,7 @@ export class RegisterFormComponent {
           this.status = 'failed';
         },
       });
-      console.log(name, email, password, role);
+      //console.log(name, email, password, role);
     } else {
       this.form.markAllAsTouched();
     }
@@ -68,7 +68,7 @@ export class RegisterFormComponent {
       const { email } = this.formUser.getRawValue();
       this.authService.isAvailable(email).subscribe({
         next: (rta) => {
-          console.log(rta);
+          //console.log(rta);
           this.status = 'success';
           if (rta.isAvailable) {
             this.showRegister = true;

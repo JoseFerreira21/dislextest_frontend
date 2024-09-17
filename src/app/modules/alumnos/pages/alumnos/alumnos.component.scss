@@ -1,0 +1,24 @@
+table {
+    width: 100%;
+  }
+
+.registrar-btn {
+  background-color: #4caf50;
+  color: black;
+  font-size: 1.0rem; /* Texto del botón más grande */
+  padding: 05px 20px; /* Botones más grandes */
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s;
+  margin-block-end: 20px;
+}
+
+.registrar-btn:hover {
+  transform: scale(1.1);
+  background-color: #43a047;
+  color: white;
+}

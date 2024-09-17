@@ -19,16 +19,21 @@ export class GlobalService {
     if (this.profesorId !== null) {
       return of(this.profesorId);
     }
-
+  
     const sub = this._tokenService.getSub();
     if (sub) {
+      //console.log('Valor de sub:', sub);
       return this._profesorService.getProfesorId(sub).pipe(
         map(dataResponse => {
-          if (dataResponse.length > 0) {
+          //console.log('Respuesta completa del servidor:', dataResponse);
+          
+          // Verifica si dataResponse es un array y accede al primer elemento
+          if (Array.isArray(dataResponse) && dataResponse.length > 0 && dataResponse[0].id) {
             this.profesorId = dataResponse[0].id;
+            //console.log('ID encontrado:', this.profesorId);
             return this.profesorId;
           } else {
-            console.error('El array de objetos está vacío.');
+            console.error('No se encontró el campo "id" en la respuesta.');
             return null;
           }
         }),
@@ -43,4 +48,6 @@ export class GlobalService {
       return of(null);
     }
   }
+  
+  
 }

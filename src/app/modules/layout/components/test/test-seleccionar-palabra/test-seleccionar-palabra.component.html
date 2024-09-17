@@ -1,33 +1,27 @@
-<!--
 <div class="formar-container-test-title">
   <div class="title">
-    <p class="tachar-descripcion">Selecciona la palabra escrita correctamente</p>
+    <p class="p-test">Selecciona la palabra escrita correctamente.</p>
+    <button (click)="escucharInstruccion()" class="audio-button">
+      <mat-icon class="icono-audio">volume_up</mat-icon> Escuchar instrucción
+    </button>
+    <!-- Mostrar tiempo transcurrido -->
+    <span class="tiempo-empleado">
+      <mat-icon class="icono-reloj">schedule</mat-icon> {{ getFormattedTime() }}
+    </span>
   </div>
+  
   <div class="formar-container-test">
     <div *ngFor="let grupo of grupos; let i = index" class="grupo">
-        <div *ngFor="let palabra of grupo.palabras; let j = index" class="palabra"
-            [class.seleccionada]="seleccion[i] === j" (click)="seleccionar(i,palabra.opcion, j)">
-            {{ palabra.opcion }}
-        </div>
-    </div>
-  </div>
- </div>
- -->
-
- <div class="formar-container-test-title">
-  <div class="title">
-    <p class="tachar-descripcion">Selecciona la palabra escrita correctamente.</p>
-  </div>
-  <div class="formar-container-test">
-    <div *ngFor="let grupo of grupos; let i = index"
-         class="grupo"
-         >
       <div *ngFor="let palabra of grupo.palabras; let j = index" [ngClass]="getGrupoClasses(i)"
-           class="palabra"
-           [class.seleccionada]="seleccion[i] === j"
-           (click)="seleccionar(i, palabra.opcion, j)">
+           class="palabra" [class.seleccionada]="seleccion[i] === j" (click)="seleccionar(i, palabra.opcion, j)">
         {{ palabra.opcion }}
+        
+        <div class="imagen-check-container" *ngIf="mostrarImagen && palabra.validez">
+          <img class="imagen-check" [src]="palabra.validez">
+        </div>
       </div>
     </div>
   </div>
 </div>
+
+

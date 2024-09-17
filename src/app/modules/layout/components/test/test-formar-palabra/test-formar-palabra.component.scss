@@ -1,6 +1,6 @@
 .formar-container-test {
     background-color: #38B6FF;
-    max-width: 1000px;
+    max-width: 1000%;
     margin: 20px auto;
     text-align: center;
     display: grid;
@@ -8,7 +8,7 @@
     gap: 20px;
 }
 
-.formar-container-test-title {
+.container-test-title {
     background-color: #38B6FF;
     //padding: 20px;
     border-radius: 8px;
@@ -19,8 +19,12 @@
     grid-template-columns: repeat(1, 1fr);
 }
 
-.title{
-    display: block;
+.title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
 
 .palabra-container {
@@ -46,6 +50,8 @@
     font-weight: bold;
     color: #000000;
     font-size: 25px;
+    margin: 0;
+    padding: 10px 0;
 }
 
 .span-test {
@@ -123,11 +129,11 @@
   }
 
   .imagen-ejercicio img {
-    width: 80px;
+    width: 100px;
     height: auto;
     max-width: 100%;
     height: auto;
-    border-radius: 25px;
+    border-radius: 20px;
   }
 
   .imagen-check-container {
@@ -135,7 +141,45 @@
   }
 
   .imagen-check {
-    width: 80px;
+    width: 50px;
     height: auto;
     z-index: 10;
+  }
+
+  .audio-button {
+    display: flex;
+    align-items: center;
+    font-size: 16px; /* Ajusta el tamaño del texto si es necesario */
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    margin-top: 10px; /* Espacio entre el título y el botón */
+  }
+  
+  .icono-audio {
+    margin-right: 8px;
+    color: #ff5722; /* Cambia este valor para ajustar el color del icono */
+  }
+  
+  .audio-button:hover .icono-audio {
+    color: #f44336; /* Cambia el color del icono cuando se pasa el cursor por encima */
+  }
+
+  .tiempo-empleado {
+    font-size: 1.0rem;
+    color: black;
+    font-weight: bold;
+    text-align: right;
+    display: flex;
+    align-items: center; /* Alinea el icono y el texto en la misma línea */
+    margin-top: 10px;
+  }
+  
+  .icono-reloj {
+    margin-right: 5px;
+    color: black; /* Color del icono */
+    font-size: inherit; /* Hereda el tamaño de la fuente del contenedor */
+    width: 1.0em; /* Asegura que el icono sea proporcional al texto */
+    height: 1.0em;
+    line-height: 1; /* Alinea el icono correctamente */
   }

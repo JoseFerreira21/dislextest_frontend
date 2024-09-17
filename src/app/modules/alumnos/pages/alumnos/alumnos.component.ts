@@ -5,7 +5,7 @@ import { AfterViewInit, Component, ViewChild, OnInit } from '@angular/core';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 
-import { Entidad } from 'src/app/interfaces/entidad';
+import { Entidad } from 'src/app/models/entidad';
 import { EntidadService } from '@services/entidad.service';
 import { GlobalService } from '@services/global.service';
 
@@ -13,27 +13,32 @@ import { GlobalService } from '@services/global.service';
 import { MatIconModule } from '@angular/material/icon';
 //Para trabajar con modal de material
 import { MatDialog } from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 
 import { MatGridListModule } from '@angular/material/grid-list';
-import { alumnoEntidad } from 'src/app/interfaces/alumnoEntidad';
+import { alumnoEntidad } from '@models/alumnoEntidad';
 import { RegistrarAlumnoComponent } from 'src/app/modules/layout/components/dialogs/registrar-editar-alumno/registrar-editar-alumno.component'; 
 import { EliminarAlumnoComponent } from 'src/app/modules/layout/components/dialogs/eliminar-alumno/eliminar-alumno.component';
 
 import { Router } from '@angular/router';
 import { BienvenidaAlumnoComponent } from 'src/app/modules/layout/components/dialogs/bienvenida-alumno/bienvenida-alumno.component';
 import { TextToSpeechService } from '@services/text-to-speech.service';
+import { CommonModule } from '@angular/common';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'alumnos',
   templateUrl: './alumnos.component.html',
-  styleUrls: ['./alumnos.component.css'],
+  styleUrls: ['./alumnos.component.scss'],
   standalone: true,
   imports: [
     MatTableModule,
     MatPaginatorModule,
     MatIconModule,
     MatGridListModule,
+    CommonModule,   
+    MatSnackBarModule,  // Importa esto aquí también
+    MatButtonModule,  // Importa esto aquí para los botones
   ],
   entryComponents: [BienvenidaAlumnoComponent] // Para asegurar que el modal esté disponible
 })
@@ -43,6 +48,7 @@ export class AlumnosComponent implements AfterViewInit, OnInit {
     'Nombre',
     'Apellido',
     'Fecha de Nacimiento',
+    'Sexo',
     'Edad',
     'Teléfono',
     'Dirección',
