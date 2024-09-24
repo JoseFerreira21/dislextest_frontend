@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "trello-auth": {
+    "dislextest": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -70,10 +70,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "trello-auth:build:production"
+              "browserTarget": "dislextest:build:production"
             },
             "development": {
-              "browserTarget": "trello-auth:build:development"
+              "browserTarget": "dislextest:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -81,7 +81,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "trello-auth:build"
+            "browserTarget": "dislextest:build"
           }
         },
         "test": {
