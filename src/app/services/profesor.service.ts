@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { TokenService } from './token.service';
 import { AuthService } from './auth.service';
@@ -20,6 +20,11 @@ export class ProfesorService {
   apiUrl = environment.API_URL;
 
   getProfesorId(idUsuario :number){
-    return this.http.get<Profesor>(`${this.apiUrl}/profesor/usuario/${idUsuario}`, {context: checkToken()});
+    const token = this.tokenService.getToken();
+    const headers = new HttpHeaders({
+      'content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    });
+    return this.http.get<Profesor>(`${this.apiUrl}/profesor/usuario/${idUsuario}`, { headers: headers,});
   }
 }
