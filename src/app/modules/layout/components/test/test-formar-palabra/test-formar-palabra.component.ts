@@ -64,7 +64,7 @@ export class TestFormarPalabraComponent implements OnInit {
   async ngOnInit() {
     try {
       this.puntaje = 0;
-      this.startTimer(); 
+      this.startTimer();
 
       // Cargar áreas y palabras en paralelo
       await Promise.all([this.cargarAreas(), this.cargarPalabras()]);
@@ -80,16 +80,16 @@ export class TestFormarPalabraComponent implements OnInit {
       console.error('Error en ngOnInit: ', error);
     }
   }
-   // Iniciar el temporizador de tiempo empleado en el test/ejercicio
-    startTimer() {
-      this.startTime = Date.now();
-      this.interval = setInterval(() => {
-        this.elapsedTime = Date.now() - this.startTime;
-        this.tiempoEmpleado = Math.floor(this.elapsedTime / 1000);  // Segundos transcurridos
-      }, 1000);
-    }
+  // Iniciar el temporizador de tiempo empleado en el test/ejercicio
+  startTimer() {
+    this.startTime = Date.now();
+    this.interval = setInterval(() => {
+      this.elapsedTime = Date.now() - this.startTime;
+      this.tiempoEmpleado = Math.floor(this.elapsedTime / 1000); // Segundos transcurridos
+    }, 1000);
+  }
 
-   // Calcular minutos y segundos para mostrar en el HTML
+  // Calcular minutos y segundos para mostrar en el HTML
   getFormattedTime() {
     const minutes = Math.floor(this.tiempoEmpleado / 60);
     const seconds = this.tiempoEmpleado % 60;
@@ -203,19 +203,15 @@ export class TestFormarPalabraComponent implements OnInit {
   }
 
   public guardar = async (testId: number) => {
-    clearInterval(this.interval);
-    
+    //clearInterval(this.interval);
+
     // Cancelar el temporizador de inactividad cuando se guarda el resultado
     this.cancelarInactivityTimer();
-    
-    //console.log(this.palabras);
-    //console.log('Test del resultado guardado: ', testId);
 
     for (let index = 0; index < this.palabras.length; index++) {
       const element = this.palabras[index];
       this.resultadoTest.AreaId = element.areaId;
       this.resultadoTest.ResultadoTestId = testId;
-
       // Asignar el tiempo empleado
       this.resultadoTest.tiempoEmpleado = this.tiempoEmpleado;
 
@@ -223,8 +219,9 @@ export class TestFormarPalabraComponent implements OnInit {
       //console.log(
       //  this.aparicionAleatoria(element) + `-` + this.respuestaPalabra(element)
       //);
-
+      this.aparicionAleatoria(element) + `-` + this.respuestaPalabra(element);
       // Verificación y asignación de indicador y observación
+
       if (
         element.pMinimo !== undefined &&
         element.observacionSR &&
@@ -242,8 +239,6 @@ export class TestFormarPalabraComponent implements OnInit {
 
     this.resultadoTest.ResultadoTestId = testId;
     this.resultadoTest.pObtenido = this.puntaje;
-
-    //console.log('Puntaje obtenido: ', this.puntaje);
 
     // Calcular el valor a enviar al modal basado en el puntaje obtenido
     let modalValue: number;

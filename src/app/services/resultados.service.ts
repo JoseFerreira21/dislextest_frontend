@@ -7,6 +7,7 @@ import { TokenService } from '@services/token.service';
 import { ResultadoTest, ResultadoTestPost } from '@models/resultados.model';
 import { ResultadoItem, ResultadoItemRespuesta } from '@models/resultados-item.model';
 import { ResultadoEjercicio } from '@models/resultados-ejercicio.model';
+import { checkToken } from 'src/interceptors/token.interceptor';
 
 @Injectable({
   providedIn: 'root'
@@ -65,7 +66,7 @@ export class ResultadosService {
       'content-Type': 'application/json',
       Authorization: `Bearer ${token}`,
     });
-    return this.http.post<ResultadoItemRespuesta>(`${this.apiUrl}/resultadoejercicio/`, JSON.stringify(resultado), {
+    return this.http.post<ResultadoEjercicio>(`${this.apiUrl}/resultadoejercicio/`, JSON.stringify(resultado), {
       headers: headers,
     });
   }

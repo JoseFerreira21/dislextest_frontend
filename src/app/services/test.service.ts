@@ -48,7 +48,7 @@ export class TestService {
       'Authorization': `Bearer ${this.tokenService.getToken()}`
     });
     //let datos: DiscriminacionPalabra[] = [];
-    let datos:Observable<DiscriminacionPalabra[]> = this.http.get<DiscriminacionPalabra[]>(`${this.apiUrlDiccionario}discriminacion-visual-v2`, { headers: headers });
+    let datos:Observable<DiscriminacionPalabra[]> = this.http.get<DiscriminacionPalabra[]>(`${this.apiUrlDiccionario}discriminacion-visual`, { headers: headers });
     //console.log('datos del service: ', datos);
      return this.http.get<DiscriminacionPalabra[]>(`${this.apiUrlDiccionario}discriminacion-visual`, { headers: headers });
   }
