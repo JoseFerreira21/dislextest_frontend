@@ -1,0 +1,72 @@
+<h1 mat-dialog-title>{{ titulo }}</h1>
+<div mat-dialog-content>
+  <form [formGroup]="formPerfil">
+    <mat-form-field appearance="fill" style="width: 100%">
+      <mat-label>Nombres</mat-label>
+      <input matInput formControlName="nombre" />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" style="width: 100%">
+      <mat-label>Apellidos</mat-label>
+      <input matInput formControlName="apellido" />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" style="width: 100%">
+      <mat-label>Teléfono</mat-label>
+      <input matInput formControlName="telefono" />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" style="width: 100%">
+      <mat-label>Dirección</mat-label>
+      <input matInput formControlName="direccion" />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" style="width: 100%">
+      <mat-label>Nro Documento</mat-label>
+      <input matInput formControlName="nroDocumento" />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" style="width: 100%">
+      <mat-label>Fecha Nacimiento</mat-label>
+      <input
+        matInput
+        [matDatepicker]="picker"
+        formControlName="fechaNacimiento"
+      />
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-label>Sexo</mat-label>
+    <mat-radio-group
+      formControlName="sexo"
+      class="sexo-radio-group"
+      color="primary"
+    >
+      <mat-radio-button value="M">Masculino</mat-radio-button>
+      <mat-radio-button value="F">Femenino</mat-radio-button>
+    </mat-radio-group>
+  </form>
+</div>
+
+<div mat-dialog-actions>
+  <button class="cerrar-btn" mat-raised-button (click)="cerrarModal()">Cerrar</button>
+  <button
+    mat-raised-button
+    class="editar-btn"
+    *ngIf="!editMode"
+    (click)="enableEdit()"
+  >
+    Editar
+  </button>
+  <button
+    mat-raised-button
+    class="guardar-btn"
+    color="primary"
+    [disabled]="formPerfil.invalid"
+    *ngIf="editMode"
+    (click)="saveChanges()"
+  >
+    Guardar
+  </button>
+</div>
