@@ -34,7 +34,7 @@ export class BienvenidaAlumnoComponent implements OnInit {
     }
 
   onComenzar(): void {
-    console.log('Comenzando el juego para:', this.alumno.nombre);
+    //console.log('Comenzando el juego para:', this.alumno.nombre);
     this.dialogRef.close(this.alumno);  // Pasa todo el objeto alumno, incluyendo el ID
     this.soundService.EmpezarTestSonido();
   }
