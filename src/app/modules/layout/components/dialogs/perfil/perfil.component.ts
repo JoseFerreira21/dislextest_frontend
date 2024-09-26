@@ -70,7 +70,7 @@ export class PerfilComponent implements OnInit {
       next: (entidad: EntidadUsuario) => {
         this.perfil = entidad;
 
-        console.log(entidad);
+        //console.log(entidad);
         
         // Si la fecha de nacimiento es nula, asigna un valor predeterminado o deja el campo vacío
         const fechaNacimiento = entidad.fechaNacimiento ? moment(entidad.fechaNacimiento, 'YYYY-MM-DD').toDate() : null;
