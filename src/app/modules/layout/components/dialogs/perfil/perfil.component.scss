@@ -1,0 +1,70 @@
+.mat-dialog-container {
+    max-width: 90vw;
+    width: 90vw;
+  }
+  
+  .mat-form-field {
+    margin-bottom: 10px;
+  }
+    
+  /* Estilos para el botón de Cerrar */
+  .cerrar-btn {
+    background-color: #f44336 !important; /* Rojo */
+    color: #000;
+    border-radius: 20px;
+    padding: 12px 20px; /* Tamaño ajustado */
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s;
+  }
+  
+  .cerrar-btn:hover {
+    transform: scale(1.05);
+    background-color: #e53935;
+    color: white;
+  }
+  
+  /* Estilos para el botón de Editar */
+  .editar-btn {
+    background-color:  #4caf50 !important; /* Verde */
+    color: #000;
+    border-radius: 20px;
+    padding: 12px 20px;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s;
+    margin-left: 15px; /* Separación entre botones */
+  }
+  
+  .editar-btn:hover {
+    transform: scale(1.05);
+    background-color: #4caf50;
+    color: white;
+  }
+  
+  /* Estilos para el botón de Guardar */
+  .guardar-btn {
+    background-color: #4caf50 !important; /* Verde */
+    color: #000;
+    padding: 15px 25px;
+    font-size: 1.2rem;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s;
+    margin-left: 15px; /* Separación entre botones */
+  }
+  
+  .guardar-btn:hover {
+    transform: scale(1.1);
+    background-color: #43a047;
+    color: white;
+  }

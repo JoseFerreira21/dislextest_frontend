@@ -4,7 +4,7 @@ import { environment } from '@environments/environment';
 import { TokenService } from '@services/token.service';
 
 import { Observable } from 'rxjs';
-import { Entidad } from '../models/entidad';
+import { Entidad, EntidadUsuario } from '../models/entidad';
 import { checkToken } from 'src/interceptors/token.interceptor';
 
 @Injectable({
@@ -15,6 +15,18 @@ export class EntidadService {
 
   apiUrl = environment.API_URL + '/entidad/';
 
+  getEntidadPerfil(idEntidad: number): Observable<Entidad> {
+    return this.http.get<Entidad>(`${this.apiUrl}${idEntidad}`, {
+      context: checkToken(),
+    });
+  }
+
+  getEntidadByUser(idUsuario: number): Observable<EntidadUsuario> {
+    return this.http.get<EntidadUsuario>(`${this.apiUrl}usuario/${idUsuario}`, {
+      context: checkToken(), // Si utilizas esta función para manejar el token
+    });
+  }
+  
   getEntidadList(): Observable<Entidad[]> {
     return this.http.get<Entidad[]>(`${this.apiUrl}`, {
       context: checkToken(),

@@ -8,6 +8,7 @@ import { Perfil } from '@models/perfil.model';
 import { checkToken } from 'src/interceptors/token.interceptor';
 
 import { AuthService } from '@services/auth.service';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -22,26 +23,23 @@ export class PerfilService {
   
   apiUrl = environment.API_URL;
 
-  /*getPerfilEntidad() {
-    return this.http.get<Perfil[]>(
-      `${this.apiUrl}/entidad/usuario/${this.user$.value?.id}`,
-      {
-        context: checkToken(),
-      }
-    );
+  getEntidadPerfil(idEntidad: number): Observable<Perfil> {
+    return this.http.get<Perfil>(`${this.apiUrl}${idEntidad}`, {
+      context: checkToken(),
+    });
   }
 
-  postPerfilProfesor(entidad: any) {
-    //console.log('Objeto profesor que recibira la Api');
-    //console.log(entidad);
+  updateEntidadPerfil(idEntidad: number, modelo: Perfil): Observable<Perfil> {
+    //console.log('Objeto entidad que recibira la Api');
     const token = this.tokenService.getToken();
     const headers = new HttpHeaders({
       'content-Type': 'application/json',
       Authorization: `Bearer ${token}`,
     });
-
-    return this.http.post(`${this.apiUrl}/entidad`, JSON.stringify(entidad), {
-      headers: headers,
-    });
-  }*/
+    return this.http.put<Perfil>(
+      `${this.apiUrl}${idEntidad}`,
+      JSON.stringify(modelo),
+      { headers: headers }
+    );
+  }
 }

@@ -5,7 +5,6 @@ export interface Perfil {
     telefono: string;
     direccion: string;
     nroDocumento: string;
-    //materia: string;
     createAt: Date;
     updateAt: Date;
     usuarioId: number;

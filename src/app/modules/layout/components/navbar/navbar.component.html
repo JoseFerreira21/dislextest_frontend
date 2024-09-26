@@ -35,25 +35,26 @@
       </div>
 
     </div>
+    
     <div class="flex items-center">
       <div class="flex space-x-2">
         <button
           type="button"
           class="flex rounded-full"
           aria-expanded="false"
-          type="button"
           (click)="isOpenOverlayAvatar = !isOpenOverlayAvatar"
           cdkOverlayOrigin
           #menuOverlay="cdkOverlayOrigin"
         >
           <img
             class="w-8 h-8 rounded-full"
-            src="https://api.multiavatar.com/Binx%20Bond.png"
+            [src]="avatarUrl"
             alt="user photo"
           />
         </button>
       </div>
     </div>
+    
   </div>
 </nav>
 
@@ -75,30 +76,48 @@
         <fa-icon [icon]="faClose"></fa-icon>
       </button>
     </div>
-    <div class="py-3 px-4 flex items-center space-x-4">
-      <img
-        class="w-10 h-10 rounded-full"
-        src="https://api.multiavatar.com/Binx%20Bond.png"
-        alt=""
-      />
-      <div class="space-y-1">
-        <div class="text-sm text-gray-500"></div>
-      </div>
-    </div>
-    <ul class="py-1">
-      <li>
-        <a
-          routerLink="/app/perfil"
-          class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600"
-          >Perfil</a
+    
+    <div class="flex items-center">
+      <div class="flex space-x-2">
+        <button
+          type="button"
+          class="flex rounded-full"
+          aria-expanded="false"
+          (click)="isOpenOverlayAvatar = !isOpenOverlayAvatar"
+          cdkOverlayOrigin
+          #menuOverlay="cdkOverlayOrigin"
         >
-      </li>
-    </ul>
+          <img
+            class="w-8 h-8 rounded-full"
+            [src]="avatarUrl" 
+            alt="user photo"
+          />
+        </button>
+        <div class="space-y-1">
+          <div class="text-sm text-gray-500">{{ userName }}</div>
+          <div class="text-sm text-gray-500">{{ userEmail}}</div>
+        </div>
+      
+      </div>
+      
+    </div>
+
+   
     <ul class="py-1">
-      <li>
-        <button class="block py-2 px-4 text-sm text-gray-700" (click)="logout()" >Cerrar sesión</button>
-      </li>
-    </ul>
+      <button 
+        (click)="openPerfilModal()"
+        class="block w-full text-left py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-300"
+      >Perfil</button>
+   </ul>
+
+  <ul class="py-1">
+    <li>
+      <button 
+      class="block w-full text-left py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-300"
+      (click)="logout()" >Cerrar sesión</button>
+    </li>
+  </ul>
+
   </div>
  </ng-template>
 </ng-container>

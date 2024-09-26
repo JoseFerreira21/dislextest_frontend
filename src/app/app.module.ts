@@ -53,6 +53,7 @@ import { EliminarAlumnoComponent } from './modules/layout/components/dialogs/eli
 import { RegistrarAlumnoComponent } from './modules/layout/components/dialogs/registrar-editar-alumno/registrar-editar-alumno.component'; 
 import { DetallesEjercicioComponent } from './modules/layout/components/dialogs/detalles-ejercicio/detalles-ejercicio.component';
 import { PasswordPromptComponent } from './modules/layout/components/dialogs/password-prompt/password-prompt.component';
+import { PerfilComponent } from './modules/layout/components/dialogs/perfil/perfil.component';
 
 @NgModule({
   declarations: [
@@ -63,7 +64,8 @@ import { PasswordPromptComponent } from './modules/layout/components/dialogs/pas
     BienvenidaAlumnoComponent, 
     ModalDespedidaComponent, 
     PasswordPromptComponent,
-    DetallesEjercicioComponent],
+    DetallesEjercicioComponent,
+    PerfilComponent],
   entryComponents: [PasswordPromptComponent],
   imports: [
     BrowserModule,
