@@ -42,18 +42,18 @@
             <td mat-cell *matCellDef="let alumno">{{ alumno.fechaNacimiento }}</td>
           </ng-container>
 
-           <!-- Sexo Column -->
+          <!-- Edad Column -->
+          <ng-container matColumnDef="Edad">
+            <th mat-header-cell *matHeaderCellDef>Edad</th>
+            <td mat-cell *matCellDef="let alumno">{{ alumno.edad }}</td>
+          </ng-container>
+          
+          <!-- Sexo Column -->
           <ng-container matColumnDef="Sexo">
             <th mat-header-cell *matHeaderCellDef> Sexo </th>
             <td mat-cell *matCellDef="let alumno">
               {{ alumno.sexo === 'M' ? 'Masculino' : alumno.sexo === 'F' ? 'Femenino' : 'No especificado' }}
             </td>
-          </ng-container>
-
-          <!-- Edad Column -->
-          <ng-container matColumnDef="Edad">
-            <th mat-header-cell *matHeaderCellDef>Edad</th>
-            <td mat-cell *matCellDef="let alumno">{{ alumno.edad }}</td>
           </ng-container>
 
           <!-- Teléfono Column -->
