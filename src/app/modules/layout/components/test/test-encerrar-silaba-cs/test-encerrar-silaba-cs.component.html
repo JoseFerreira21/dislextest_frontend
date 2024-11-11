@@ -1,0 +1,43 @@
+<div class="container-test-title">
+    <div class="title">
+      <p class="sub-title">Encierra la sílaba que falta, dando click en ella</p>
+      <button (click)="escucharInstruccion()" class="audio-button">
+        <mat-icon class="icono-audio">volume_up</mat-icon> Escuchar instrucción
+      </button>
+      <!-- Mostrar tiempo transcurrido -->
+      <span class="tiempo-empleado">
+        <mat-icon class="icono-reloj">schedule</mat-icon> {{ getFormattedTime() }}
+      </span>
+    </div>
+
+    <div *ngFor="let ejercicio of ejercicios; let i = index">
+        <div class="ejercicio">
+            <!-- Opciones de letras -->
+            <div class="opciones">
+                <button *ngFor="let opcion of ejercicio.opciones"
+                        [class.selected]="respuestasSeleccionadas[i] === opcion"
+                        (click)="seleccionar(opcion, i)">
+                    {{ opcion }}
+                </button>
+                <div class="imagen-check-container" *ngIf="mostrarImagen">
+                    <img class="imagen-check" [src]="ejercicio.validez" alt="Validación">
+                </div>
+            </div>
+        </div>
+
+        <!-- Contenedor con imagen y palabra incompleta alineados horizontalmente -->
+        <div class="contenedor-palabra-imagen">
+            <div class="palabra-incompleta">
+                {{ejercicio.palabraIncompleta}}
+            </div>
+            <div class="imagenes-container">
+                <div class="imagen-ejercicio">
+                    <img [src]="imagenesEjercicio[i]">
+                </div>
+                
+            </div>
+            
+        </div>
+    </div>
+    
+</div>

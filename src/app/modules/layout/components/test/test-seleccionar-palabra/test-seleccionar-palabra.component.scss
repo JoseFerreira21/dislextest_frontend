@@ -1,6 +1,6 @@
 .grupo {
   margin-bottom: 15px;
-  padding: 10px;
+  padding: 40px;
   position: relative; /* Necesario para posicionar los emoticones */
 }
 
@@ -14,7 +14,6 @@
   grid-template-columns: repeat(2, 1fr);
   gap: 20px;
   min-height: 600px;
-
 }
 
 .palabra {
@@ -32,6 +31,10 @@
   cursor: pointer;
 }
 
+.palabra:hover {
+  background-color: #ddd;
+}
+
 .seleccionada {
   background-color: rgba(0, 0, 0, 0.2);
   font-weight: bold;
@@ -47,6 +50,7 @@
   text-align: center;
   min-height: 150px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.356);
+  padding-block-end: 60px;
 }
 
 .title {
@@ -58,12 +62,15 @@
 }
 
 .p-test {
-  font-family: 'Comic Sans MS', cursive, sans-serif;
+  font-family: 'Arial Rounded MT Bold', sans-serif;
   font-weight: bold;
   color: #000000;
-  font-size: 25px;
+  font-size: 30px; /* Tamaño de la fuente del título */
   margin: 0;
-  padding: 10px 0;
+  padding: 15px 0; /* Padding para mayor espacio */
+  word-wrap: break-word; /* Permite el ajuste de línea */
+  white-space: normal; /* Permite el salto de línea */
+  line-height: 1.2; /* Ajusta el espacio entre líneas */
 }
 
 /* Clases de color específicas para grupos */
@@ -105,11 +112,11 @@
 
 .icono-audio {
   margin-right: 8px;
-  color: #ff5722; /* Cambia este valor para ajustar el color del icono */
+  color: #ff5722;
 }
 
 .audio-button:hover .icono-audio {
-  color: #f44336; /* Cambia el color del icono cuando se pasa el cursor por encima */
+  color: #b41c11;
 }
 
 .tiempo-empleado {

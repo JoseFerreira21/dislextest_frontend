@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
-import { alumnoEntidad } from '@models/alumnoEntidad';
+import { alumnoEntidad } from '@models/alumnoEntidad.model';
 import { AlumnosComponent } from 'src/app/modules/alumnos/pages/alumnos/alumnos.component'; 
 
 @Component({

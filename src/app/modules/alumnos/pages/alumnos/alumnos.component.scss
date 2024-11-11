@@ -15,10 +15,72 @@ table {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   transition: transform 0.2s;
   margin-block-end: 20px;
+  margin-left: auto;
+}
+
+.registrar-btn-primer {
+  background-color: #4caf50;
+  color: black;
+  font-size: 1.0rem; /* Texto del botón más grande */
+  padding: 05px 20px; /* Botones más grandes */
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s;
+  margin-block-end: 20px;
 }
 
 .registrar-btn:hover {
   transform: scale(1.1);
   background-color: #43a047;
+  color: white;
+}
+
+.imagen-check-container {
+  display: flex;
+  justify-content: center;
+  align-items: center; 
+  padding: 15px; 
+}
+
+.imagen-check {
+  width: 30px; 
+  height: auto;
+}
+
+.filtro-container {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap; 
+}
+
+.filtro-nombre {
+  max-width: 440px;
+  margin-block-end: 20px;
+  flex: 1;
+}
+
+.limpiar-filtros-btn {
+  color: black;
+  font-size: 1.0rem; 
+  padding: 5px 20px; 
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s;
+  margin-block-end: 20px;
+  margin-left: auto;
+}
+
+.limpiar-filtros-btn:hover {
+  transform: scale(1.1);
+  background-color: #d32f2f;
   color: white;
 }

@@ -1,0 +1,166 @@
+.container-test-title {
+    background-color: #CB6CE6;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.356);
+    max-width: 1100px;
+    margin: 20px auto;
+    text-align: center;
+    padding: 20px;
+  }
+  
+  /* Nuevo contenedor para ejercicios */
+  .contenedor-ejercicios {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+  
+  .title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin-bottom: 15px;
+  }
+  
+  .sub-title {
+    font-family: 'Arial Rounded MT Bold', sans-serif;
+    font-weight: bold;
+    color: #000000;
+    font-size: 30px; /* Tamaño de la fuente del título */
+    margin: 0;
+    padding: 15px 0; /* Padding para mayor espacio */
+    word-wrap: break-word; /* Permite el ajuste de línea */
+    white-space: normal; /* Permite el salto de línea */
+    line-height: 1.2; /* Ajusta el espacio entre líneas */
+  }
+  
+  .letters-box {
+    background-color: #fff;
+    border: 8px solid #ff9b77;
+    margin: 40px;
+    padding: 75px;
+    font-size: 48px;
+    text-align: center;
+    letter-spacing: 20px; /* Aumentar la separación entre letras */
+    line-height: 80px; /* Aumentar la separación vertical */
+  }
+  
+  .questions-container {
+    margin-top: 20px;
+    font-size: 36px;
+  }
+  
+  .question {
+    margin-bottom: 40px;
+  }
+  
+  /* Nuevo contenedor para las opciones */
+  .options-container {
+    background-color: #fff;
+    border: 5px solid #ff9b77;
+    border-radius: 8px;
+    padding: 20px;
+    margin-top: 10px;
+  }
+  
+  .options {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+  }
+  
+  .option {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .option:hover {
+    background-color: #ddd;
+  }
+  
+  .option.selected {
+    border-radius: 50%;
+    border: 5px solid red;
+  }
+  
+
+  .imagen-check-container {
+    position: absolute;
+  }
+  
+  .imagen-check {
+    width: 30px;
+    height: auto;
+    z-index: 10;
+  }
+  
+  .boton-siguiente {
+    margin-top: 30px;
+    padding: 15px 40px;
+    font-size: 24px; /* Aumentar el tamaño de la fuente */
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+  
+  .boton-siguiente:hover {
+    background-color: #218838;
+  }
+  
+  .audio-button {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  
+  .icono-audio {
+    margin-right: 10px;
+    color: #ff5722;
+  }
+  
+  .audio-button:hover .icono-audio {
+    color: #b41c11;
+  }
+  
+  .tiempo-empleado {
+    font-size: 1.0rem;
+    color: black;
+    font-weight: bold;
+    text-align: right;
+    display: flex;
+    align-items: center; /* Alinea el icono y el texto en la misma línea */
+    margin-top: 10px;
+  }
+  
+  .icono-reloj {
+    margin-right: 5px;
+    color: black; /* Color del icono */
+    font-size: inherit; /* Hereda el tamaño de la fuente del contenedor */
+    width: 1.0em; /* Asegura que el icono sea proporcional al texto */
+    height: 1.0em;
+    line-height: 1; /* Alinea el icono correctamente */
+  }
+  
+  .imagenes-container {
+    margin: 0 auto;
+    display: flex;
+    width: 100px;
+    
+  }
+  
+  .imagen-ejercicio {
+    margin: 0 auto;
+    margin-bottom: 20px; /* Añade un margen para separar de las opciones */
+  }
+  

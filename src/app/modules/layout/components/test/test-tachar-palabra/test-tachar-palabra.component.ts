@@ -74,7 +74,7 @@ export class TestTacharPalabraComponent implements OnInit {
       this.unirPalabrasConAreas();
 
       this.textToSpeechService.speak(
-        'Tacha la palabra entre un conjunto de ellas'
+        'Tacha la palabra correcta'
       );
     } catch (error) {
       console.error('Error en ngOnInit:', error);
@@ -99,7 +99,7 @@ export class TestTacharPalabraComponent implements OnInit {
 
   escucharInstruccion() {
     this.textToSpeechService.speak(
-      'Tacha la palabra entre un conjunto de ellas.'
+      'Tacha la palabra correcta'
     );
   }
 
@@ -246,7 +246,7 @@ export class TestTacharPalabraComponent implements OnInit {
     // Mostrar el modal después de 2 segundos
     setTimeout(() => {
       this.mostrarMensaje(modalValue);
-    }, 2000);
+    }, 1000);
 
     // Mostrar las imágenes de validación después de calcular los resultados
     this.mostrarImagenes();

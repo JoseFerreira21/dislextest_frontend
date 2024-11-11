@@ -5,6 +5,13 @@ export interface ResultadoTest {
     nombre_alumno: string,
     nro_documento: number,
     edad: number,
+    sexo: string,
+    grado: string,
+    institucion: string,
+    indicador: string,
+    observacion: string,
+    fecha_hora_test: string,
+    tiempo_total: string
     //formar palabras//
     fp_area_id: number,
     fp_item_id: number,
@@ -84,10 +91,7 @@ export interface ResultadoTest {
     di_pminimo: number,
     di_pesperado: number,
     di_indicador: string,
-    di_observacion: string,
-    indicador: string,
-    observacion: string,
-    tiempo_total: string
+    di_observacion: string
   }
 
   export interface ResultadoEjercicio {

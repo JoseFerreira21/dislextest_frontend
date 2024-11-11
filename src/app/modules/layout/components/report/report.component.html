@@ -2,11 +2,23 @@
     <h1>Reporte de Resultados</h1>
   
     <div *ngFor="let resultado of resultados">
+      <div class="fila">
       <h2>{{ resultado.nombre_alumno }}</h2>
-      <p>Edad: {{ resultado.edad }} años</p>
-      <p>Nroº de documento: {{ resultado.nro_documento }}</p>
-      <p>Indicador general: {{ resultado.indicador }}</p>
-      <p>Observación general: {{ resultado.observacion }}</p>
+      <p class="titulos">Fecha y hora: {{resultado.fecha_hora_test}} </p>
+      </div>
+      <div class="fila">
+        <p>Edad: {{ resultado.edad }} años</p>
+        <p class="titulos tiempo-total">Tiempo total empleado:  {{resultado.tiempo_total}} </p>  
+      </div>
+      <div class="fila">
+        <p>Nroº de documento: {{ resultado.nro_documento }}</p>
+      </div>
+      <div class="fila">
+        <p>Indicador general: {{ resultado.fp_indicador === null ? '' : (resultado.fp_indicador === 'R' ? 'Riesgo' : 'Sin Riesgo') }}</p>
+    </div>
+      <div class="fila">
+        <p>Observación general: {{ resultado.observacion }}</p>
+      </div>
   
       <table class="report-table">
         <thead>
@@ -25,7 +37,7 @@
               <td> {{ resultado.fp_pobtenido}} </td>
               <td>{{resultado.fp_pminimo}}</td>
               <td>{{resultado.fp_pesperado}}</td>
-              <td>{{ resultado.fp_indicador === null ? null  : (resultado.fp_indicador === 'R' ? 'RIESGO' : 'SIN RIESGO') }}</td>
+              <td>{{ resultado.fp_indicador === null ? null  : (resultado.fp_indicador === 'R' ? 'Riesgo' : 'Sin Riesgo') }}</td>
               <td> {{ resultado.fp_observacion }} </td>
             </tr>
   
@@ -34,7 +46,7 @@
               <td> {{ resultado.dva_pobtenido}} </td>
               <td>{{resultado.dva_pminimo}}</td>
               <td>{{resultado.dva_pesperado}}</td>
-              <td>{{ resultado.dva_indicador === null ? null  : (resultado.dva_indicador === 'R' ? 'RIESGO' : 'SIN RIESGO') }}</td>
+              <td>{{ resultado.dva_indicador === null ? null  : (resultado.dva_indicador === 'R' ? 'Riesgo' : 'Sin Riesgo') }}</td>
               <td> {{ resultado.dva_observacion }} </td>
             </tr>
   
@@ -43,7 +55,7 @@
               <td> {{ resultado.dp_pobtenido}} </td>
               <td>{{resultado.dp_pminimo}}</td>
               <td>{{resultado.dp_pesperado}}</td>
-              <td>{{ resultado.dp_indicador === null ? null  : (resultado.dp_indicador === 'R' ? 'RIESGO' : 'SIN RIESGO') }}</td>
+              <td>{{ resultado.dp_indicador === null ? null  : (resultado.dp_indicador === 'R' ? 'Riesgo' : 'Sin Riesgo') }}</td>
               <td> {{ resultado.dp_observacion }} </td>
               
             </tr>
@@ -53,7 +65,7 @@
               <td> {{ resultado.elp_pobtenido}} </td>
               <td>{{resultado.elp_pminimo}}</td>
               <td>{{resultado.elp_pesperado}}</td>
-              <td>{{ resultado.elp_indicador === null ? null  : (resultado.elp_indicador === 'R' ? 'RIESGO' : 'SIN RIESGO') }}</td>
+              <td>{{ resultado.elp_indicador === null ? null  : (resultado.elp_indicador === 'R' ? 'Riesgo' : 'Sin Riesgo') }}</td>
               <td> {{ resultado.elp_observacion }} </td>
             </tr>
   
@@ -62,7 +74,7 @@
               <td> {{ resultado.nc_pobtenido}} </td>
               <td>{{resultado.nc_pminimo}}</td>
               <td>{{resultado.nc_pesperado}}</td>
-              <td>{{ resultado.nc_indicador === null ? null  : (resultado.nc_indicador === 'R' ? 'RIESGO' : 'SIN RIESGO') }}</td>
+              <td>{{ resultado.nc_indicador === null ? null  : (resultado.nc_indicador === 'R' ? 'Riesgo' : 'Sin Riesgo') }}</td>
               <td> {{ resultado.nc_observacion }} </td>
             </tr>
   
@@ -71,7 +83,7 @@
               <td> {{ resultado.ld_pobtenido}} </td>
               <td>{{resultado.ld_pminimo}}</td>
               <td>{{resultado.ld_pesperado}}</td>
-              <td>{{ resultado.ld_indicador === null ? null  : (resultado.ld_indicador === 'R' ? 'RIESGO' : 'SIN RIESGO') }}</td>
+              <td>{{ resultado.ld_indicador === null ? null  : (resultado.ld_indicador === 'R' ? 'Riesgo' : 'Sin Riesgo') }}</td>
               <td> {{ resultado.ld_observacion }} </td>
             </tr>
   
@@ -80,7 +92,7 @@
                 <td> {{ resultado.dvb_pobtenido}} </td>
                 <td>{{resultado.dvb_pminimo}}</td>
                 <td>{{resultado.dvb_pesperado}}</td>
-                <td>{{ resultado.dvb_indicador === null ? null  : (resultado.dvb_indicador === 'R' ? 'RIESGO' : 'SIN RIESGO') }}</td>
+                <td>{{ resultado.dvb_indicador === null ? null  : (resultado.dvb_indicador === 'R' ? 'Riesgo' : 'Sin Riesgo') }}</td>
                 <td> {{ resultado.dvb_observacion }} </td>
             </tr>
   
@@ -90,7 +102,7 @@
                 <td> {{ resultado.cs_pobtenido}} </td>
                 <td>{{resultado.cs_pminimo}}</td>
                 <td>{{resultado.cs_pesperado}}</td>
-                <td>{{ resultado.cs_indicador === null ? null  : (resultado.cs_indicador === 'R' ? 'RIESGO' : 'SIN RIESGO') }}</td>
+                <td>{{ resultado.cs_indicador === null ? null  : (resultado.cs_indicador === 'R' ? 'Riesgo' : 'Sin Riesgo') }}</td>
                 <td> {{ resultado.cs_observacion }} </td>
             </tr>
             
@@ -99,7 +111,7 @@
                 <td> {{ resultado.cf_pobtenido}} </td>
                 <td>{{resultado.cf_pminimo}}</td>
                 <td>{{resultado.cf_pesperado}}</td>
-                <td>{{ resultado.cf_indicador === null ? null  : (resultado.cf_indicador === 'R' ? 'RIESGO' : 'SIN RIESGO') }}</td>
+                <td>{{ resultado.cf_indicador === null ? null  : (resultado.cf_indicador === 'R' ? 'Riesgo' : 'Sin Riesgo') }}</td>
                 <td> {{ resultado.cf_observacion }} </td>
             </tr>
   
@@ -108,7 +120,7 @@
                 <td> {{ resultado.di_pobtenido}} </td>
                 <td>{{resultado.di_pminimo}}</td>
                 <td>{{resultado.di_pesperado}}</td>
-                <td>{{ resultado.di_indicador === null ? null  : (resultado.di_indicador === 'R' ? 'RIESGO' : 'SIN RIESGO') }}</td>
+                <td>{{ resultado.di_indicador === null ? null  : (resultado.di_indicador === 'R' ? 'Riesgo' : 'Sin Riesgo') }}</td>
                 <td> {{ resultado.di_observacion }} </td>
             </tr>
   

@@ -24,7 +24,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatNativeDateModule } from '@angular/material/core';
+import { MatNativeDateModule, MatOptionModule } from '@angular/material/core';
 import { MomentDateModule } from '@angular/material-moment-adapter';
 import { MatStepperModule } from '@angular/material/stepper';
 
@@ -65,7 +65,8 @@ import { PerfilComponent } from './modules/layout/components/dialogs/perfil/perf
     ModalDespedidaComponent, 
     PasswordPromptComponent,
     DetallesEjercicioComponent,
-    PerfilComponent],
+    PerfilComponent
+  ],
   entryComponents: [PasswordPromptComponent],
   imports: [
     BrowserModule,
@@ -94,7 +95,8 @@ import { PerfilComponent } from './modules/layout/components/dialogs/perfil/perf
     DragDropModule,
     ObserversModule,
     CdkStepperModule,
-    MatIconModule
+    MatIconModule,
+    MatOptionModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },

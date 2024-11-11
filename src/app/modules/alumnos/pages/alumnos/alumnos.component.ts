@@ -5,7 +5,7 @@ import { AfterViewInit, Component, ViewChild, OnInit } from '@angular/core';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 
-import { Entidad } from 'src/app/models/entidad';
+import { Entidad } from '@models/entidad.model';
 import { EntidadService } from '@services/entidad.service';
 import { GlobalService } from '@services/global.service';
 
@@ -16,8 +16,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 
 import { MatGridListModule } from '@angular/material/grid-list';
-import { alumnoEntidad } from '@models/alumnoEntidad';
-import { RegistrarAlumnoComponent } from 'src/app/modules/layout/components/dialogs/registrar-editar-alumno/registrar-editar-alumno.component'; 
+import { alumnoEntidad } from '@models/alumnoEntidad.model';
+import { RegistrarAlumnoComponent } from 'src/app/modules/layout/components/dialogs/registrar-editar-alumno/registrar-editar-alumno.component';
 import { EliminarAlumnoComponent } from 'src/app/modules/layout/components/dialogs/eliminar-alumno/eliminar-alumno.component';
 
 import { Router } from '@angular/router';
@@ -25,6 +25,12 @@ import { BienvenidaAlumnoComponent } from 'src/app/modules/layout/components/dia
 import { TextToSpeechService } from '@services/text-to-speech.service';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
+import { AlumnosDelProfesor } from '@models/alumnos-del-profesor.model';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
+import { MatOptionModule } from '@angular/material/core';
 
 @Component({
   selector: 'alumnos',
@@ -32,15 +38,21 @@ import { MatButtonModule } from '@angular/material/button';
   styleUrls: ['./alumnos.component.scss'],
   standalone: true,
   imports: [
+    FormsModule,
     MatTableModule,
     MatPaginatorModule,
     MatIconModule,
     MatGridListModule,
-    CommonModule,   
-    MatSnackBarModule,  // Importa esto aquí también
-    MatButtonModule,  // Importa esto aquí para los botones
+    CommonModule,
+    MatSnackBarModule, 
+    MatButtonModule, 
+    MatFormFieldModule, 
+    MatSelectModule, 
+    MatInputModule,
+    MatOptionModule,
+    ReactiveFormsModule,
   ],
-  entryComponents: [BienvenidaAlumnoComponent] // Para asegurar que el modal esté disponible
+  entryComponents: [BienvenidaAlumnoComponent], // Para asegurar que el modal esté disponible
 })
 export class AlumnosComponent implements AfterViewInit, OnInit {
   displayedColumns: string[] = [
@@ -55,16 +67,25 @@ export class AlumnosComponent implements AfterViewInit, OnInit {
     'N° Documento',
     'Acciones',
     'Comenzar',
+    'realizoTest',
   ];
-  dataSource = new MatTableDataSource<alumnoEntidad>();
+  dataSource = new MatTableDataSource<AlumnosDelProfesor>();
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
+
+  rutaImagenCheck: string = 'assets/images/';
+
+  grados: string[] = [];
+  instituciones: string[] = [];
+  gradoSeleccionado: string | null = null;
+  institucionSeleccionada: string | null = null;
+  filterText: string = '';
 
   constructor(
     private router: Router,
     private entidadService: EntidadService,
     private alumnoService: AlumnosService,
-    private globalService: GlobalService, 
+    private globalService: GlobalService,
     public dialog: MatDialog,
     private _snackBar: MatSnackBar,
     private textToSpeechService: TextToSpeechService
@@ -74,12 +95,19 @@ export class AlumnosComponent implements AfterViewInit, OnInit {
     this.mostrarAlumnosDelProfesor();
   }
 
-  mostrarAlumnosDelProfesor() {
+  /*mostrarAlumnosDelProfesor() {
     this.globalService.getProfesorId().subscribe(profesorId => {
       if (profesorId !== null) {
         this.alumnoService.getAlumnosDelProfesor(profesorId).subscribe({
           next: (dataResponse) => {
-            this.dataSource.data = dataResponse;
+            this.dataSource.data = dataResponse.map((alumno: any) => {
+              // Ajustamos para manejar grado e institucion como objetos
+              return {
+                ...alumno,
+                grado: alumno.grado ? alumno.grado.nombre : 'Sin asignar',
+                institucion: alumno.institucion ? alumno.institucion.nombre : 'Sin asignar'
+              };
+            });
           },
           error: (e) => {
             console.error('Error al obtener alumnos del profesor:', e);
@@ -89,15 +117,63 @@ export class AlumnosComponent implements AfterViewInit, OnInit {
         console.error('No se pudo obtener el ID del profesor.');
       }
     });
+  }*/
+
+  mostrarAlumnosDelProfesor() {
+    this.globalService.getProfesorId().subscribe({
+      next: (profesorId) => {
+        if (profesorId !== null) {
+          this.alumnoService.getAlumnosDelProfesor(profesorId).subscribe({
+            next: (dataResponse: AlumnosDelProfesor[]) => {
+              this.dataSource.data = dataResponse; // Asigna los datos directamente
+
+              // Extrae los nombres de grados e instituciones para los filtros
+              this.grados = Array.from(
+                new Set(this.dataSource.data.map((a) => a.grado.nombre))
+              );
+              this.instituciones = Array.from(
+                new Set(this.dataSource.data.map((a) => a.institucion.nombre))
+              );
+            },
+            error: (e) => console.error('Error al obtener alumnos:', e),
+          });
+        } else {
+          console.error('No se pudo obtener el ID del profesor.');
+        }
+      },
+      error: (e) => console.error('Error al obtener el ID del profesor:', e),
+    });
   }
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
   }
 
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
+  applyFilter() {
+    this.dataSource.filterPredicate = (data: AlumnosDelProfesor) => {
+      const matchesGrado = this.gradoSeleccionado
+        ? data.grado.nombre === this.gradoSeleccionado
+        : true;
+      const matchesInstitucion = this.institucionSeleccionada
+        ? data.institucion.nombre === this.institucionSeleccionada
+        : true;
+      const matchesNombre = this.filterText
+        ? data.nombre.toLowerCase().includes(this.filterText.toLowerCase())
+        : true;
+
+      return matchesGrado && matchesInstitucion && matchesNombre;
+    };
+
+    this.dataSource.filter = Math.random().toString(); // Fuerza la actualización del filtro
+  }
+
+  limpiarFiltros() {
+    this.institucionSeleccionada = null;
+    this.gradoSeleccionado = null;
+    this.filterText = ''; 
+    
+    // Restablece la lista filtrada a todos los resultados
+    this.applyFilter();
   }
 
   dialogoNuevoAlumno() {
@@ -158,19 +234,18 @@ export class AlumnosComponent implements AfterViewInit, OnInit {
         }
       });
   }
-  
+
   comenzarEjercicio(alumno: any): void {
     const dialogRef = this.dialog.open(BienvenidaAlumnoComponent, {
       width: '300px',
-      data: alumno
-    
+      data: alumno,
     });
 
     this.textToSpeechService.speak('Bienvenido, ' + alumno.nombre);
-    
-    dialogRef.afterClosed().subscribe(result => {
+
+    dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        console.log('El juego ha comenzado para el alumno:', result.nombre);
+        //console.log('El juego ha comenzado para el alumno:', result.nombre);
         this.iniciarTest(result.alumnoId);
       }
     });

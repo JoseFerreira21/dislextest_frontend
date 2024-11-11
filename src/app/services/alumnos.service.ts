@@ -5,9 +5,10 @@ import { environment } from '@environments/environment';
 
 import { TokenService } from '@services/token.service';
 import { checkToken } from 'src/interceptors/token.interceptor';
-import { Entidad } from '../models/entidad';
-import { alumnoEntidad } from '../models/alumnoEntidad';
-import { Alumno, CrearAlumnoDTO } from '../models/alumno';
+import { Entidad } from '../models/entidad.model';
+import { alumnoEntidad } from '../models/alumnoEntidad.model';
+import { Alumno, CrearAlumnoDTO } from '../models/alumno.model';
+import { AlumnosDelProfesor } from '@models/alumnos-del-profesor.model';
 
 @Injectable({
   providedIn: 'root',
@@ -23,9 +24,11 @@ export class AlumnosService {
       'content-Type': 'application/json',
       Authorization: `Bearer ${token}`,
     });
-    return this.http.get<alumnoEntidad[]>(
+    return this.http.get<AlumnosDelProfesor[]>(
       `${this.apiUrl}/alumno/profesor/${idProfesor}`,
-      { context: checkToken() }
+      {
+        headers: headers,
+      }
     );
   }
 

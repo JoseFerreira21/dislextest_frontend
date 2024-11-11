@@ -1,9 +1,16 @@
-<h2 mat-dialog-title class="despedida-titulo">¡Has completado todos los ejercicios!</h2>
+<div class="modal-confetti-container">
+  <canvas #confettiCanvas class="confetti-canvas"></canvas>
 
-<mat-dialog-content class="despedida-contenido">
-  <p>Gracias por participar. ¡Excelente trabajo!</p>
-</mat-dialog-content>
+  <h2 mat-dialog-title class="despedida-titulo">🏆 ¡Has completado todos los ejercicios! 🏆</h2>
 
-<div class="mat-dialog-actions despedida-acciones">
-  <button mat-button class="cerrar-btn" (click)="cerrar()">Volver</button>
+  <mat-dialog-content class="despedida-contenido animate__animated animate__fadeIn" align="center">
+    <p>🎉 ¡Excelente trabajo! 🎉</p>
+    <p>Gracias por participar y dar tu mejor esfuerzo. 🌟</p>
+  </mat-dialog-content>
+
+  <div class="mat-dialog-actions despedida-acciones animate__animated animate__fadeInUp">
+    <button mat-button class="cerrar-btn" (click)="cerrar()">
+      <mat-icon>check_circle</mat-icon> Volver
+    </button>
+  </div>
 </div>

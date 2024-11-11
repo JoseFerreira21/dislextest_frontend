@@ -1,8 +1,8 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import * as XLSX from 'xlsx';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { ErrorStateMatcher, MAT_DATE_FORMATS } from '@angular/material/core';
+import { MatDialogRef, MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { ErrorStateMatcher, MAT_DATE_FORMATS, MatNativeDateModule } from '@angular/material/core';
 import * as moment from 'moment';
 
 import {
@@ -16,15 +16,16 @@ import {
 import { EntidadService } from '@services/entidad.service';
 import { RequestStatus } from '@models/request-status.model';
 import { AlumnosService } from '@services/alumnos.service';
-import { Entidad } from 'src/app/models/entidad';
+import { Entidad } from '@models/entidad.model';
 import { AlumnosComponent } from 'src/app/modules/alumnos/pages/alumnos/alumnos.component';
-import { MatTableDataSource } from '@angular/material/table';
-import { alumnoEntidad } from '@models/alumnoEntidad';
-import { TokenService } from '@services/token.service';
-import { ProfesorService } from '@services/profesor.service';
-import { Alumno, CrearAlumnoDTO } from '@models/alumno';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
+import { alumnoEntidad } from '@models/alumnoEntidad.model';
+import { Alumno, CrearAlumnoDTO, Grado, Institucion } from '@models/alumno.model';
 import { GlobalService } from '@services/global.service';
 import { switchMap } from 'rxjs/operators';
+import { GradoService } from '@services/grado.service';
+import { InstitucionService } from '@services/institucion.service';
+
 
 export const MY_DATE_FORMATS = {
   parse: {
@@ -42,7 +43,7 @@ export const MY_DATE_FORMATS = {
   selector: 'app-registrar-alumno',
   templateUrl: './registrar-editar-alumno.component.html',
   styleUrls: ['./registrar-editar-alumno.component.scss'],
-  providers: [{ provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS }],
+  providers: [{ provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS }]
 })
 export class RegistrarAlumnoComponent implements OnInit {
   formAlumno: FormGroup;
@@ -53,11 +54,14 @@ export class RegistrarAlumnoComponent implements OnInit {
   dataSource = new MatTableDataSource<Entidad>();
   alumnosMasivos: CrearAlumnoDTO[] = [];
 
+  grados: Grado[] = []; 
+  instituciones: Institucion[] = []; 
+
   aluProfe = {
     id: 0,
-    grado: '',
+    gradoId: 0,
     año: 0,
-    institucion: '',
+    institucionId: 0,
     entidadId: 0,
     profesorId: 0,
   };
@@ -68,9 +72,9 @@ export class RegistrarAlumnoComponent implements OnInit {
     private _snackBar: MatSnackBar,
     private _entidadService: EntidadService,
     private _alumnosService: AlumnosService,
-    private _tokenService: TokenService,
-    private _profesorService: ProfesorService,
     private globalService: GlobalService,
+    private gradoService: GradoService,
+    private institucionService: InstitucionService,
     @Inject(MAT_DIALOG_DATA) public dataAlumno: alumnoEntidad
   ) {
     // Deshabilitar el cierre del modal al hacer clic fuera de él o con la tecla ESC
@@ -85,16 +89,32 @@ export class RegistrarAlumnoComponent implements OnInit {
       telefono: [''],
       direccion: [''],
       nroDocumento: ['', Validators.required],
-      grado: ['', Validators.required],
+      gradoId: ['', Validators.required],
       año: ['', Validators.required],
-      institucion: ['', Validators.required],
-      usuarioId: [],
+      institucionId: ['', Validators.required],
     });
   }
   
   ngOnInit(): void {
+    // Cargar los grados al inicializar
+    this.gradoService.getGrados().subscribe({
+      next: (grados) => {
+        this.grados = grados;
+        console.log('Grados cargados:', grados);
+      },
+      error: (err) => console.error('Error al cargar grados', err)
+    });
+  
+    // Cargar las instituciones al inicializar
+    this.institucionService.getInstituciones().subscribe({
+      next: (instituciones) => {
+        this.instituciones = instituciones;
+        console.log('Instituciones cargadas:', instituciones);
+      },
+      error: (err) => console.error('Error al cargar instituciones', err)
+    });
+  
     if (this.dataAlumno) {
-      // Primero llenamos los campos básicos de alumnoEntidad
       this.formAlumno.patchValue({
         nombre: this.dataAlumno.nombre,
         apellido: this.dataAlumno.apellido,
@@ -102,19 +122,17 @@ export class RegistrarAlumnoComponent implements OnInit {
         sexo: this.dataAlumno.sexo,
         telefono: this.dataAlumno.telefono,
         direccion: this.dataAlumno.direccion,
-        nroDocumento: this.dataAlumno.nroDocumento
+        nroDocumento: this.dataAlumno.nroDocumento,
       });
-      //console.log(this.dataAlumno)
   
-      // Llamamos al servicio para obtener el Alumno completo con grado, año, institución
       this._alumnosService.getAlumnoByEntidadID(this.dataAlumno.id).subscribe({
         next: (alumno: Alumno) => {
-          // Ahora rellenamos los campos adicionales que solo están en la interfaz Alumno
           this.formAlumno.patchValue({
-            grado: alumno.grado,
+            gradoId: alumno.gradoId,  
             año: alumno.año,
-            institucion: alumno.institucion
+            institucionId: alumno.institucionId 
           });
+          console.log('Detalles del alumno cargado en el formulario:', this.formAlumno.value);
         },
         error: (e) => {
           console.error('Error al obtener los detalles del alumno:', e);
@@ -125,6 +143,8 @@ export class RegistrarAlumnoComponent implements OnInit {
       this.botonAccion = 'Actualizar';
     }
   }
+  
+
 
   mostrarAlerta(msg: string, accion: string) {
     this._snackBar.open(msg, accion, {
@@ -165,19 +185,19 @@ export class RegistrarAlumnoComponent implements OnInit {
           this.globalService.getProfesorId().subscribe((profesorId) => {
             if (profesorId !== null) {
               this.aluProfe.profesorId = profesorId;
-              this.aluProfe.grado = this.formAlumno.value.grado;
+              this.aluProfe.gradoId = this.formAlumno.value.grado;
               this.aluProfe.año = parseInt(this.formAlumno.value.año, 10);
-              this.aluProfe.institucion = this.formAlumno.value.institucion;
+              this.aluProfe.institucionId = this.formAlumno.value.institucion;
     
               const nuevoAlumno: CrearAlumnoDTO = {
-                grado: this.aluProfe.grado,
+                gradoId: this.formAlumno.value.gradoId,  // Enviamos solo el ID
                 año: this.aluProfe.año,
-                institucion: this.aluProfe.institucion,
+                institucionId: this.formAlumno.value.institucionId,  // Enviamos solo el ID
                 entidadId: this.aluProfe.entidadId,
                 profesorId: this.aluProfe.profesorId,
               };
     
-              //console.log('Datos que se enviarán al POST sin el id:', nuevoAlumno);
+              console.log('Datos que se enviarán al POST sin el id:', nuevoAlumno);
     
               // Crear el alumno para el profesor
               this._alumnosService.createAlumno(nuevoAlumno).subscribe({
@@ -213,18 +233,18 @@ export class RegistrarAlumnoComponent implements OnInit {
                   // Asignar correctamente el valor de entidadId
                   this.aluProfe.entidadId = alumno.entidadId; // Asegúrate de que entidadId sea correcto
                   this.aluProfe.profesorId = profesorId;
-                  this.aluProfe.grado = this.formAlumno.value.grado;
+                  this.aluProfe.gradoId = this.formAlumno.value.gradoId;
                   this.aluProfe.año = parseInt(this.formAlumno.value.año, 10);
-                  this.aluProfe.institucion = this.formAlumno.value.institucion;
+                  this.aluProfe.institucionId = this.formAlumno.value.institucionId;
                   this.aluProfe.id = alumno.id;
           
                   //console.log('Datos que se enviarán al PUT:', this.aluProfe);
           
                   // Actualizar alumno, pasando el ID en la URL y los demás datos en el cuerpo
                   return this._alumnosService.updateAlumno(this.aluProfe.id, {
-                    grado: this.aluProfe.grado,
-                    año: this.aluProfe.año,
-                    institucion: this.aluProfe.institucion,
+                    gradoId: this.formAlumno.value.gradoId,
+                    año: parseInt(this.formAlumno.value.año, 10),
+                    institucionId: this.formAlumno.value.institucionId,
                     entidadId: this.aluProfe.entidadId,
                     profesorId: this.aluProfe.profesorId
                   });
@@ -247,18 +267,6 @@ export class RegistrarAlumnoComponent implements OnInit {
         }
       });
     }
-  }
-
-
-  crearAlumnosDesdePlanilla() {
-    console.log("Descargando planilla...");
-    // Aquí puedes agregar tu lógica de descarga
-  }
-
-  // Función para mostrar detalles adicionales
-  mostrarDetallesPlanilla() {
-    console.log("Mostrando detalles...");
-    // Lógica para mostrar detalles
   }
 
 }

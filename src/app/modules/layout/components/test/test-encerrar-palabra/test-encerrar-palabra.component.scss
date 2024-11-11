@@ -2,12 +2,13 @@
   background-color: #38B6FF;
   padding: 25px;
   max-width: 1100px;
-  margin: 20px auto;
+  margin: 20px;
   text-align: center;
   display: grid;
   grid-template-columns: 1fr 1fr; /* Una columna para imágenes y otra para las opciones */
   gap: 20px;
   min-height: 600px;
+  padding-block-end: 40px;
 }
 
 .imagenes-container {
@@ -55,6 +56,10 @@
   cursor: pointer;
 }
 
+.palabra:hover {
+  background-color: #ddd;
+}
+
 
 .seleccionada {
   border-radius: 40%; 
@@ -81,12 +86,15 @@
 }
 
 .p-test {
-  font-family: 'Comic Sans MS', cursive, sans-serif;
+  font-family: 'Arial Rounded MT Bold', sans-serif;
   font-weight: bold;
   color: #000000;
-  font-size: 25px;
+  font-size: 30px; /* Tamaño de la fuente del título */
   margin: 0;
-  padding: 10px 0;
+  padding: 15px 0; /* Padding para mayor espacio */
+  word-wrap: break-word; /* Permite el ajuste de línea */
+  white-space: normal; /* Permite el salto de línea */
+  line-height: 1.2; /* Ajusta el espacio entre líneas */
 }
 
 
@@ -136,11 +144,11 @@
 
 .icono-audio {
   margin-right: 8px;
-  color: #ff5722; /* Cambia este valor para ajustar el color del icono */
+  color: #ff5722; 
 }
 
 .audio-button:hover .icono-audio {
-  color: #f44336; /* Cambia el color del icono cuando se pasa el cursor por encima */
+  color: #b41c11;
 }
 
 .tiempo-empleado {

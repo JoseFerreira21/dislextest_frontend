@@ -2,26 +2,86 @@
   <div class="container mx-auto">
     <h1 class="text-xl text-gray-700 font-semibold italic mb-5">Lista de Resultados</h1>
 
-    <!-- Campo de búsqueda -->
-    <div class="mb-4">
-      <input type="text" [(ngModel)]="filterText" placeholder="Buscar por nombre del alumno" (input)="filterResultados()" class="px-4 py-2 border rounded w-full">
+  <div class="filtro-container">
+    <!-- Filtro por Institución -->
+    
+      <!-- Campo de búsqueda por nombre -->
+      <div class="filtro-nombre">
+        <input type="text" [(ngModel)]="filterText" placeholder="Buscar por nombre del alumno" (input)="filterResultados()" class="px-4 py-2 border rounded w-full">
+      </div>
+      
+      <!-- Botón para generar reporte -->
+      
+      <button class="generar-reporte-btn" (click)="generateReport()">
+        <mat-icon>print</mat-icon> Generar Reporte
+      </button>
     </div>
 
-    <div class="mb-4 flex justify-end">
-      <button (click)="generateReport()" class="px-4 py-2 bg-green-500 text-white rounded">Generar Reporte</button>
+    <div class="filtro-container">
+      <mat-form-field appearance="fill">
+        <mat-label>Filtrar por Institución</mat-label>
+        <mat-select [(value)]="institucionSeleccionada" (selectionChange)="applyFilter()">
+          <mat-option *ngFor="let institucion of instituciones" [value]="institucion">{{ institucion }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <!-- Filtro por Grado -->
+      <mat-form-field appearance="fill">
+        <mat-label>Filtrar por Grado</mat-label>
+        <mat-select [(value)]="gradoSeleccionado" (selectionChange)="applyFilter()">
+          <mat-option *ngFor="let grado of grados" [value]="grado">{{ grado }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <!-- Filtro por Sexo -->
+      <mat-form-field appearance="fill">
+        <mat-label>Filtrar por Sexo</mat-label>
+        <mat-select [(value)]="sexoSeleccionado" (selectionChange)="applyFilter()">
+          <mat-option *ngFor="let sexo of sexos" [value]="sexo">{{ sexo === 'M' ? 'Masculino' : 'Femenino' }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <!-- Filtro por Indicador -->
+      <mat-form-field appearance="fill">
+        <mat-label>Filtrar por Indicador</mat-label>
+        <mat-select [(value)]="indicadorSeleccionado" (selectionChange)="applyFilter()">
+          <mat-option *ngFor="let indicador of indicadores" [value]="indicador">
+            {{ indicador === 'R' ? 'Riesgo' : 'Sin Riesgo' }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <!-- Botón Limpiar Filtros -->
+      <button class="limpiar-filtros-btn" (click)="limpiarFiltros()">
+        <mat-icon>filter_alt_off</mat-icon> Limpiar Filtros
+      </button>
+
     </div>
 
     <div class="contenedor" *ngFor="let resultado of filteredResultados">
       <div class="resultado-info">
         <div class="fila">
           <span class="titulos">Nombre del alumno: <span class="informacion"> {{resultado.nombre_alumno}} </span> </span>
-          <span class="titulos tiempo-total">Tiempo total empleado: <span class="informacion"> {{resultado.tiempo_total}} </span></span>
+          <span class="titulos">Fecha y hora: <span class="informacion"> {{resultado.fecha_hora_test}} </span></span>
         </div>
-        <span class="titulos">Edad: <span class="informacion"> {{resultado.edad}} años</span> </span><br>
-        <span class="titulos">Nroº de documento: <span class="informacion"> {{resultado.nro_documento}} </span> </span><br>
-        <span class="titulos">Indicador general: <span class="informacion">{{resultado.indicador}}</span></span><br>
-        <span class="titulos">Observación general: <span class="informacion"> {{resultado.observacion}} </span></span><br><br>
-        <span class="titulos">Perfil detallado</span> <br> <br>
+        <div class="fila">
+          <span class="titulos">Edad: <span class="informacion"> {{resultado.edad}} años</span> </span><br>
+          <span class="titulos tiempo-total">Tiempo total empleado: <span class="informacion"> {{resultado.tiempo_total}} </span></span>  
+        </div>
+        <div class="fila">
+          <span class="titulos">Nroº de documento: <span class="informacion"> {{resultado.nro_documento}} </span> </span><br>  
+        </div>
+        <div class="fila">
+          <span class="titulos">Indicador general: <span class="informacion">
+            {{ resultado.fp_indicador === null ? null : (resultado.fp_indicador === 'R' ? 'Riesgo' : 'Sin Riesgo') }}
+        </span></span><br>  
+        </div>
+        <div class="fila">
+          <span class="titulos">Observación general: <span class="informacion"> {{resultado.observacion}} </span></span><br><br>  
+        </div>
+        <div class="fila">
+          <span class="titulos">Perfil detallado</span> <br> <br>
+        </div>
       </div>
       <table class="table table-striped">
         <thead class="bg-white border-b">
@@ -41,7 +101,7 @@
             <td> {{ resultado.fp_pobtenido}} </td>
             <td>{{resultado.fp_pminimo}}</td>
             <td>{{resultado.fp_pesperado}}</td>
-            <td>{{ resultado.fp_indicador === null ? null  : (resultado.fp_indicador === 'R' ? 'RIESGO' : 'SIN RIESGO') }}</td>
+            <td>{{ resultado.fp_indicador === null ? null  : (resultado.fp_indicador === 'R' ? 'Riesgo' : 'Sin Riesgo') }}</td>
             <td> {{ resultado.fp_observacion }} </td>
             <td class="text-center">
               <button class="details-button" title="Detalles del ejercicio" 
@@ -56,7 +116,7 @@
             <td> {{ resultado.dva_pobtenido}} </td>
             <td>{{resultado.dva_pminimo}}</td>
             <td>{{resultado.dva_pesperado}}</td>
-            <td>{{ resultado.dva_indicador === null ? null  : (resultado.dva_indicador === 'R' ? 'RIESGO' : 'SIN RIESGO') }}</td>
+            <td>{{ resultado.dva_indicador === null ? null  : (resultado.dva_indicador === 'R' ? 'Riesgo' : 'Sin Riesgo') }}</td>
             <td> {{ resultado.dva_observacion }} </td>
             <td class="text-center">
               <button class="details-button" title="Detalles del ejercicio" 
@@ -71,7 +131,7 @@
             <td> {{ resultado.dp_pobtenido}} </td>
             <td>{{resultado.dp_pminimo}}</td>
             <td>{{resultado.dp_pesperado}}</td>
-            <td>{{ resultado.dp_indicador === null ? null  : (resultado.dp_indicador === 'R' ? 'RIESGO' : 'SIN RIESGO') }}</td>
+            <td>{{ resultado.dp_indicador === null ? null  : (resultado.dp_indicador === 'R' ? 'Riesgo' : 'Sin Riesgo') }}</td>
             <td> {{ resultado.dp_observacion }} </td>
             <td class="text-center">
               <button class="details-button" title="Detalles del ejercicio" 
@@ -86,7 +146,7 @@
             <td> {{ resultado.elp_pobtenido}} </td>
             <td>{{resultado.elp_pminimo}}</td>
             <td>{{resultado.elp_pesperado}}</td>
-            <td>{{ resultado.elp_indicador === null ? null  : (resultado.elp_indicador === 'R' ? 'RIESGO' : 'SIN RIESGO') }}</td>
+            <td>{{ resultado.elp_indicador === null ? null  : (resultado.elp_indicador === 'R' ? 'Riesgo' : 'Sin Riesgo') }}</td>
             <td> {{ resultado.elp_observacion }} </td>
             <td class="text-center">
               <button class="details-button" title="Detalles del ejercicio" 
@@ -101,7 +161,7 @@
             <td> {{ resultado.nc_pobtenido}} </td>
             <td>{{resultado.nc_pminimo}}</td>
             <td>{{resultado.nc_pesperado}}</td>
-            <td>{{ resultado.nc_indicador === null ? null  : (resultado.nc_indicador === 'R' ? 'RIESGO' : 'SIN RIESGO') }}</td>
+            <td>{{ resultado.nc_indicador === null ? null  : (resultado.nc_indicador === 'R' ? 'Riesgo' : 'Sin Riesgo') }}</td>
             <td> {{ resultado.nc_observacion }} </td>
             <td class="text-center">
               <button class="details-button" title="Detalles del ejercicio" 
@@ -116,7 +176,7 @@
             <td> {{ resultado.ld_pobtenido}} </td>
             <td>{{resultado.ld_pminimo}}</td>
             <td>{{resultado.ld_pesperado}}</td>
-            <td>{{ resultado.ld_indicador === null ? null  : (resultado.ld_indicador === 'R' ? 'RIESGO' : 'SIN RIESGO') }}</td>
+            <td>{{ resultado.ld_indicador === null ? null  : (resultado.ld_indicador === 'R' ? 'Riesgo' : 'Sin Riesgo') }}</td>
             <td> {{ resultado.ld_observacion }} </td>
             <td class="text-center">
               <button class="details-button" title="Detalles del ejercicio" 
@@ -131,7 +191,7 @@
               <td> {{ resultado.dvb_pobtenido}} </td>
               <td>{{resultado.dvb_pminimo}}</td>
               <td>{{resultado.dvb_pesperado}}</td>
-              <td>{{ resultado.dvb_indicador === null ? null  : (resultado.dvb_indicador === 'R' ? 'RIESGO' : 'SIN RIESGO') }}</td>
+              <td>{{ resultado.dvb_indicador === null ? null  : (resultado.dvb_indicador === 'R' ? 'Riesgo' : 'Sin Riesgo') }}</td>
               <td> {{ resultado.dvb_observacion }} </td>
               <td class="text-center">
                 <button class="details-button" title="Detalles del ejercicio" 
@@ -147,7 +207,7 @@
               <td> {{ resultado.cs_pobtenido}} </td>
               <td>{{resultado.cs_pminimo}}</td>
               <td>{{resultado.cs_pesperado}}</td>
-              <td>{{ resultado.cs_indicador === null ? null  : (resultado.cs_indicador === 'R' ? 'RIESGO' : 'SIN RIESGO') }}</td>
+              <td>{{ resultado.cs_indicador === null ? null  : (resultado.cs_indicador === 'R' ? 'Riesgo' : 'Sin Riesgo') }}</td>
               <td> {{ resultado.cs_observacion }} </td>
               <td class="text-center">
                 <button class="details-button" title="Detalles del ejercicio" 
@@ -162,7 +222,7 @@
               <td> {{ resultado.cf_pobtenido}} </td>
               <td>{{resultado.cf_pminimo}}</td>
               <td>{{resultado.cf_pesperado}}</td>
-              <td>{{ resultado.cf_indicador === null ? null  : (resultado.cf_indicador === 'R' ? 'RIESGO' : 'SIN RIESGO') }}</td>
+              <td>{{ resultado.cf_indicador === null ? null  : (resultado.cf_indicador === 'R' ? 'Riesgo' : 'Sin Riesgo') }}</td>
               <td> {{ resultado.cf_observacion }} </td>
               <td class="text-center">
                 <button class="details-button" title="Detalles del ejercicio" 
@@ -177,7 +237,7 @@
               <td> {{ resultado.di_pobtenido}} </td>
               <td>{{resultado.di_pminimo}}</td>
               <td>{{resultado.di_pesperado}}</td>
-              <td>{{ resultado.di_indicador === null ? null  : (resultado.di_indicador === 'R' ? 'RIESGO' : 'SIN RIESGO') }}</td>
+              <td>{{ resultado.di_indicador === null ? null  : (resultado.di_indicador === 'R' ? 'Riesgo' : 'Sin Riesgo') }}</td>
               <td> {{ resultado.di_observacion }} </td>
               <td class="text-center">
                 <button class="details-button" title="Detalles del ejercicio" 

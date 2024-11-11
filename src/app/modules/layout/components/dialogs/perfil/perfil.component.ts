@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { EntidadService } from '@services/entidad.service';
 import { GlobalService } from '@services/global.service';
-import { EntidadUsuario } from '@models/entidad';
+import { EntidadUsuario } from '@models/entidad.model';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import * as moment from 'moment';
 import { MAT_DATE_FORMATS } from '@angular/material/core';

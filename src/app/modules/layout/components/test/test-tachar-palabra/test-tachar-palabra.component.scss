@@ -1,41 +1,47 @@
 .container {
   background-color: #7ED957;
-  padding: 30px; /* Aumentar padding para expandir el contenido */
+  padding: 30px; /* Padding para expandir el contenido */
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.356);
-  max-width: 1200px; /* Aumentar el ancho máximo del contenedor */
+  max-width: 1200px; /* Ancho máximo del contenedor */
   text-align: center;
+  
 }
 
 .container-test-title {
   background-color: #7ED957;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.356);
-  max-width: 1200px; /* Aumentar el ancho máximo del contenedor */
+  max-width: 1100px; /* Ancho máximo del contenedor */
   margin: 20px auto; 
   text-align: center;
-  padding: 15px 0; /* Aumentar el padding para mayor espacio vertical */
+  padding: 15px 0; /* Padding para mayor espacio vertical */
+  padding-block-end: 80px;
 }
 
 .options {
-  margin: 25px 0; /* Aumentar el margen entre grupos de palabras */
+  margin: 25px 0; /* Margen entre grupos de palabras */
   border: 7px solid #FF8482;
-  border-radius: 15px; /* Cambiar el borde a redondeado */
+  border-radius: 15px; /* Borde a redondeado */
   font-weight: bold;
   letter-spacing: 2px;
   display: grid;
   grid-template-columns: repeat(2, 1fr); /* Crear dos columnas para las palabras */
-  gap: 15px; /* Aumentar el espacio entre las palabras */
-  padding: 15px; /* Aumentar el padding interno del contenedor de opciones */
+  gap: 15px; /* Espacio entre las palabras */
+  padding: 15px; /* Padding interno del contenedor de opciones */
 }
 
 .options div {
-  padding: 15px; /* Aumentar el padding para que las palabras estén bien separadas */
+  padding: 15px; /* Padding para que las palabras estén bien separadas */
   cursor: pointer;
-  font-size: 24px; /* Aumentar el tamaño de la fuente de las opciones */
+  font-size: 24px; /* Tamaño de la fuente de las opciones */
   background-color: transparent; /* Fondo transparente para heredar color de grupo */
   border-radius: 10px; /* Borde redondeado para las palabras */
   color: inherit; /* Heredar el color del texto del grupo */
+}
+
+.options div:hover {
+  background-color: #ddd;
 }
 
 .options div.selected {
@@ -52,26 +58,29 @@
   align-items: center;
   justify-content: center;
   text-align: center;
-  margin-bottom: 25px; /* Aumentar el margen inferior */
+  margin-bottom: 25px; /* Margen inferior */
 }
 
 .p-test {
-  font-family: 'Comic Sans MS', cursive, sans-serif;
+  font-family: 'Arial Rounded MT Bold', sans-serif;
   font-weight: bold;
   color: #000000;
-  font-size: 32px; /* Aumentar el tamaño de la fuente del título */
+  font-size: 30px; /* Tamaño de la fuente del título */
   margin: 0;
-  padding: 15px 0; /* Aumentar el padding para mayor espacio */
+  padding: 15px 0; /* Padding para mayor espacio */
+  word-wrap: break-word; /* Permite el ajuste de línea */
+  white-space: normal; /* Permite el salto de línea */
+  line-height: 1.2; /* Ajusta el espacio entre líneas */
 }
 
 .opcion-texto {
   font-weight: bold;
-  font-size: 24px; /* Aumentar el tamaño de la fuente de las respuestas */
+  font-size: 24px; /* Tamaño de la fuente de las respuestas */
   letter-spacing: 2px;
   border: 7px solid #FF8482;
   display: inline-block;
   border-radius: 10px;
-  padding: 15px 20px; /* Aumentar el padding de las respuestas */
+  padding: 15px 20px; /* Padding de las respuestas */
   margin-bottom: 15px;
   text-align: center; /* Centramos el texto en la opción */
   background-color: inherit; /* Heredar el color de fondo del grupo */
@@ -91,7 +100,7 @@
 
 .color-0 .options {
   background-color: #CB6CE6; /* Relleno para todo el grupo de palabras en el primer color */
-  padding: 15px; /* Añadir padding para espacio interno */
+  padding: 15px; /* Padding para espacio interno */
   border-radius: 15px; /* Bordes redondeados para el grupo */
 }
 
@@ -122,11 +131,11 @@
 .audio-button {
   display: flex;
   align-items: center;
-  font-size: 18px; /* Aumentar el tamaño de la fuente del botón */
+  font-size: 18px; /*Tamaño de la fuente del botón */
   background-color: transparent;
   border: none;
   cursor: pointer;
-  margin-top: 15px; /* Aumentar el margen superior */
+  margin-top: 15px; /* Margen superior */
 }
 
 .icono-audio {
@@ -135,7 +144,7 @@
 }
 
 .audio-button:hover .icono-audio {
-  color: #f44336;
+  color: #b41c11;
 }
 
 .tiempo-empleado {

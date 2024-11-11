@@ -1,13 +1,6 @@
 <h1 mat-dialog-title style="display: block; justify-content: space-between; align-items: center;">
   {{ tituloAccion }} Alumno
-  <div *ngIf="tituloAccion === 'Nuevo'" style="display: flex; gap: 10px;"> <!-- Añadimos un gap para separar los botones -->
-    <button mat-raised-button class="planilla-button" (click)="crearAlumnosDesdePlanilla()">
-      <mat-icon>description</mat-icon>
-      Planilla
-    </button>
-    <button mat-icon-button class="details-button" (click)="mostrarDetallesPlanilla()">
-      <mat-icon>info</mat-icon>
-    </button>
+  <div *ngIf="tituloAccion === 'Nuevo'" style="display: flex; gap: 10px;">
   </div>
 </h1>
 <div mat-dialog-content class="mat-form-fiel-registrar-alumno">
@@ -79,9 +72,14 @@
       <mat-grid-tile>
         <mat-form-field appearance="fill" style="width: 100%">
           <mat-label>Grado</mat-label>
-          <input matInput formControlName="grado" autocomplete="off" />
+          <mat-select formControlName="gradoId">
+            <mat-option *ngFor="let grado of grados" [value]="grado.id">
+              {{ grado.nombre }}
+            </mat-option>
+          </mat-select>
         </mat-form-field>
       </mat-grid-tile>
+      
 
       <mat-grid-tile>
         <mat-form-field appearance="fill" style="width: 100%">
@@ -93,11 +91,17 @@
       <mat-grid-tile>
         <mat-form-field appearance="fill" style="width: 100%">
           <mat-label>Institución</mat-label>
-          <input matInput formControlName="institucion" autocomplete="off" />
+          <mat-select formControlName="institucionId">
+            <mat-option *ngFor="let institucion of instituciones" [value]="institucion.id">
+              {{ institucion.nombre }}
+            </mat-option>
+          </mat-select>
         </mat-form-field>
       </mat-grid-tile>
+    
+    
     </mat-grid-list>
-  </form>
+   </form>
 
   <div mat-dialog-actions>
     <button mat-raised-button mat-dialog-close class="volver-btn">
