@@ -74,7 +74,7 @@
           <mat-label>Grado</mat-label>
           <mat-select formControlName="gradoId">
             <mat-option *ngFor="let grado of grados" [value]="grado.id">
-              {{ grado.nombre }}
+              {{ grado.descripcion }}
             </mat-option>
           </mat-select>
         </mat-form-field>
@@ -93,7 +93,7 @@
           <mat-label>Institución</mat-label>
           <mat-select formControlName="institucionId">
             <mat-option *ngFor="let institucion of instituciones" [value]="institucion.id">
-              {{ institucion.nombre }}
+              {{ institucion.descripcion }}
             </mat-option>
           </mat-select>
         </mat-form-field>

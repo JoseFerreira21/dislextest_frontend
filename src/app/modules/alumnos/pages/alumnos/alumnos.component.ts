@@ -95,30 +95,6 @@ export class AlumnosComponent implements AfterViewInit, OnInit {
     this.mostrarAlumnosDelProfesor();
   }
 
-  /*mostrarAlumnosDelProfesor() {
-    this.globalService.getProfesorId().subscribe(profesorId => {
-      if (profesorId !== null) {
-        this.alumnoService.getAlumnosDelProfesor(profesorId).subscribe({
-          next: (dataResponse) => {
-            this.dataSource.data = dataResponse.map((alumno: any) => {
-              // Ajustamos para manejar grado e institucion como objetos
-              return {
-                ...alumno,
-                grado: alumno.grado ? alumno.grado.nombre : 'Sin asignar',
-                institucion: alumno.institucion ? alumno.institucion.nombre : 'Sin asignar'
-              };
-            });
-          },
-          error: (e) => {
-            console.error('Error al obtener alumnos del profesor:', e);
-          },
-        });
-      } else {
-        console.error('No se pudo obtener el ID del profesor.');
-      }
-    });
-  }*/
-
   mostrarAlumnosDelProfesor() {
     this.globalService.getProfesorId().subscribe({
       next: (profesorId) => {
@@ -129,10 +105,10 @@ export class AlumnosComponent implements AfterViewInit, OnInit {
 
               // Extrae los nombres de grados e instituciones para los filtros
               this.grados = Array.from(
-                new Set(this.dataSource.data.map((a) => a.grado.nombre))
+                new Set(this.dataSource.data.map((a) => a.grado.descripcion))
               );
               this.instituciones = Array.from(
-                new Set(this.dataSource.data.map((a) => a.institucion.nombre))
+                new Set(this.dataSource.data.map((a) => a.institucion.descripcion))
               );
             },
             error: (e) => console.error('Error al obtener alumnos:', e),
@@ -152,10 +128,10 @@ export class AlumnosComponent implements AfterViewInit, OnInit {
   applyFilter() {
     this.dataSource.filterPredicate = (data: AlumnosDelProfesor) => {
       const matchesGrado = this.gradoSeleccionado
-        ? data.grado.nombre === this.gradoSeleccionado
+        ? data.grado.descripcion === this.gradoSeleccionado
         : true;
       const matchesInstitucion = this.institucionSeleccionada
-        ? data.institucion.nombre === this.institucionSeleccionada
+        ? data.institucion.descripcion === this.institucionSeleccionada
         : true;
       const matchesNombre = this.filterText
         ? data.nombre.toLowerCase().includes(this.filterText.toLowerCase())
