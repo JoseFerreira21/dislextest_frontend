@@ -17,10 +17,10 @@ export interface CrearAlumnoDTO {
 
 export interface Grado {
   id: number;
-  nombre: string;
+  descripcion: string;
 }
 
 export interface Institucion {
   id: number;
-  nombre: string;
+  descripcion: string;
 }

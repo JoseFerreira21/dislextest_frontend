@@ -13,11 +13,11 @@ export interface AlumnosDelProfesor {
     año: number;
     grado: {
       id: number;
-      nombre: string;
+      descripcion: string;
     };
     institucion: {
       id: number;
-      nombre: string;
+      descripcion: string;
     };
     realizoTest: string;
   }
