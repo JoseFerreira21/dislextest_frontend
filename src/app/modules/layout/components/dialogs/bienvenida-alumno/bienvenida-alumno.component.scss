@@ -1,45 +1,62 @@
+@import 'https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css';
+
 mat-dialog-container {
   background-color: #1e1e1e;
   border-radius: 20px;
   padding: 20px;
-  max-width: 1000px; /* Incrementa el ancho máximo del modal */
-  min-width: 1000px; /* Incrementa el ancho mínimo del modal */
-  max-height: 90vh; /* Limita la altura para que no sobrepase la pantalla */
+  animation: scaleIn 0.5s ease-out; /* Animación de entrada */
+}
+
+@keyframes scaleIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 .bienvenida-titulo {
-  font-size: 3rem; /* Título más grande */
+  font-size: 3rem;
   text-align: center;
   color: #3CCCA8;
   text-shadow: 2px 2px #000;
-  margin-bottom: 20px; /* Espacio adicional debajo del título */
+  margin-bottom: 20px;
   margin-top: 50px;
+  padding: 15px 0; /* Padding para mayor espacio */
+  word-wrap: break-word; /* Permite el ajuste de línea */
+  white-space: normal; /* Permite el salto de línea */
+  line-height: 1.2; /* Ajusta el espacio entre líneas */
 }
 
 .bienvenida-contenido {
   text-align: center;
-    font-size: 1.4rem;
-    margin: 30px auto; /* Centra el contenido horizontalmente */
-    color:  #673ab7;
-    background-color: #ffffff;
-    padding: 30px;
-    border-radius: 15px;
-    max-width: 80%; /* Limita el ancho del contenido al 80% del ancho del modal */
+  font-size: 1.4rem;
+  margin: 30px auto;
+  color: #673ab7;
+  background-color: #ffffff;
+  padding: 30px;
+  border-radius: 15px;
+  max-width: 80%;
+  word-wrap: break-word; /* Permite el ajuste de línea */
+  white-space: normal; /* Permite el salto de línea */
+  line-height: 1.2; /* Ajusta el espacio entre líneas */
 }
 
 .bienvenida-acciones {
-  margin-top: 30px; /* Espacio adicional encima de los botones */
+  margin-top: 30px;
   display: flex;
   justify-content: center;
-  gap: 20px; /* Añade espacio entre los botones */
+  gap: 20px;
 }
 
 .cancelar-btn {
-  background-color: #f44336;
   color: black;
   border-radius: 20px;
-  padding: 15px 25px; /* Botones más grandes */
-  font-size: 1.2rem; /* Texto del botón más grande */
+  padding: 15px 25px;
+  font-size: 1.2rem;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   transition: transform 0.2s;
 }
@@ -53,8 +70,8 @@ mat-dialog-container {
 .play-btn {
   background-color: #4caf50;
   color: black;
-  font-size: 1.5rem; /* Texto del botón más grande */
-  padding: 15px 50px; /* Botones más grandes */
+  font-size: 1.5rem;
+  padding: 15px 50px;
   border-radius: 50px;
   display: flex;
   align-items: center;
@@ -69,4 +86,18 @@ mat-dialog-container {
   transform: scale(1.1);
   background-color: #43a047;
   color: white;
+}
+
+/* Animación de parpadeo en el botón de PLAY */
+@keyframes blink {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.play-btn-animated {
+  animation: blink 1s infinite; /* Efecto de parpadeo */
 }

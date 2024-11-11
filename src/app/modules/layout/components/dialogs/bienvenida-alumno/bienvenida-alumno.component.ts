@@ -2,7 +2,6 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { SoundService } from '@services/sound.service';
 import { PasswordPromptComponent } from '../password-prompt/password-prompt.component'; 
-import { AuthService } from '@services/auth.service';
 
 
 @Component({
@@ -12,6 +11,7 @@ import { AuthService } from '@services/auth.service';
 })
 export class BienvenidaAlumnoComponent implements OnInit {
 
+  
   constructor(
     public dialogRef: MatDialogRef<BienvenidaAlumnoComponent>,
     private soundService: SoundService,
@@ -41,6 +41,8 @@ export class BienvenidaAlumnoComponent implements OnInit {
   
 
   ngOnInit(): void {
-  
+
   }
+
+  
 }

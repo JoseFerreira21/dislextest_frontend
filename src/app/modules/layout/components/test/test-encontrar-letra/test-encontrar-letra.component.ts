@@ -90,7 +90,7 @@ export class TestEncontrarLetraComponent implements OnInit {
   }
 
   escucharInstruccion() {
-    this.textToSpeechService.speak('Encierra la letra que se te indica.');
+    this.textToSpeechService.speak('Encierra la letra que se te indica');
   }
 
   async cargarPalabras(): Promise<void> {

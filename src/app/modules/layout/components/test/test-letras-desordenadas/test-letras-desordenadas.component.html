@@ -1,0 +1,34 @@
+<div class="container-test-title">
+    <div class="title">
+      <p class="p-test">Ordena las letras formando una palabra, arrastrando en el cuadro</p>
+      <button (click)="escucharInstruccion()" class="audio-button">
+        <mat-icon class="icono-audio">volume_up</mat-icon> Escuchar instrucción
+      </button>
+      <span class="tiempo-empleado">
+        <mat-icon class="icono-reloj">schedule</mat-icon> {{ getFormattedTime() }}
+      </span>
+    </div>
+  
+    <div class="formar-container-test">
+      <ng-container *ngFor="let palabra of palabras; let i = index">
+        <div class="palabra-container" cdkDropList [cdkDropListConnectedTo]="['respuesta' + i]" [cdkDropListData]="palabra.letras" (cdkDropListDropped)="drop($event, palabra)">
+          <div class="palabra-desordenada">
+            <span *ngFor="let letter of palabra.letras" 
+                  class="span-test" 
+                  cdkDrag 
+                  [cdkDragData]="letter">{{ letter.letra }}</span>
+          </div>
+        </div>
+        
+        <div class="respuesta-container" cdkDropList [id]="'respuesta' + i" [cdkDropListData]="palabra.letrasRespuesta" (cdkDropListDropped)="drop($event, palabra)">
+          <ng-container *ngFor="let letter of palabra.letrasRespuesta; let j = index">
+            <span class="drop-span">{{ letter.letra || ' ' }}</span>
+          </ng-container>
+          <div class="imagen-check-container" *ngIf="mostrarImagen">
+            <img class="imagen-check" src="{{palabra.validez}}">
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+  

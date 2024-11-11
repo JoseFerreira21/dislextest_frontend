@@ -1,17 +1,20 @@
 <mat-dialog-content>
-  <div class="modal-content">
-    <ng-container *ngIf="data.value === 60">
-      Excelente resultado!
-      <img [src]="imagen" alt="">
-    </ng-container>
-    <ng-container *ngIf="data.value === 30">
-      Buen trabajo, pero puedes mejorar.
-      <img [src]="imagen" alt="">
-    </ng-container>
-    <ng-container *ngIf="data.value === 10">
-      No te desanimes, sigue intentándolo.
-      <img [src]="imagen" alt="">
-    </ng-container>
+  <div class="modal-confetti-container">
+    <canvas #confettiCanvas class="confetti-canvas"></canvas>
+
+    <div class="modal-content">
+      <ng-container *ngIf="data.value === 60">
+        ¡Excelente resultado!
+        <img [src]="imagen" alt="">
+      </ng-container>
+      <ng-container *ngIf="data.value === 30">
+        ¡Buen trabajo, pero puedes mejorar!
+        <img [src]="imagen" alt="">
+      </ng-container>
+      <ng-container *ngIf="data.value === 10">
+        ¡No te desanimes, sigue intentándolo!
+        <img [src]="imagen" alt="">
+      </ng-container>
+    </div>
   </div>
 </mat-dialog-content>
-

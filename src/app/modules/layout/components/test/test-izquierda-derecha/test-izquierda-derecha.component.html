@@ -1,0 +1,72 @@
+<div class="container-test-title">
+  <div class="title">
+    <p class="p-test">{{ instruccion }}</p>
+    <button (click)="escucharInstruccion()" class="audio-button">
+      <mat-icon class="icono-audio">volume_up</mat-icon> Escuchar instrucción
+    </button>
+    <span class="tiempo-empleado">
+      <mat-icon class="icono-reloj">schedule</mat-icon> {{ getFormattedTime() }}
+    </span>
+  </div>
+
+  <!-- Contenedor inicial de imágenes arrastrables -->
+  <div
+    class="draggable-container"
+    cdkDropList
+    [cdkDropListData]="imagenesEjercicio"
+    [cdkDropListConnectedTo]="['leftDropzone', 'rightDropzone']"
+    (cdkDropListDropped)="onDrop($event, 'initial')"
+  >
+    <ng-container *ngFor="let img of imagenesEjercicio">
+      <div cdkDrag [cdkDragData]="img" class="draggable">
+        <img [src]="img" alt="Ejercicio" class="draggable-img" />
+      </div>
+    </ng-container>
+  </div>
+
+  <!-- Contenedor central con zonas de arrastre (invertidas según la perspectiva del usuario) -->
+  <div class="image-container">
+    <!-- Zona derecha del usuario (izquierda en el código) -->
+    <div
+      class="left-dropzone"
+      cdkDropList
+      [cdkDropListData]="derecha"
+      [cdkDropListConnectedTo]="['draggable-container', 'leftDropzone']"
+      (cdkDropListDropped)="onDrop($event, 'derecha')"
+      id="leftDropzone"
+    >
+      <ng-container *ngFor="let img of derecha">
+        <div class="draggable">
+          <img [src]="img" alt="Imagen Derecha" class="draggable-img" />
+          <div class="imagen-check-container" *ngIf="mostrarImagen">
+            <img class="imagen-check" [src]="validacionPosicionImagenChek(img)" />
+          </div>
+        </div>
+      </ng-container>
+    </div>
+
+    <!-- Imagen central de la casa -->
+    <div class="central-image">
+      <img [src]="rutaImagenCheck + 'casa.png'" alt="Casa" class="casa-img" />
+    </div>
+
+    <!-- Zona izquierda del usuario (derecha en el código) -->
+    <div
+      class="right-dropzone"
+      cdkDropList
+      [cdkDropListData]="izquierda"
+      [cdkDropListConnectedTo]="['draggable-container', 'rightDropzone']"
+      (cdkDropListDropped)="onDrop($event, 'izquierda')"
+      id="rightDropzone"
+    >
+      <ng-container *ngFor="let img of izquierda">
+        <div class="draggable">
+          <img [src]="img" alt="Imagen Izquierda" class="draggable-img" />
+          <div class="imagen-check-container" *ngIf="mostrarImagen">
+            <img class="imagen-check" [src]="validacionPosicionImagenChek(img)" />
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</div>

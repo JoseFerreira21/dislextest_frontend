@@ -1,7 +1,5 @@
 .formar-container-test {
     background-color: #38B6FF;
-    max-width: 1000%;
-    margin: 20px auto;
     text-align: center;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -10,14 +8,14 @@
 
 .container-test-title {
     background-color: #38B6FF;
-    //padding: 20px;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.356);
-    max-width: 1000px;
+    max-width: 1100px;
     margin: 20px auto;
     text-align: center;
     grid-template-columns: repeat(1, 1fr);
 }
+
 
 .title {
   display: flex;
@@ -30,28 +28,24 @@
 .palabra-container {
     background-color: #FFD985;
     display: block;
-    margin: 30px;
+    margin: 23px;
     height: 80px !important;
     border-radius: 8px;
     border: 5px solid #FF8482;
 }
 
-.h2-test {
-    font-size: 24px;
-    color: #333;
-    margin-bottom: 10px;
-    font-family: 'Comic Sans MS', cursive, sans-serif;
-    font-weight: bold;
 
-}
 
 .p-test {
-    font-family: 'Comic Sans MS', cursive, sans-serif;
-    font-weight: bold;
-    color: #000000;
-    font-size: 25px;
-    margin: 0;
-    padding: 10px 0;
+  font-family: 'Arial Rounded MT Bold', sans-serif;
+  font-weight: bold;
+  color: #000000;
+  font-size: 30px; /* Tamaño de la fuente del título */
+  margin: 5px 0;
+  padding: 15px 0; /* Padding para mayor espacio */
+  word-wrap: break-word; /* Permite el ajuste de línea */
+  white-space: normal; /* Permite el salto de línea */
+  line-height: 1.2; /* Ajusta el espacio entre líneas */
 }
 
 .span-test {
@@ -71,6 +65,10 @@
     letter-spacing: 2px;
     display: inline-block;
     cursor: pointer;
+}
+
+.span-test:hover {
+  background-color: #ddd;
 }
 
 .input-test {
@@ -112,15 +110,9 @@
     background-color: rgb(237, 237, 176);
   }
 
-  // img {
-  //   width: 200px;
-  //   height: auto;
-  //   margin: 10px;
-  // }
   .imagenes-container {
     margin: 0 auto;
     display: flex;
-   // flex-wrap: wrap;
   }
 
   .imagen-ejercicio {
@@ -149,7 +141,7 @@
   .audio-button {
     display: flex;
     align-items: center;
-    font-size: 16px; /* Ajusta el tamaño del texto si es necesario */
+    font-size: 16px; 
     background-color: transparent;
     border: none;
     cursor: pointer;
@@ -158,11 +150,11 @@
   
   .icono-audio {
     margin-right: 8px;
-    color: #ff5722; /* Cambia este valor para ajustar el color del icono */
+    color: #ff5722; 
   }
   
   .audio-button:hover .icono-audio {
-    color: #f44336; /* Cambia el color del icono cuando se pasa el cursor por encima */
+    color: #b41c11;
   }
 
   .tiempo-empleado {

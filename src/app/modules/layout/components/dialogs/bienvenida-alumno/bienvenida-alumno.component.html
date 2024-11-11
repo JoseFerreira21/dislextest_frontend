@@ -1,12 +1,16 @@
-<h2 mat-dialog-title class="bienvenida-titulo">¡Bienvenido, {{alumno?.nombre}}!</h2>
+<div class="mat-dialog-container">
+  <h2 mat-dialog-title class="bienvenida-titulo animate__animated animate__bounceInDown">
+    🎉 ¡Bienvenido, {{ alumno?.nombre }}! 🎉
+  </h2>
 
-<mat-dialog-content class="bienvenida-contenido" align="center" >
-  <p>Estás a punto de comenzar un nuevo desafío.</p>
-</mat-dialog-content>
+  <mat-dialog-content class="bienvenida-contenido animate__animated animate__fadeIn" align="center">
+    <p>🎯 Estás a punto de comenzar un nuevo desafío emocionante y divertido. ¿Listo? 🚀</p>
+  </mat-dialog-content>
 
-<mat-dialog-actions align="center" class="bienvenida-acciones">
-  <button mat-button class="cancelar-btn" (click)="onCancel()">Cancelar</button>
-  <button mat-button class="play-btn" (click)="onComenzar()">
-    <mat-icon>play_arrow</mat-icon> PLAY
-  </button>
-</mat-dialog-actions>
+  <mat-dialog-actions align="center" class="bienvenida-acciones animate__animated animate__fadeInUp">
+    <button mat-button class="cancelar-btn" (click)="onCancel()">Cancelar</button>
+    <button mat-button class="play-btn play-btn-animated" (click)="onComenzar()">
+      <mat-icon>play_arrow</mat-icon> PLAY
+    </button>
+  </mat-dialog-actions>
+</div>

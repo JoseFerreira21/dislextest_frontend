@@ -2,10 +2,11 @@
   background-color: #ac61d8;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.356);
-  max-width: 1000px;
+  max-width: 1100px;
   margin: 20px auto;
   text-align: center;
-  padding: 40px 20px;
+  padding: 20px;
+  padding-block-end: 70px;
 }
 
 .title {
@@ -18,13 +19,17 @@
 }
 
 .sub-title {
-  font-family: 'Comic Sans MS', cursive, sans-serif;
+  font-family: 'Arial Rounded MT Bold', sans-serif;
   font-weight: bold;
   color: #000000;
-  font-size: 32px; /* Aumentar el tamaño de la fuente del título */
-  margin: 0;
-  padding: 15px 0; /* Aumentar el padding para mayor espacio */
+  font-size: 30px; /* Tamaño de la fuente del título */
+  margin: 5px 0;
+  padding: 15px 0; /* Padding para mayor espacio */
+  word-wrap: break-word; /* Permite el ajuste de línea */
+  white-space: normal; /* Permite el salto de línea */
+  line-height: 1.2; /* Ajusta el espacio entre líneas */
 }
+
 
 .container-test {
   display: flex;
@@ -64,7 +69,6 @@
 }
 
 .palabra-container {
-  background-color: #ffd700;
   padding: 25px;
   border-radius: 15px;
   display: flex;
@@ -73,7 +77,8 @@
   border: 7px solid #FF8482;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   width: 100%; /* Para asegurar que el contenedor tenga un tamaño consistente */
-  max-width: 300px; /* Ajustar según el espacio disponible */
+  max-width: 500px; /* Ajustar según el espacio disponible */
+  padding-block-end: 40px;
 }
 
 .palabra-container.color-celeste {
@@ -93,8 +98,15 @@
   display: flex; /* Cambiar a 'flex' para alinear correctamente */
   justify-content: center; /* Centrar horizontalmente */
   align-items: center; /* Centrar verticalmente */
-  width: 48px; /* Tamaño fijo para evitar expansión */
-  height: 48px; /* Tamaño fijo para evitar expansión */
+  //width: 24px; /* Tamaño fijo para evitar expansión */
+  //height: 24px; /* Tamaño fijo para evitar expansión */
+  border-radius: 50%;
+  min-height: 48px;
+  min-width: 48px;
+}
+
+.letra-span:hover {
+  background-color: #ddd;
 }
 
 .letra-span.seleccionado {
@@ -140,11 +152,11 @@
 
 .icono-audio {
   margin-right: 8px;
-  color: #ff5722;
+  color: #ff5722; 
 }
 
 .audio-button:hover .icono-audio {
-  color: #f44336;
+  color: #b41c11;
 }
 
 .tiempo-empleado {

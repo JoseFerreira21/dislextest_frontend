@@ -1,4 +1,4 @@
-import { Component, ViewChild, ViewContainerRef } from '@angular/core';
+import { Component, ViewChild, ViewContainerRef, ComponentFactoryResolver } from '@angular/core';
 import { TestFormarPalabraComponent } from '../../layout/components/test/test-formar-palabra/test-formar-palabra.component';
 import { TestSeleccionarPalabraComponent } from '../../layout/components/test/test-seleccionar-palabra/test-seleccionar-palabra.component';
 import { TestTacharPalabraComponent } from '../../layout/components/test/test-tachar-palabra/test-tachar-palabra.component';
@@ -13,11 +13,15 @@ import { GlobalService } from '@services/global.service';
 import { SharedService } from '@services/shared.service';
 import { TestEncontrarLetraComponent } from '../../layout/components/test/test-encontrar-letra/test-encontrar-letra.component';
 import { TestEncerrarPalabraComponent } from '../../layout/components/test/test-encerrar-palabra/test-encerrar-palabra.component';
-import { TestOrdenarLetrasComponent } from '../../layout/components/test/test-ordenar-letras/test-ordenar-letras.component';
+import { TestLetrasDesordenadasComponent } from '../../layout/components/test/test-letras-desordenadas/test-letras-desordenadas.component'; 
 import { ModalDespedidaComponent } from '../../layout/components/dialogs/despedida-alumno/despedida-alumno.component';
 
-import { Router } from '@angular/router'; // Importar el Router para la redirección (A MODO DE PRUEBA)
+import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
+import { TestEncerrarSilabaCsComponent } from '../../layout/components/test/test-encerrar-silaba-cs/test-encerrar-silaba-cs.component';
+import { TestContarLetrasComponent } from '../../layout/components/test/test-contar-letras/test-contar-letras.component';
+import { TestEncerrarSilabaCfComponent } from '../../layout/components/test/test-encerrar-silaba-cf/test-encerrar-silaba-cf.component';
+import { TestIzquierdaDerechaComponent } from '../../layout/components/test/test-izquierda-derecha/test-izquierda-derecha.component';
 
 @Component({
   selector: 'app-test',
@@ -28,11 +32,16 @@ export class TestComponent {
   @ViewChild('componentContainer', { read: ViewContainerRef, static: true })
   componentContainer!: ViewContainerRef;
   components = [
+    TestLetrasDesordenadasComponent,
     TestFormarPalabraComponent,
     TestSeleccionarPalabraComponent,
     TestTacharPalabraComponent,
     TestEncontrarLetraComponent,
     TestEncerrarPalabraComponent,
+    TestEncerrarSilabaCsComponent,
+    TestContarLetrasComponent,
+    TestEncerrarSilabaCfComponent,
+    TestIzquierdaDerechaComponent, 
   ];
   currentComponentIndex = 0;
   componentsInstance: any[] = [];
@@ -66,6 +75,7 @@ export class TestComponent {
   ngOnInit() {
     // Inicializar tiempo de inicio cuando se cargue el primer componente
     this.startTimer();
+   
     // Capturar el alumnoId desde los queryParams
     this.route.queryParams.subscribe((params) => {
       const alumnoId = +params['alumnoId']; // El operador + convierte la cadena a número
@@ -87,12 +97,16 @@ export class TestComponent {
           alumnoId: this.resultadoTest.alumnoId,
           profesorId: this.resultadoTest.profesorId,
         };
+        
         this.insertarResultado();
       } else {
         console.error('No se pudo obtener el ID del profesor.');
       }
     });
   }
+  
+
+
   //CONTROL DE TIEMPO DE CARGA DE LOS COMPONENTES//
   startTimer() {
     this.startTime = Date.now();
@@ -115,6 +129,7 @@ export class TestComponent {
   //CONTROL DE TIEMPO DE CARGA DE LOS COMPONENTES//
 
   cargarEjercicios(index: number) {
+    this.componentContainer.clear(); 
     let componentsInstance: any = this.adminComponentesService.cargarEjercicios(
       this.componentContainer,
       this.components[index]
@@ -135,8 +150,7 @@ export class TestComponent {
       this.componentsInstance[this.currentComponentIndex]?.instance;
   
     if (
-      currentComponentInstance?.seleccionCompleta ||
-      currentComponentInstance?.tareaCompleta
+      currentComponentInstance?.seleccionCompleta 
     ) {
       this.soundService.ClickSiguienteSound();
       currentComponentInstance.guardar(this.resultadoTestId);

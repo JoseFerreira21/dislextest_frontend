@@ -74,7 +74,7 @@ export class TestFormarPalabraComponent implements OnInit {
 
       this.cargarImagenes();
       this.textToSpeechService.speak(
-        'Observa la palabra, y ordena los nombres de los animales.'
+        'Observa la palabra y ordena los nombres de los animales, dando click en las letras.'
       );
     } catch (error) {
       console.error('Error en ngOnInit: ', error);
@@ -98,7 +98,7 @@ export class TestFormarPalabraComponent implements OnInit {
 
   escucharInstruccion() {
     this.textToSpeechService.speak(
-      'Observa la palabra, y ordena los nombres de los animales.'
+      'Observa la palabra y ordena los nombres de los animales, dando click en las letras.'
     );
   }
 

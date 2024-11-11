@@ -30,3 +30,9 @@
   .page-break {
     page-break-before: always; 
   }
+
+  .fila {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }

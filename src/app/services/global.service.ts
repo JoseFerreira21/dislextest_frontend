@@ -5,7 +5,7 @@ import { Observable, of } from 'rxjs';
 import { catchError, map, shareReplay } from 'rxjs/operators';
 
 import { EntidadService } from '@services/entidad.service';
-import { EntidadUsuario } from '@models/entidad';
+import { EntidadUsuario } from '@models/entidad.model';
 
 @Injectable({
   providedIn: 'root'

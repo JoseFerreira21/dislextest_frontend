@@ -5,16 +5,22 @@ import { Injectable } from '@angular/core';
 })
 export class TextToSpeechService {
 
-  constructor() { }
+  private voices: SpeechSynthesisVoice[] = [];
+
+  constructor() {
+    // Esperar a que las voces estén disponibles
+    window.speechSynthesis.onvoiceschanged = () => {
+      this.voices = window.speechSynthesis.getVoices();
+    };
+  }
 
   speak(text: string) {
     if ('speechSynthesis' in window) {
       const utterance = new SpeechSynthesisUtterance(text);
       // Buscar una voz en español latinoamericano
-      const voices = window.speechSynthesis.getVoices();
-      const spanishVoice = voices.find(voice => voice.lang === 'es-419') 
-        || voices.find(voice => voice.lang === 'es-MX') 
-        || voices.find(voice => voice.lang.startsWith('es'));
+      const spanishVoice = this.voices.find(voice => voice.lang === 'es-419')
+        || this.voices.find(voice => voice.lang === 'es-MX')
+        || this.voices.find(voice => voice.lang.startsWith('es'));
 
       if (spanishVoice) {
         utterance.voice = spanishVoice;
@@ -22,11 +28,10 @@ export class TextToSpeechService {
         console.warn('Voz en español latinoamericano no encontrada, utilizando la voz predeterminada.');
       }
 
-      utterance.lang = 'es-419'; // Establecer el idioma a español latinoamericano
+      utterance.lang = 'es-419';
       speechSynthesis.speak(utterance);
     } else {
       console.error('Text-to-Speech no es soportado en este navegador.');
     }
   }
 }
-
