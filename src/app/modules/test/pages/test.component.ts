@@ -150,7 +150,8 @@ export class TestComponent {
       this.componentsInstance[this.currentComponentIndex]?.instance;
   
     if (
-      currentComponentInstance?.seleccionCompleta 
+      currentComponentInstance?.seleccionCompleta
+
     ) {
       this.soundService.ClickSiguienteSound();
       currentComponentInstance.guardar(this.resultadoTestId);
@@ -163,7 +164,7 @@ export class TestComponent {
         this.cargarEjercicios(this.currentComponentIndex);
   
         this.startTimer(); // Reiniciar el temporizador cuando se carga el nuevo ejercicio
-      }, 5000);
+      }, 4000);
     } else {
       this.textToSpeechService.speak(
         'Por favor, completa todos los ejercicios antes de continuar.'

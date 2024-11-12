@@ -250,10 +250,10 @@ export class TestEncerrarSilabaCfComponent {
       this.soundService.EquivocadoSonido();
     }
 
-    // Mostrar el modal después de un segundo
+    // Mostrar el modal después de 0,5 segundo
     setTimeout(() => {
       this.mostrarMensaje(modalValue);
-    }, 2000);
+    }, 500);
 
     this.mostrarImagenes(); // Mostrar las imágenes después de evaluar
     await this.guardarResultado(); // Guardar el resultado

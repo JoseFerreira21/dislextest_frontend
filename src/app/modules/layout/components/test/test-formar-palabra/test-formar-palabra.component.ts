@@ -255,10 +255,10 @@ export class TestFormarPalabraComponent implements OnInit {
       this.soundService.EquivocadoSonido();
     }
 
-    // Mostrar el modal después de 1 segundos
+    // Mostrar el modal después de 0,5 segundos
     setTimeout(() => {
       this.mostrarMensaje(modalValue);
-    }, 1000);
+    }, 500);
 
     this.mostrarImagenes();
 

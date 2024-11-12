@@ -5,8 +5,7 @@
   <button 
      (click)="onButtonClick()" 
      class="siguiente-btn" 
-     [disabled]="!componentsInstance[currentComponentIndex]?.instance?.seleccionCompleta"
-     >
+    >
      {{ currentComponentIndex === components.length - 1 ? 'Finalizar' : 'Siguiente' }}
   </button>
 </div>

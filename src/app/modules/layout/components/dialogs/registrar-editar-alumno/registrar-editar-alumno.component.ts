@@ -100,7 +100,7 @@ export class RegistrarAlumnoComponent implements OnInit {
     this.gradoService.getGrados().subscribe({
       next: (grados) => {
         this.grados = grados;
-        console.log('Grados cargados:', grados);
+        //console.log('Grados cargados:', grados);
       },
       error: (err) => console.error('Error al cargar grados', err)
     });
@@ -109,12 +109,12 @@ export class RegistrarAlumnoComponent implements OnInit {
     this.institucionService.getInstituciones().subscribe({
       next: (instituciones) => {
         this.instituciones = instituciones;
-        console.log('Instituciones cargadas:', instituciones);
+        //console.log('Instituciones cargadas:', instituciones);
       },
       error: (err) => console.error('Error al cargar instituciones', err)
     });
     
-    console.log(this.dataAlumno);
+    //console.log(this.dataAlumno);
 
     if (this.dataAlumno) {
       this.formAlumno.patchValue({
@@ -199,7 +199,7 @@ export class RegistrarAlumnoComponent implements OnInit {
                 profesorId: this.aluProfe.profesorId,
               };
     
-              console.log('Datos que se enviarán al POST sin el id:', nuevoAlumno);
+              //console.log('Datos que se enviarán al POST sin el id:', nuevoAlumno);
     
               // Crear el alumno para el profesor
               this._alumnosService.createAlumno(nuevoAlumno).subscribe({

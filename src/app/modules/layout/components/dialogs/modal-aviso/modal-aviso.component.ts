@@ -16,7 +16,7 @@ export class ModalAvisoComponent implements AfterViewInit {
   ) {
     this.dialogRef.disableClose = true;
 
-    // Configura la imagen según el valor recibido
+    // Se configura la imagen según el valor recibido
     if (data.value === 60) {
       this.imagen += 'exelente.png';
     } else if (data.value === 30) {
@@ -25,10 +25,10 @@ export class ModalAvisoComponent implements AfterViewInit {
       this.imagen += 'preocupado.png';
     }
 
-    // Cierra el modal automáticamente después de 3 segundos
+    // Cierra el modal automáticamente después de 3,5 segundos
     setTimeout(() => {
       this.dialogRef.close();
-    }, 3000);
+    }, 3500);
   }
 
   ngAfterViewInit(): void {
