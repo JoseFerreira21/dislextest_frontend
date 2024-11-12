@@ -7,6 +7,7 @@ export interface alumnoEntidad {
     fechaNacimiento?: string,
     sexo: string,
     edad?: string,
+    año?: number,
     telefono?: string,
     direccion?: string,
     nroDocumento?: string,

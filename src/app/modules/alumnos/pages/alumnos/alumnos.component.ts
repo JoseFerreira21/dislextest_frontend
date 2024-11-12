@@ -167,11 +167,13 @@ export class AlumnosComponent implements AfterViewInit, OnInit {
   }
 
   dialogoEditarAlumno(dataAlumno: alumnoEntidad) {
+    //console.log(dataAlumno)
     this.dialog
       .open(RegistrarAlumnoComponent, {
         disableClose: true,
         width: '400px',
         data: dataAlumno,
+        
       })
       .afterClosed()
       .subscribe((resultado) => {

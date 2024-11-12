@@ -113,7 +113,9 @@ export class RegistrarAlumnoComponent implements OnInit {
       },
       error: (err) => console.error('Error al cargar instituciones', err)
     });
-  
+    
+    console.log(this.dataAlumno);
+
     if (this.dataAlumno) {
       this.formAlumno.patchValue({
         nombre: this.dataAlumno.nombre,
@@ -123,13 +125,13 @@ export class RegistrarAlumnoComponent implements OnInit {
         telefono: this.dataAlumno.telefono,
         direccion: this.dataAlumno.direccion,
         nroDocumento: this.dataAlumno.nroDocumento,
+        año: this.dataAlumno.año,
       });
   
       this._alumnosService.getAlumnoByEntidadID(this.dataAlumno.id).subscribe({
         next: (alumno: Alumno) => {
           this.formAlumno.patchValue({
             gradoId: alumno.gradoId,  
-            año: alumno.año,
             institucionId: alumno.institucionId 
           });
           console.log('Detalles del alumno cargado en el formulario:', this.formAlumno.value);
