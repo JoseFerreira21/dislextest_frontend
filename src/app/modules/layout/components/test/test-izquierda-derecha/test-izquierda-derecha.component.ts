@@ -370,7 +370,7 @@ export class TestIzquierdaDerechaComponent implements OnInit {
               resolve();
             })
             .catch(reject);
-        }, 1000);
+        }, 500); // Mostrar el modal después de 0,5 segundos
       } catch (error) {
         reject(error);
       }
@@ -411,7 +411,7 @@ export class TestIzquierdaDerechaComponent implements OnInit {
 
     return Promise.all(requests)
       .then(() => {
-        console.log('Todas las respuestas fueron guardadas correctamente.');
+        //console.log('Todas las respuestas fueron guardadas correctamente.');
       })
       .catch((error) => {
         console.error('Error en guardarResultadoEjercicio:', error);

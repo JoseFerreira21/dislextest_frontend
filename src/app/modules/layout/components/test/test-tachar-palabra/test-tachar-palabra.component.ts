@@ -243,10 +243,10 @@ export class TestTacharPalabraComponent implements OnInit {
       this.soundService.EquivocadoSonido();
     }
 
-    // Mostrar el modal después de 2 segundos
+    // Mostrar el modal después de 0,5 segundos
     setTimeout(() => {
       this.mostrarMensaje(modalValue);
-    }, 1000);
+    }, 500);
 
     // Mostrar las imágenes de validación después de calcular los resultados
     this.mostrarImagenes();

@@ -256,10 +256,10 @@ export class TestEncerrarSilabaCsComponent implements OnInit {
       this.soundService.EquivocadoSonido();
     }
 
-    // Mostrar el modal después de un segundo
+    // Mostrar el modal después 0,5 segundo
     setTimeout(() => {
       this.mostrarMensaje(modalValue);
-    }, 2000);
+    }, 500);
 
     this.mostrarImagenes(); // Mostrar las imágenes después de evaluar
     await this.guardarResultado(); // Guardar el resultado

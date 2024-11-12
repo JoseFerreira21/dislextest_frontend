@@ -24,7 +24,7 @@ ngOnInit(): void{
 
  confirmarEliminar(){
   if (this.dataAlumno){
-    console.log(this.dataAlumno);
+    //console.log(this.dataAlumno);
     this._dialogoReferencia.close("eliminar")
   }
  }
