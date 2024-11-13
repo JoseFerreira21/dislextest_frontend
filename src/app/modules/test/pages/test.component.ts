@@ -51,6 +51,7 @@ export class TestComponent {
   startTime: number = 0;
   elapsedTime: number = 0;
   interval: any;
+  isPosting: boolean = false; 
 
   constructor(
     private route: ActivatedRoute,
@@ -138,32 +139,30 @@ export class TestComponent {
   }
 
   onButtonClick() {
-    if (this.currentComponentIndex === this.components.length - 1) {
-      this.finalizarTest(); // Si es el último componente, finaliza el test
+    if (!this.isPosting && this.currentComponentIndex === this.components.length - 1) {
+      this.finalizarTest();
     } else {
-      this.siguienteEjercicio(); // De lo contrario, avanza al siguiente ejercicio
+      this.siguienteEjercicio();
     }
   }
 
   siguienteEjercicio() {
-    const currentComponentInstance =
-      this.componentsInstance[this.currentComponentIndex]?.instance;
-  
-    if (
-      currentComponentInstance?.seleccionCompleta
+    const currentComponentInstance = this.componentsInstance[this.currentComponentIndex]?.instance;
 
-    ) {
+    if (currentComponentInstance?.seleccionCompleta && !this.isPosting) {
+      this.isPosting = true; // Evita múltiples clics
+
       this.soundService.ClickSiguienteSound();
       currentComponentInstance.guardar(this.resultadoTestId);
-  
-      this.pauseTimer(); // Pausar el temporizador cuando se completa un ejercicio
-  
+
+      this.pauseTimer();
+
       setTimeout(() => {
-        this.currentComponentIndex =
-          (this.currentComponentIndex + 1) % this.components.length;
+        this.currentComponentIndex = (this.currentComponentIndex + 1) % this.components.length;
         this.cargarEjercicios(this.currentComponentIndex);
-  
-        this.startTimer(); // Reiniciar el temporizador cuando se carga el nuevo ejercicio
+
+        this.isPosting = false; // Habilita el botón para el siguiente ejercicio
+        this.startTimer();
       }, 4000);
     } else {
       this.textToSpeechService.speak(
@@ -187,25 +186,23 @@ export class TestComponent {
   }
 
   finalizarTest() {
-    this.pauseTimer(); // Pausar el temporizador por última vez
-    this.resultadoTest.tiempoTotal = this.getTotalElapsedTime(); // Asignar el tiempo total transcurrido
-  
-    const currentComponentInstance =
-      this.componentsInstance[this.currentComponentIndex]?.instance;
-  
+    if (this.isPosting) return; // Evita múltiples clics en el botón "Finalizar"
+
+    this.isPosting = true; // Desactiva el botón "Finalizar"
+    this.pauseTimer();
+    this.resultadoTest.tiempoTotal = this.getTotalElapsedTime();
+
+    const currentComponentInstance = this.componentsInstance[this.currentComponentIndex]?.instance;
+
     if (currentComponentInstance) {
       currentComponentInstance
         .guardar(this.resultadoTestId)
         .then(() => {
-          // Actualizar el tiempo total en la base de datos
           this.actualizarTiempoTotal();
         })
         .catch((error: any) => {
-          console.error(
-            'Error al guardar los resultados del último test:',
-            error
-          );
-          this.actualizarTiempoTotal(); // Intentar actualizar el tiempo total incluso si ocurre un error
+          console.error('Error al guardar los resultados del último test:', error);
+          this.actualizarTiempoTotal();
         });
     } else {
       this.actualizarTiempoTotal();
@@ -233,6 +230,7 @@ export class TestComponent {
     const dialogRef = this.dialog.open(ModalDespedidaComponent);
 
     dialogRef.afterClosed().subscribe(() => {
+      this.isPosting = false; // Reactiva el botón al regresar a la lista de alumnos
       this.router.navigate(['/app/alumnos']); // Redirigir a la lista de alumnos
     });
   }
