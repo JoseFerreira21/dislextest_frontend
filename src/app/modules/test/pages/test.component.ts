@@ -186,25 +186,23 @@ export class TestComponent {
   }
 
   finalizarTest() {
-    this.pauseTimer(); // Pausar el temporizador por última vez
-    this.resultadoTest.tiempoTotal = this.getTotalElapsedTime(); // Asignar el tiempo total transcurrido
-  
-    const currentComponentInstance =
-      this.componentsInstance[this.currentComponentIndex]?.instance;
-  
+    if (this.isPosting) return; // Evita múltiples clics en el botón "Finalizar"
+
+    this.isPosting = true; // Desactiva el botón "Finalizar"
+    this.pauseTimer();
+    this.resultadoTest.tiempoTotal = this.getTotalElapsedTime();
+
+    const currentComponentInstance = this.componentsInstance[this.currentComponentIndex]?.instance;
+
     if (currentComponentInstance) {
       currentComponentInstance
         .guardar(this.resultadoTestId)
         .then(() => {
-          // Actualizar el tiempo total en la base de datos
           this.actualizarTiempoTotal();
         })
         .catch((error: any) => {
-          console.error(
-            'Error al guardar los resultados del último test:',
-            error
-          );
-          this.actualizarTiempoTotal(); // Intentar actualizar el tiempo total incluso si ocurre un error
+          console.error('Error al guardar los resultados del último test:', error);
+          this.actualizarTiempoTotal();
         });
     } else {
       this.actualizarTiempoTotal();
@@ -232,6 +230,7 @@ export class TestComponent {
     const dialogRef = this.dialog.open(ModalDespedidaComponent);
 
     dialogRef.afterClosed().subscribe(() => {
+      this.isPosting = false; // Reactiva el botón al regresar a la lista de alumnos
       this.router.navigate(['/app/alumnos']); // Redirigir a la lista de alumnos
     });
   }
