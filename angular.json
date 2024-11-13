@@ -17,6 +17,8 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "allowedCommonJsDependencies": ["moment",
+                                            "howler"],
             "outputPath": "dist/dislextest",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -39,8 +41,7 @@
                 {
                   "type": "initial",
                   "maximumWarning": "1mb",
-                  "maximumError": "2mb"
-                },
+                  "maximumError": "2mb"},
                 {
                   "type": "anyComponentStyle",
                   "maximumWarning": "2.5kb",
