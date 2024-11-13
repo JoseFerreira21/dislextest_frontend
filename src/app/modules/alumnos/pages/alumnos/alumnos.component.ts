@@ -54,7 +54,7 @@ import { MatOptionModule } from '@angular/material/core';
   ],
   entryComponents: [BienvenidaAlumnoComponent], // Para asegurar que el modal esté disponible
 })
-export class AlumnosComponent implements AfterViewInit, OnInit {
+export class AlumnosComponent implements OnInit {
   displayedColumns: string[] = [
     'ID',
     'Nombre',
@@ -102,7 +102,7 @@ export class AlumnosComponent implements AfterViewInit, OnInit {
           this.alumnoService.getAlumnosDelProfesor(profesorId).subscribe({
             next: (dataResponse: AlumnosDelProfesor[]) => {
               this.dataSource.data = dataResponse; // Asigna los datos directamente
-
+              this.dataSource.paginator = this.paginator; 
               // Extrae los nombres de grados e instituciones para los filtros
               this.grados = Array.from(
                 new Set(this.dataSource.data.map((a) => a.grado.descripcion))
@@ -121,9 +121,6 @@ export class AlumnosComponent implements AfterViewInit, OnInit {
     });
   }
 
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-  }
 
   applyFilter() {
     this.dataSource.filterPredicate = (data: AlumnosDelProfesor) => {
