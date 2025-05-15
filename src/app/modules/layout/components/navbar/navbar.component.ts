@@ -41,7 +41,7 @@ export class NavbarComponent {
     this.generateRandomAvatar(); // Llama a la función para generar el avatar al cargar el componente
   }
 
-  generateRandomAvatar() {
+  /*generateRandomAvatar() {
     const randomSeed = Math.random().toString(36).substring(7); // Genera un string aleatorio
     const avatarId = encodeURIComponent(randomSeed); // Encodea el seed para que sea válido en una URL
 
@@ -51,6 +51,12 @@ export class NavbarComponent {
         this.avatarUrl = 'data:image/svg+xml;base64,' + btoa(svg); // Codifica el SVG en Base64
       })
       .catch(err => console.error('Error al generar el avatar:', err));
+  }*/
+
+  generateRandomAvatar() {
+    const randomSeed = Math.random().toString(36).substring(7);
+    const avatarId = encodeURIComponent(randomSeed);
+    this.avatarUrl = `https://api.multiavatar.com/${avatarId}.svg`;
   }
 
   openPerfilModal() {
